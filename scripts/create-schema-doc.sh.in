@@ -1,0 +1,24 @@
+#!/bin/sh
+
+####################################################################################
+#
+# Generate XML schema documentation using the xs3p stylesheet with Xalan processor.
+#
+####################################################################################
+
+# location of LCDD schemas
+SCHEMA_DOC=@PROJECT_SOURCE_DIR@/doc/schemas
+
+(
+  # Xalan jars
+  export CLASSPATH=@XALAN_DIR@/xalan.jar:@XALAN_DIR@/serializer.jar:@XALAN_DIR@/xml-apis.jar
+
+  # change to schema dir
+  cd @PROJECT_SOURCE_DIR@/schemas/lcdd/1.0
+
+  # process the schemas to produce HTML doc
+  for x in $(ls *.xsd); do
+    echo "processing: $x"
+    java org.apache.xalan.xslt.Process -IN $x -XSL @PROJECT_SOURCE_DIR@/doc/schemas/xs3p.xsl -OUT @PROJECT_SOURCE_DIR@/doc/schemas/$x.html
+  done
+)

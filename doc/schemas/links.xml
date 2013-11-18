@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<links xmlns="http://titanium.dstc.edu.au/xml/xs3p">
+
+        <schema file-location="lcdd.xsd" docfile-location="lcdd.xsd.html"/>
+        <schema file-location="lcdd_header.xsd" docfile-location="lcdd_header.xsd.html"/>
+        <schema file-location="lcdd_regions.xsd" docfile-location="lcdd_regions.xsd.html"/>
+        <schema file-location="lcdd_sensitive_detectors.xsd" docfile-location="lcdd_sensitive_detectors.xsd.html"/>
+        <schema file-location="lcdd_iddict.xsd" docfile-location="lcdd_iddict.xsd.html"/>
+        <schema file-location="lcdd_fields.xsd" docfile-location="lcdd_fields.xsd.html"/>
+	<schema file-location="lcdd_display.xsd" docfile-location="lcdd_display.xsd.html"/>
+	<schema file-location="lcdd_limits.xsd" docfile-location="lcdd_limits.xsd.html"/>
+
+	<schema file-location="gdml/1.0/gdml.xsd" docfile-location="gdml.xsd.html"/>
+	<schema file-location="gdml/1.0/gdml_core.xsd" docfile-location="gdml_core.xsd.html"/>
+	<schema file-location="gdml/1.0/gdml_materials.xsd" docfile-location="gdml_materials.xsd.html"/>
+	<schema file-location="gdml/1.0/gdml_replicas.xsd" docfile-location="gdml_replicas.xsd.html" />
+	<schema file-location="gdml/1.0/gdml_define.xsd" docfile-location="gdml_define.xsd.html"/>
+	<schema file-location="gdml/1.0/gdml_parameterised.xsd" docfile-location="gdml_parameterised.xsd.html"/>
+	<schema file-location="gdml/1.0/gdml_solids.xsd" docfile-location="gdml_solids.xsd.html"/>
+
+</links>
+
