@@ -6,6 +6,7 @@
 
 // Geant4
 #include "G4Tubs.hh"
+#include "G4SystemOfUnits.hh"
 
 // STL
 #include <cmath>

@@ -10,6 +10,7 @@
 // Geant4
 #include "G4String.hh"
 #include "G4NistManager.hh"
+#include "G4SystemOfUnits.hh"
 
 // STL
 #include <vector>

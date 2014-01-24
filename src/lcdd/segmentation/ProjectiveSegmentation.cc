@@ -10,6 +10,7 @@
 #include "G4VPhysicalVolume.hh"
 #include "G4LogicalVolume.hh"
 #include "G4Tubs.hh"
+#include "G4SystemOfUnits.hh"
 
 ProjectiveSegmentation::ProjectiveSegmentation(G4int ntheta, G4int nphi) :
         Segmentation(Segmentation::eProjective), _ntheta(ntheta), _nphi(nphi) {

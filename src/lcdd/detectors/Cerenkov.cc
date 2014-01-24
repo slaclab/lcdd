@@ -15,6 +15,7 @@
 // Geant4
 #include "G4Step.hh"
 #include "G4ThreeVector.hh"
+#include "G4SystemOfUnits.hh"
 
 #include <iomanip>
 
