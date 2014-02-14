@@ -15,6 +15,7 @@ LegacyCalorimeterHitProcessor::~LegacyCalorimeterHitProcessor() {
 }
 
 bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
+
     // Get the energy deposition.
     G4double edep = step->GetTotalEnergyDeposit();
 
@@ -37,6 +38,7 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
     G4ThreeVector globalCellPosition = segmentation->getGlobalHitPosition(step);
 
     // Set the segmentation bin values from the step.
+    segmentation->resetBins();
     segmentation->setBins(step);
 
     // Create a 64-bit ID from the step information.
@@ -46,7 +48,7 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
     CalorimeterHit* hit = _calorimeter->findHit(id);
 
     // Was there a hit found with this identifier?
-    if (hit == 0) {
+    if (hit == NULL) {
 
         // No hit was found, so a new one is created.
         hit = new CalorimeterHit(id, edep, globalCellPosition);
