@@ -3,6 +3,7 @@
 // LCDD
 #include "lcdd/segmentation/GridXYZSegmentation.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
+//#include "lcdd/util/TimeUtil.hh"
 
 // Geant4
 #include "G4NavigationHistory.hh"
@@ -22,6 +23,7 @@ void GridXYZSegmentation::setBinNames() {
 }
 
 G4ThreeVector GridXYZSegmentation::getGlobalHitPosition(const G4Step* aStep) {
+
     // compute midpoint
     G4ThreeVector globalStepPos = ReadoutUtil::computeMidPos(aStep);
 
@@ -38,6 +40,7 @@ G4ThreeVector GridXYZSegmentation::getGlobalHitPosition(const G4Step* aStep) {
 }
 
 void GridXYZSegmentation::setBins(const G4Step* aStep) {
+
     // Compute the midpoint of the step.
     G4ThreeVector globalStepPos = ReadoutUtil::computeMidPos(aStep);
 
@@ -49,47 +52,34 @@ void GridXYZSegmentation::setBins(const G4Step* aStep) {
     int binY = computeBinY(localStepPos);
     int binZ = computeBinZ(localStepPos);
 
-    // Set the bins.
-    int idx = 0;
-
-    setBin(idx, binX);
-    ++idx;
-
-    setBin(idx, binY);
-    ++idx;
-
-    setBin(idx, binZ);
-    ++idx;
+    // Set the bin values.
+    setBin(0, binX);
+    setBin(1, binY);
+    setBin(2, binZ);
 }
 
 int GridXYZSegmentation::computeBinX(const G4ThreeVector& localStepPos) {
-    int ret;
     if (_gridSizeX != 0) {
-        ret = Segmentation::computeBin(localStepPos.x(), _gridSizeX);
+        return Segmentation::computeBin(localStepPos.x(), _gridSizeX);
     } else {
-        ret = 0;
+        return 0;
     }
-    return ret;
 }
 
 int GridXYZSegmentation::computeBinY(const G4ThreeVector& localStepPos) {
-    int ret;
     if (_gridSizeY != 0) {
-        ret = Segmentation::computeBin(localStepPos.y(), _gridSizeY);
+        return Segmentation::computeBin(localStepPos.y(), _gridSizeY);
     } else {
-        ret = 0;
+        return 0;
     }
-    return ret;
 }
 
 int GridXYZSegmentation::computeBinZ(const G4ThreeVector& localStepPos) {
-    int ret;
     if (_gridSizeZ != 0) {
-        ret = Segmentation::computeBin(localStepPos.z(), _gridSizeZ);
+        return Segmentation::computeBin(localStepPos.z(), _gridSizeZ);
     } else {
-        ret = 0;
+        return 0;
     }
-    return ret;
 }
 
 double GridXYZSegmentation::computeDimX(int bin) {
@@ -103,24 +93,6 @@ double GridXYZSegmentation::computeDimY(int bin) {
 double GridXYZSegmentation::computeDimZ(int bin) {
     return Segmentation::computeDim(bin, _gridSizeZ);
 }
-
-/*
- G4ThreeVector GridXYZSegmentation::getGlobalHitPosPreStep(const G4StepPoint* aPreStepPoint)
- {
- G4ThreeVector globalStepPos = aPreStepPoint->GetPosition();
-
- // Figure out local step pos using touchable and global midpoint.
- G4ThreeVector localStepPos = ReadoutUtil::transformGlobalToLocal(aPreStepPoint, globalStepPos);
-
- // Compute local cell pos.
- G4ThreeVector localCellPos = this->getLocalHitPos(localStepPos);
-
- // Compute global cell pos.
- G4ThreeVector globalCellPos = ReadoutUtil::transformLocalToGlobal(aPreStepPoint, localCellPos);
-
- return globalCellPos;
- }
- */
 
 G4ThreeVector GridXYZSegmentation::getLocalHitPos(const G4ThreeVector& localStepPos) {
     G4ThreeVector localHitPos;
