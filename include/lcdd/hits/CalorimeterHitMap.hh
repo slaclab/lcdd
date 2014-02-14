@@ -48,6 +48,12 @@ public:
     CalorimeterHit* get(const Id64bit& id);
 
     /**
+     * Get the size of the map.
+     * @return The size of the map.
+     */
+    int size();
+
+    /**
      * Clear all entries from this hit map.
      */
     void clear();

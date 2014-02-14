@@ -20,3 +20,7 @@ CalorimeterHit* CalorimeterHitMap::get(const Id64bit& id) {
 void CalorimeterHitMap::clear() {
     _map.clear();
 }
+
+int CalorimeterHitMap::size() {
+    return _map.size();
+}
