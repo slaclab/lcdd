@@ -6,6 +6,7 @@
 
 Segmentation::Segmentation(EType segType, int nbins) :
         _numBins(nbins), _type(segType) {
+
     // reserve nbins
     _bins.reserve(_numBins);
 
@@ -17,7 +18,7 @@ Segmentation::~Segmentation() {
 }
 
 void Segmentation::setBin(int binIdx, int binVal) {
-    _bins.insert(_bins.begin() + binIdx, binVal);
+    _bins[binIdx] = binVal;
 }
 
 int Segmentation::getNumberOfBins() {
@@ -32,23 +33,17 @@ Segmentation::EType Segmentation::getType() {
     return _type;
 }
 
-//G4ThreeVector Segmentation::getGlobalHitPos(const G4Step* aStep)
-//{
-//    return ReadoutUtil::computeMidPos(aStep);
-//}
-
-//G4ThreeVector Segmentation::getGlobalHitPosPreStep(const G4StepPoint* aPreStepPoint)
-//{
-//    //G4Exception("Do not use this method!");
-//    return aPreStepPoint->GetPosition();
-//}
-
 G4ThreeVector Segmentation::getLocalHitPosition(const G4ThreeVector& localStepPos) {
     return localStepPos;
 }
 
 void Segmentation::resetBins() {
+
+    // Clear the bin values.
     _bins.clear();
+
+    // Re-reserve space for new bin values, just in case.
+    _bins.reserve(_numBins);
 }
 
 void Segmentation::printOutBins(std::ostream& os, const std::vector<int>& bins) {
