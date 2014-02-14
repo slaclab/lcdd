@@ -170,7 +170,7 @@ protected:
      */
     static double computeDim(const int &bin, const double &incr);
 
-private:
+protected:
 
     /** The current bin values. */
     std::vector<int> _bins;
