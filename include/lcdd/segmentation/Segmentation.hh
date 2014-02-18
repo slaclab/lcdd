@@ -70,11 +70,6 @@ public:
     G4ThreeVector getLocalHitPosition(const G4ThreeVector& localStepPos);
 
     /**
-     * Reset the bins values to all zero.
-     */
-    void resetBins();
-
-    /**
      * Get the type of this segmentation.
      * @return The Segmentation type as an enum.
      */

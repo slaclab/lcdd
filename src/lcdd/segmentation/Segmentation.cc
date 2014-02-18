@@ -6,12 +6,10 @@
 
 Segmentation::Segmentation(EType segType, int nbins) :
         _numBins(nbins), _type(segType) {
-
-    // reserve nbins
-    _bins.reserve(_numBins);
-
-    // fill in 0 vals
-    resetBins();
+    // Fill bins with zeros.
+    for (int i=0; i<_numBins; i++) {
+        _bins.push_back(0);
+    }
 }
 
 Segmentation::~Segmentation() {
@@ -37,15 +35,6 @@ G4ThreeVector Segmentation::getLocalHitPosition(const G4ThreeVector& localStepPo
     return localStepPos;
 }
 
-void Segmentation::resetBins() {
-
-    // Clear the bin values.
-    _bins.clear();
-
-    // Re-reserve space for new bin values, just in case.
-    _bins.reserve(_numBins);
-}
-
 void Segmentation::printOutBins(std::ostream& os, const std::vector<int>& bins) {
     os << "segmentationBins <" << bins.size() << "> :: ";
     for (std::vector<int>::const_iterator iter = bins.begin(); iter != bins.end(); iter++) {
@@ -56,11 +45,9 @@ void Segmentation::printOutBins(std::ostream& os, const std::vector<int>& bins) 
 
 bool Segmentation::isValidSolid(G4VSolid* s) {
     bool valid = true;
-
     if (0 == s) {
         valid = false;
     }
-
     return valid;
 }
 

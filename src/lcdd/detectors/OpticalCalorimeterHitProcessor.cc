@@ -52,8 +52,6 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
         G4double theEdep = double(NCerenPhotons);
         // get global cell pos from seg
         G4ThreeVector globalCellPos = getGlobalHitPosition(apreStepPoint);
-        // reset the seg bins
-        _calorimeter->getSegmentation()->resetBins();
         // set the seg bins
         _calorimeter->getSegmentation()->setBins(step);
 

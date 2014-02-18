@@ -38,7 +38,7 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
     G4ThreeVector globalCellPosition = segmentation->getGlobalHitPosition(step);
 
     // Set the segmentation bin values from the step.
-    segmentation->resetBins();
+    //segmentation->resetBins();
     segmentation->setBins(step);
 
     // Create a 64-bit ID from the step information.
