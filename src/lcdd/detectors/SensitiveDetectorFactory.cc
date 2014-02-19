@@ -130,7 +130,7 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
             if (sensitiveDetectorTypeName == "tracker") {
                 // Add the default TrackerHitProcessor.
                 sensitiveDetector->addHitProcessor(
-                        HitProcessorManager::instance()->getFactory("StepCombiningTrackerHitProcessor")->createHitProcessor(sensitiveDetector));
+                        HitProcessorManager::instance()->getFactory("BasicTrackerHitProcessor")->createHitProcessor(sensitiveDetector));
             } else if (sensitiveDetectorTypeName == "calorimeter") {
                 // Add the default CalorimeterHitProcessor.
                 sensitiveDetector->addHitProcessor(
