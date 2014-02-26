@@ -22,7 +22,9 @@ OpticalCalorimeterHitProcessor::~OpticalCalorimeterHitProcessor() {
 }
 
 bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
-
+    // FIXME: This should not be here.  Unfortunately, it appears that instantiating
+    //        it in the constructor does not work due to unintialized Geant4 data structures.
+    //        The HitProcessor may need an initialize method called in start of event.
     if (_cerenGenerator == NULL)
         _cerenGenerator = new Cerenkov();
 
