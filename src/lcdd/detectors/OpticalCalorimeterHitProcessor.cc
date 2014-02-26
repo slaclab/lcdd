@@ -3,6 +3,7 @@
 // LCDD
 #include "lcdd/detectors/OpticalCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
+#include "lcdd/hits/TrackInformation.hh"
 
 // Geant4
 #include "G4OpticalPhoton.hh"
@@ -21,11 +22,9 @@ OpticalCalorimeterHitProcessor::~OpticalCalorimeterHitProcessor() {
 }
 
 bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
-    // FIXME: This initialization should not happen here.
-    //        Put into PhysicsManager as statically accessible.
-    if (_cerenGenerator == 0) {
+
+    if (_cerenGenerator == NULL)
         _cerenGenerator = new Cerenkov();
-    }
 
     G4int NCerenPhotons = 0;
     G4Track* theTrack = step->GetTrack();
@@ -52,6 +51,7 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
         G4double theEdep = double(NCerenPhotons);
         // get global cell pos from seg
         G4ThreeVector globalCellPos = getGlobalHitPosition(apreStepPoint);
+
         // set the seg bins
         _calorimeter->getSegmentation()->setBins(step);
 
@@ -59,7 +59,7 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
         Id64bit id64 = _calorimeter->makeIdentifier(step);
 
         // Look for existing hit.
-        CalorimeterHit* hit = _calorimeter->findHit(id64);
+        CalorimeterHit* hit = _calorimeter->findHit(id64, eCerenkov);
 
         // Was hit found?
         if (hit == 0) {
@@ -74,7 +74,13 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
             hit->addEdep(theEdep);
         }
         // add McpHitContrib to this hit, setting info from step info
-        hit->addHitContribution(HitContribution(step));
+        int trackID = dynamic_cast<TrackInformation*>(theTrack->GetUserInformation())->getOriginalTrackID();
+        hit->addHitContribution(HitContribution(
+                        trackID,
+                        theEdep*GeV,
+                        theTrack->GetParticleDefinition()->GetAntiPDGEncoding(),
+                        theTrack->GetGlobalTime()));
+        std::cout << "added contrib with energy: " << theEdep << std::endl;
         return true;
     }  // end Cerenkov photon treatment
 }
