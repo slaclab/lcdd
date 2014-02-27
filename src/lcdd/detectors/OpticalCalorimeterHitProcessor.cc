@@ -6,6 +6,7 @@
 #include "lcdd/hits/TrackInformation.hh"
 
 // Geant4
+#include "G4SystemOfUnits.hh"
 #include "G4OpticalPhoton.hh"
 #include "G4TransportationManager.hh"
 #include "G4VProcess.hh"
@@ -24,7 +25,7 @@ OpticalCalorimeterHitProcessor::~OpticalCalorimeterHitProcessor() {
 bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
     // FIXME: This should not be here.  Unfortunately, it appears that instantiating
     //        it in the constructor does not work due to unintialized Geant4 data structures.
-    //        The HitProcessor may need an initialize method called in start of event.
+    //        The HitProcessor may need an initialize method called in start of run.
     if (_cerenGenerator == NULL)
         _cerenGenerator = new Cerenkov();
 
