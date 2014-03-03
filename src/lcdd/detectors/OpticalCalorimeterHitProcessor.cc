@@ -17,12 +17,16 @@ OpticalCalorimeterHitProcessor::OpticalCalorimeterHitProcessor(CalorimeterSD* ca
 }
 
 OpticalCalorimeterHitProcessor::~OpticalCalorimeterHitProcessor() {
-    if (_cerenGenerator != 0) {
+    if (_cerenGenerator != NULL) {
         delete _cerenGenerator;
     }
 }
 
 bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
+
+    /* Activate hit processing for standard edep collection. */    
+    LegacyCalorimeterHitProcessor::processHits(step);
+
     // FIXME: This should not be here.  Unfortunately, it appears that instantiating
     //        it in the constructor does not work due to unintialized Geant4 data structures.
     //        The HitProcessor may need an initialize method called in start of run.
@@ -46,14 +50,12 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
         NCerenPhotons = 0;
     }
 
-    if (NCerenPhotons <= 0) {
-        return LegacyCalorimeterHitProcessor::processHits(step);
-    } else {
+    /* Perform optical hit processing if Cerenkov photons were created by parameterization. */
+    if (NCerenPhotons > 0) {
         G4ThreeVector myPoint = step->GetPreStepPoint()->GetPosition();
-        G4StepPoint* apreStepPoint = step->GetPreStepPoint();
         G4double theEdep = double(NCerenPhotons);
         // get global cell pos from seg
-        G4ThreeVector globalCellPos = getGlobalHitPosition(apreStepPoint);
+        G4ThreeVector globalCellPos = getGlobalHitPosition(pPreStepPoint);
 
         // set the seg bins
         _calorimeter->getSegmentation()->setBins(step);
@@ -83,9 +85,9 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
                         theEdep*GeV,
                         theTrack->GetParticleDefinition()->GetAntiPDGEncoding(),
                         theTrack->GetGlobalTime()));
-        std::cout << "added contrib with energy: " << theEdep << std::endl;
-        return true;
     }  // end Cerenkov photon treatment
+ 
+    return true;
 }
 
 G4ThreeVector OpticalCalorimeterHitProcessor::getGlobalHitPosition(const G4StepPoint* aPreStepPoint) {
