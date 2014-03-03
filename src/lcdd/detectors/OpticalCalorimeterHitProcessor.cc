@@ -24,9 +24,6 @@ OpticalCalorimeterHitProcessor::~OpticalCalorimeterHitProcessor() {
 
 bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
 
-    /* Activate hit processing for standard edep collection. */    
-    LegacyCalorimeterHitProcessor::processHits(step);
-
     // FIXME: This should not be here.  Unfortunately, it appears that instantiating
     //        it in the constructor does not work due to unintialized Geant4 data structures.
     //        The HitProcessor may need an initialize method called in start of run.
@@ -85,9 +82,10 @@ bool OpticalCalorimeterHitProcessor::processHits(G4Step* step) {
                         theEdep*GeV,
                         theTrack->GetParticleDefinition()->GetAntiPDGEncoding(),
                         theTrack->GetGlobalTime()));
-    }  // end Cerenkov photon treatment
- 
-    return true;
+        return true;
+    } else { 
+        return false;
+    }
 }
 
 G4ThreeVector OpticalCalorimeterHitProcessor::getGlobalHitPosition(const G4StepPoint* aPreStepPoint) {
