@@ -18,11 +18,12 @@ using namespace std;
 
 Cartesian3DMagneticFieldMap::Cartesian3DMagneticFieldMap(const char* filename, double xOffset, double yOffset, double zOffset) :
         _xOffset(xOffset), _yOffset(yOffset), _zOffset(zOffset), _invertX(false), _invertY(false), _invertZ(false) {
-    G4cout << "\n-----------------------------------------------------------" << "\n      Magnetic field"
-            << "\n-----------------------------------------------------------";
+    G4cout << "-----------------------------------------------------------" << G4endl;
+    G4cout << "    Magnetic field" << G4endl;	
+    G4cout << "-----------------------------------------------------------" << G4endl << G4endl;
 
-    G4cout << "\n ---> " "Reading the field grid from " << filename << " ... " << endl;
-    G4cout << "  xoffset, yoffset, zoffset: " << xOffset << " " << yOffset << " " << zOffset << G4endl;
+    G4cout << "Reading the field grid from " << filename << " ... " << endl;
+    G4cout << "  Offsets: " << xOffset << " " << yOffset << " " << zOffset << G4endl;
     ifstream file(filename); // Open the file for reading.
 
     // Ignore first blank line
@@ -32,7 +33,7 @@ Cartesian3DMagneticFieldMap::Cartesian3DMagneticFieldMap(const char* filename, d
     // Read table dimensions 
     file >> _nx >> _ny >> _nz; // Note dodgy order
 
-    G4cout << "  [ Number of values x,y,z: " << _nx << " " << _ny << " " << _nz << " ] " << endl;
+    G4cout << "  Number of values: " << _nx << " " << _ny << " " << _nz << G4endl;
 
     // Set up storage space for table
     _xField.resize(_nx);
@@ -80,12 +81,12 @@ Cartesian3DMagneticFieldMap::Cartesian3DMagneticFieldMap(const char* filename, d
     _maxy = yval;
     _maxz = zval;
 
-    G4cout << "\n ---> ... done reading " << endl;
-
-    G4cout << " Read values of field from file " << filename << endl;
-    G4cout << " ---> assumed the order:  x, y, z, Bx, By, Bz " << "\n ---> Min values x,y,z: " << _minx << " " << _miny << " " << _minz/cm << " cm "
-            << "\n ---> Max values x,y,z: " << _maxx/cm << " " << _maxy/cm << " " << _maxz/cm << " cm " << "\n ---> The field will be offset by " << _xOffset/cm
-            << " " << _yOffset/cm << " " << _zOffset/cm << " cm " << endl;
+    G4cout << "  ... done reading " << G4endl << G4endl;
+    G4cout << "Read values of field from file " << filename << G4endl;
+    G4cout << "  Assumed the order: x, y, z, Bx, By, Bz" << G4endl;
+    G4cout << "  Min values: " << _minx << " " << _miny << " " << _minz << " mm " << G4endl;
+    G4cout << "  Max values: " << _maxx << " " << _maxy << " " << _maxz << " mm " << G4endl;
+    G4cout << "  Field offsets: " << _xOffset << " " << _yOffset << " " << _zOffset << " mm " << G4endl << G4endl;
 
     // Should really check that the limits are not the wrong way around.
     if (_maxx < _minx) {
@@ -101,15 +102,17 @@ Cartesian3DMagneticFieldMap::Cartesian3DMagneticFieldMap(const char* filename, d
         _invertZ = true;
     }
 
-    G4cout << "\nAfter reordering if necessary" << "\n ---> Min values x,y,z: " << _minx/cm << " " << _miny/cm << " " << _minz << " cm "
-            << " \n ---> Max values x,y,z: " << _maxx/cm << " " << _maxy/cm << " " << _maxz/cm << " cm ";
+    G4cout << "After reordering if necessary" << G4endl;
+    G4cout << "  Min values: " << _minx << " " << _miny << " " << _minz << " mm " << G4endl;
+    G4cout << "  Max values: " << _maxx << " " << _maxy << " " << _maxz << " mm " << G4endl;;
 
     _dx = _maxx - _minx;
     _dy = _maxy - _miny;
     _dz = _maxz - _minz;
-    G4cout << "\n ---> Range of values x,y,z: " << _dx/cm << " " << _dy/cm << " " << _dz/cm << " cm"
-            << "\n-----------------------------------------------------------" << endl;
-    G4cout << "done loading field map" << endl;
+
+    G4cout << "  Range of values: " << _dx << " " << _dy << " " << _dz << " mm" << G4endl << G4endl;
+    G4cout << "Done loading field map" << G4endl << G4endl;
+    G4cout  << "-----------------------------------------------------------" << G4endl << G4endl;
 }
 
 void Cartesian3DMagneticFieldMap::GetFieldValue(const double point[4], double *Bfield) const {
@@ -154,8 +157,8 @@ void Cartesian3DMagneticFieldMap::GetFieldValue(const double point[4], double *B
         int zindex = static_cast<int>(zdindex);
 
 #ifdef DEBUG_INTERPOLATING_FIELD
-        G4cout << "Local x,y,z: " << xlocal << " " << ylocal << " " << zlocal << endl;
-        G4cout << "Index x,y,z: " << xindex << " " << yindex << " " << zindex << endl;
+        G4cout << "Local x,y,z: " << xlocal << " " << ylocal << " " << zlocal << G4endl;
+        G4cout << "Index x,y,z: " << xindex << " " << yindex << " " << zindex << G4endl;
         double valx0z0, mulx0z0, valx1z0, mulx1z0;
         double valx0z1, mulx0z1, valx1z1, mulx1z1;
         valx0z0= table[xindex ][0][zindex]; mulx0z0= (1-xlocal) * (1-zlocal);
