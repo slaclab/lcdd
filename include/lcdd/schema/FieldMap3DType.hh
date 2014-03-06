@@ -56,7 +56,7 @@ public:
      * @param yoffset The y offset.
      */
     void set_yoffset(const std::string& yoffset) {
-        _xoffset = yoffset;
+        _yoffset = yoffset;
     }
 
     /**
@@ -64,7 +64,7 @@ public:
      * @param zoffset The z offset.
      */
     void set_zoffset(const std::string& zoffset) {
-        _xoffset = zoffset;
+        _zoffset = zoffset;
     }
 
     /**
