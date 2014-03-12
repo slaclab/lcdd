@@ -28,19 +28,19 @@ bool ScoringTrackerHitProcessor::processHits(G4Step* step) {
     if (!sameTrack) {
 
         // edep
-        G4double e = step->GetTotalEnergyDeposit();
+        G4double edep = step->GetTotalEnergyDeposit();
 
         // get track information
-        TrackInformation* trkInfo = TrackInformation::getTrackInformation(step);
+        TrackInformation* trackInfo = TrackInformation::getTrackInformation(step);
 
-        // set hit flag in trk info
-        trkInfo->setHasTrackerHit(true);
+        // set hit flag in track info
+        trackInfo->setHasTrackerHit(true);
 
-        // hit data
-        G4int trkID = trackId;
-        G4double tdep = step->GetTrack()->GetGlobalTime();
-        G4ThreeVector prePosition = step->GetPreStepPoint()->GetPosition();
-        G4ThreeVector meanMomentum = 0.5 * (step->GetPreStepPoint()->GetPosition() + step->GetPostStepPoint()->GetPosition());
+        // Get track ID.
+        G4int trackID = step->GetTrack()->GetTrackID();
+
+        // Get time from pre-step point.
+        G4double tdep = step->GetPreStepPoint()->GetGlobalTime();
 
         // create hit
         TrackerHit* newHit = new TrackerHit();
@@ -49,19 +49,19 @@ bool ScoringTrackerHitProcessor::processHits(G4Step* step) {
         Id64bit id64 = _tracker->makeIdentifier(step);
 
         // Get the start position from the pre-step point.
-        G4ThreeVector start = step->GetPreStepPoint()->GetPosition();
+        G4ThreeVector startPosition = step->GetPreStepPoint()->GetPosition();
 
         // Get the end position from the post-step point.
-        G4ThreeVector end = step->GetPostStepPoint()->GetPosition();
+        G4ThreeVector endPosition = step->GetPostStepPoint()->GetPosition();
 
         // Compute the step's path length.
-        G4double length = sqrt(pow(start.x() - end.x(), 2) + pow(start.y() - end.y(), 2) + pow(start.z() - end.z(), 2));
+        G4double length = sqrt(pow(startPosition.x() - endPosition.x(), 2) + pow(startPosition.y() - endPosition.y(), 2) + pow(startPosition.z() - endPosition.z(), 2));
 
         // Set the hit information.
-        newHit->setTrackID(trkID);
-        newHit->setEdep(e);
-        newHit->setPosition(prePosition);
-        newHit->setMomentum(meanMomentum);
+        newHit->setTrackID(trackID);
+        newHit->setEdep(edep);
+        newHit->setPosition(startPosition);
+        newHit->setMomentum(step->GetPreStepPoint()->GetMomentum());
         newHit->setTdep(tdep);
         newHit->setId(id64.getId0());
         newHit->setLength(length);
