@@ -12,6 +12,7 @@
 #include <cmath>
 
 // Geant4
+#include "globals.hh"
 #include "G4SystemOfUnits.hh"
 
 using namespace std;
