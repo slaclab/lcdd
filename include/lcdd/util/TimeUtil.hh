@@ -33,6 +33,8 @@ public:
     }
 
     static void addTime(const std::string& name, long nanos) {
+        if (!haveTimer(name))
+            createTimer(name);
         _timerMap[name] += nanos;
     }
 
