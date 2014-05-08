@@ -5,6 +5,7 @@
 
 #include <string>
 #include <map>
+#include <iostream>
 
 class TimeUtil {
 
@@ -41,6 +42,10 @@ public:
 
     static long getTime(const std::string& name) {
         return _timerMap[name];
+    }
+
+    static void printOut(const std::string& name, std::ostream& os) {
+        os << name << ": " << _timerMap[name] << std::endl;
     }
 
     static void clearTimers() {
