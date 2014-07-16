@@ -211,7 +211,7 @@ public:
      * Get the track information.
      * @return The track information.
      */
-    TrackInformation* trackInformation() const;
+    //TrackInformation* trackInformation() const;
 
     /**
      * Get the position of the pre step point.

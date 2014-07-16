@@ -1,7 +1,10 @@
 // $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/LegacyCalorimeterHitProcessor.cc,v 1.5 2013-11-13 23:02:56 jeremy Exp $
 
 // LCDD
+#include "lcdd/detectors/CurrentTrackState.hh"
 #include "lcdd/detectors/LegacyCalorimeterHitProcessor.hh"
+
+#include "lcdd/util/TimerUtil.hh"
 
 // Geant4
 #include "G4Geantino.hh"
@@ -56,31 +59,15 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
         // Add the new hit to the calorimeter.
         _calorimeter->addHit(hit);
 
-        // Debug print new hit information.
-        //if (_calorimeter->getVerbose() > 0) {
-        //    std::cout << "made new hit: " << std::hex
-        //            << hit->getId64bit().getId0() << "|"
-        //            << hit->getId64bit().getId1() << std::endl;
-        //    std::resetiosflags(std::ios::showbase);
-        //}
-
     } else {
 
         // Add energy deposition to an existing hit.
         hit->addEdep(edep);
-
-        // Debug print existing hit information.
-        //if (_calorimeter->getVerbose() > 0) {
-        //    std::cout << "added " << edep << " GeV to hit: " << std::hex
-        //            << hit->getId64bit().getId0() << "|"
-        //            << hit->getId64bit().getId1() << std::endl;
-        //    std::resetiosflags(std::ios::showbase);
-        //}
-
     }
 
     // Add hit contribution to the hit.
-    hit->addHitContribution(HitContribution(step));
+    // FIXME: This should pass a pointer to a new object.  It is copied, which is inefficient.
+    hit->addHitContribution(HitContribution(CurrentTrackState::getCurrentTrackID(), step));
 
     // Return true, indicating that a hit was added or modified.
     return true;

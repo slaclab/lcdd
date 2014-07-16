@@ -5,7 +5,7 @@
 #include "lcdd/id/IdManager.hh"
 #include "lcdd/id/IdFactory.hh"
 #include "lcdd/detectors/SensitiveDetectorMessenger.hh"
-#include "lcdd/hits/TrackInformation.hh"
+//#include "lcdd/hits/TrackInformation.hh"
 
 // Geant4
 #include "G4EventManager.hh"
@@ -22,9 +22,9 @@
 
 using std::vector;
 
-const std::string& SensitiveDetector::trackerStr = "tracker";
-const std::string& SensitiveDetector::calorimeterStr = "calorimeter";
-const std::string& SensitiveDetector::noneStr = "none";
+const std::string& SensitiveDetector::TRACKER = "tracker";
+const std::string& SensitiveDetector::CALORIMETER = "calorimeter";
+const std::string& SensitiveDetector::UNKNOWN = "unknown";
 
 SensitiveDetector::SensitiveDetector(G4String sdName, G4String hcName, EType sdType) :
         G4VSensitiveDetector(sdName), _idspec(0), _type(sdType) {
@@ -59,16 +59,6 @@ SensitiveDetector::SensitiveDetector(G4String sdName, const vector<G4String>& hc
     _messenger = new SensitiveDetectorMessenger(this);
 }
 
-//SensitiveDetector::SensitiveDetector(G4String name, EType type)
-//    : G4VSensitiveDetector(name), _idspec(0), _type(type)
-//{
-// register detector with G4SDManager
-//    G4SDManager::GetSDMpointer()->AddNewDetector(this);
-
-// Create the command messenger.
-//    _messenger = new SensitiveDetectorMessenger(this);
-//}
-
 SensitiveDetector::~SensitiveDetector() {
     // Delete registered HitProcessors.
     for (HitProcessors::iterator it = _hitProcessors.begin(); it != _hitProcessors.end(); it++) {
@@ -77,11 +67,9 @@ SensitiveDetector::~SensitiveDetector() {
 }
 
 void SensitiveDetector::Initialize(G4HCofThisEvent*) {
-    // no-op
 }
 
 void SensitiveDetector::EndOfEvent(G4HCofThisEvent*) {
-    // no-op
 }
 
 G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
@@ -103,11 +91,12 @@ G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 
 const std::string& SensitiveDetector::getTypeString() const {
     if (_type == eTracker) {
-        return trackerStr;
+        return TRACKER;
     } else if (_type == eCalorimeter) {
-        return calorimeterStr;
+        return CALORIMETER;
+    } else {
+    	return UNKNOWN;
     }
-    return noneStr;
 }
 
 std::ostream& SensitiveDetector::printBasicInfo(std::ostream& os) {
@@ -127,27 +116,11 @@ std::ostream& SensitiveDetector::printBasicInfo(std::ostream& os) {
         }
         os << std::endl;
     } else {
-        os << "idspec points to null!" << std::endl;
+        os << "No idspec for this detector." << std::endl;
     }
 
     return os;
 }
-
-/*
- Id64bit SensitiveDetector::makeId() const
- {
- Id64bit id64;
- if (hasIdSpec()) {
-
- // get idvec ordered by this idspec
- const IdVec ids = IdFactory::createOrderedIdVec(step(), this);
-
- // pack into 64 bit cell id
- Id64bit id64 = IdFactory::createId64bit(ids, getIdSpec());
- }
- return id64;
- }
- */
 
 Id64bit SensitiveDetector::makeIdentifier(G4Step* step) const {
     Id64bit id64;
@@ -177,18 +150,6 @@ G4VHitsCollection* SensitiveDetector::getHitsCollection(G4int nHC) const {
         hc = G4EventManager::GetEventManager()->GetConstCurrentEvent()->GetHCofThisEvent()->GetHC(this->getHCID(nHC));
     }
     return hc;
-}
-
-std::ostream& SensitiveDetector::printNumberOfHits(std::ostream& os) {
-    for (int i = 0; i < getNumberOfHitsCollections(); i++) {
-        os << getHitsCollection(i)->GetName() << " " << getHitsCollection(i)->GetSize() << std::endl;
-    }
-    return os;
-}
-
-std::ostream& SensitiveDetector::printEdep(std::ostream& os) {
-    os << "total edep: " << G4BestUnit(this->getEdep(), "Energy") << std::endl;
-    return os;
 }
 
 std::vector<G4LogicalVolume*> SensitiveDetector::getLogicalVolumes() const {
@@ -275,19 +236,8 @@ bool SensitiveDetector::getEndcapFlag() {
     return _endcap;
 }
 
-std::ostream& SensitiveDetector::printHits(std::ostream& os) {
-    return os;
-}
-
-void SensitiveDetector::clearHits() {
-}
-
 int SensitiveDetector::getNumberOfHitsCollections() const {
     return _hcids.size();
-}
-
-double SensitiveDetector::getEdep() const {
-    return 0.0;
 }
 
 void SensitiveDetector::setHCID(G4int hcid) {

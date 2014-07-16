@@ -2,7 +2,7 @@
 
 // LCDD
 #include "lcdd/detectors/ScoringTrackerHitProcessor.hh"
-#include "lcdd/hits/TrackInformation.hh"
+//#include "lcdd/hits/TrackInformation.hh"
 
 // Geant4
 #include "G4ThreeVector.hh"
@@ -31,10 +31,10 @@ bool ScoringTrackerHitProcessor::processHits(G4Step* step) {
         G4double edep = step->GetTotalEnergyDeposit();
 
         // get track information
-        TrackInformation* trackInfo = TrackInformation::getTrackInformation(step);
+        //TrackInformation* trkInfo = TrackInformation::getTrackInformation(step);
 
-        // set hit flag in track info
-        trackInfo->setHasTrackerHit(true);
+        // set hit flag in trk info
+        //trkInfo->setHasTrackerHit(true);
 
         // Get track ID.
         G4int trackID = step->GetTrack()->GetTrackID();

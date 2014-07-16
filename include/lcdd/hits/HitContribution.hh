@@ -31,6 +31,8 @@ public:
      */
     HitContribution();
 
+    HitContribution(G4int trackID, const G4Step* aStep);
+
     /**
      * Fully qualified constructor.
      * @param[in] trackID    The Geant4 track ID.

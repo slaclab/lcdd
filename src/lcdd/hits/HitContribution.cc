@@ -2,7 +2,7 @@
 
 // LCDD
 #include "lcdd/hits/HitContribution.hh"
-#include "lcdd/hits/TrackInformation.hh"
+//#include "lcdd/hits/TrackInformation.hh"
 
 // Geant4
 #include "G4Track.hh"
@@ -11,7 +11,7 @@
 #include "G4ParticleTypes.hh"
 
 HitContribution::HitContribution() :
-        _trackID(-1), _edep(0), _PdgId(9999999), _globalTime(0) {
+        _trackID(0), _edep(0), _PdgId(0), _globalTime(0) {
     ;
 }
 
@@ -24,28 +24,57 @@ HitContribution::~HitContribution() {
     ;
 }
 
-HitContribution::HitContribution(const G4Step* aStep) {
+HitContribution::HitContribution(int trackID, const G4Step* aStep) {
     // Get the track.
-    const G4Track* aTrack = aStep->GetTrack();
+    const G4Track* track = aStep->GetTrack();
 
-    // Get the track information.
-    TrackInformation* trkInfo = static_cast<TrackInformation*>(aTrack->GetUserInformation());
-
-    // Get the track ID.
-    _trackID = trkInfo->getOriginalTrackID();
+    _trackID = trackID;
 
     // Set edep according to type of track.
-    //if (aTrack->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()) {
-    //    _edep = aTrack->GetTotalEnergy();
+    //if (track->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()) {
+    //    _edep = track->GetTotalEnergy();
     //} else {
     _edep = aStep->GetTotalEnergyDeposit();
     //}
 
     // PDG ID.
-    _PdgId = aTrack->GetDefinition()->GetPDGEncoding();
+    _PdgId = track->GetDefinition()->GetPDGEncoding();
 
     // Global time.
-    _globalTime = aTrack->GetGlobalTime();
+    _globalTime = track->GetGlobalTime();
+
+    // Compute the step midpoint.
+    G4ThreeVector posVec = (0.5 * (aStep->GetPreStepPoint()->GetPosition() + aStep->GetPostStepPoint()->GetPosition()));
+    _position[0] = posVec[0];
+    _position[1] = posVec[1];
+    _position[2] = posVec[2];
+}
+
+HitContribution::HitContribution(const G4Step* aStep) {
+    // Get the track.
+    const G4Track* track = aStep->GetTrack();
+
+    // Get the track information.
+    //TrackInformation* trackInfo = static_cast<TrackInformation*>(track->GetUserInformation());
+
+    // Get the track ID.
+    //if (trackInfo) {
+    //    _trackID = trackInfo->getOriginalTrackID();
+    //}
+    _trackID = track->GetTrackID();
+
+    // Set edep according to type of track.
+    if (track->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()) {
+        _edep = track->GetTotalEnergy();
+    } else {
+        _edep = aStep->GetTotalEnergyDeposit();
+    }
+
+    // PDG ID.
+    _PdgId = track->GetDefinition()->GetPDGEncoding();
+
+    // Global time.
+    _globalTime = track->GetGlobalTime();
 
     // Compute the step midpoint.
     G4ThreeVector posVec = (0.5 * (aStep->GetPreStepPoint()->GetPosition() + aStep->GetPostStepPoint()->GetPosition()));

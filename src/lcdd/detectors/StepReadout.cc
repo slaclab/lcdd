@@ -3,7 +3,7 @@
 // LCDD
 #include "lcdd/detectors/StepReadout.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
-#include "lcdd/hits/TrackInformation.hh"
+//#include "lcdd/hits/TrackInformation.hh"
 
 // G4
 #include "G4Step.hh"
@@ -135,9 +135,9 @@ G4ThreeVector StepReadout::momentum() const {
     return track()->GetMomentum();
 }
 
-TrackInformation* StepReadout::trackInformation() const {
-    return TrackInformation::getTrackInformation(track());
-}
+//TrackInformation* StepReadout::trackInformation() const {
+//    return TrackInformation::getTrackInformation(track());
+//}
 
 G4ThreeVector StepReadout::prePosition() const {
     return pre()->GetPosition();

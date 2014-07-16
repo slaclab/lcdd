@@ -63,10 +63,7 @@ private:
     static G4UIdirectory* _detectorsDir;
     G4UIdirectory* _detectorDir;
     G4UIcommand* _printInfoCmd;
-    G4UIcommand* _printHitsCmd;
     G4UIcommand* _printVolumesCmd;
-    G4UIcommand* _printTotalEdepCmd;
-    G4UIcommand* _printNHitsCmd;
     G4UIcmdWithAnInteger* _verboseCmd;
     G4UIcmdWithABool* _activateCmd;
     G4UIcmdWithADoubleAndUnit* _ecutCmd;

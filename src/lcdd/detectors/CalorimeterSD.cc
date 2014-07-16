@@ -85,11 +85,6 @@ std::ostream& CalorimeterSD::printHits(std::ostream& os) {
 */
 
 void CalorimeterSD::EndOfEvent(G4HCofThisEvent *) {
-#ifdef G4VERBOSE
-    if ( getVerbose() > 1 ) {
-        printHits( std::cout );
-    }
-#endif
 
     // Delete hit maps.
     for (unsigned int i=0; i<_hitMaps.size(); i++) {

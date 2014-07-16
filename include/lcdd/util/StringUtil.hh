@@ -135,6 +135,23 @@ public:
      * @param[out] tokens     The output list of string tokens.
      */
     static void split(const std::string& str, const std::string& delimiters, std::vector<std::string>& tokens);
+
+    /**
+     * Replace occurences of a string with another.
+     * @param[in] subject The string to process.
+     * @param[in] search  The search string.
+     * @param[in] replace The replacement string.
+     * @return The new string.
+     */
+    static std::string replace(std::string subject, const std::string& search, const std::string& replace);
+
+    /**
+     * Pad a string to a certain length.
+     * @param[in] input The input string.
+     * @param[in] width The output width.
+     * @return The padded string.
+     */
+    static std::string pad(std::string input, int width);
 };
 
 #endif

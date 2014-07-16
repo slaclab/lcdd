@@ -11,9 +11,6 @@
  * @brief The basic binding for a tracker type subdetector that records individual step information.
  */
 class TrackerSD: public SensitiveDetector {
-public:
-
-    //typedef std::vector<TrackerHit*> TrackerHitList;
 
 public:
 
@@ -41,31 +38,13 @@ public:
      * Perform end of event processing.
      * @param[in] hce The hit collection of this event.
      */
-    virtual void EndOfEvent(G4HCofThisEvent* hce);
-
-    /**
-     * Print out hit data.
-     * @param[in] os The output stream.
-     * @return The same output stream.
-     */
-    std::ostream& printHits(std::ostream& os);
-
-    /**
-     * Get the total energy deposition in the event.
-     * @return The total energy deposition.
-     */
-    double getEdep() const;
+    //virtual void EndOfEvent(G4HCofThisEvent* hce);
 
     /**
      * Clear the current hit list.
      */
     void clearHits();
 
-    /**
-     * Get the list of tracker hits.
-     * @return The list of tracker hits.
-     */
-    //G4TrackerHitList getTrackerHitList();
     /**
      * Add a TrackerHit.
      * @param[in] hit The Tracker hit to add.
@@ -82,8 +61,6 @@ protected:
     virtual G4bool ProcessHits(G4Step* step, G4TouchableHistory* touchable);
 
 protected:
-    //G4TrackerHitsCollection* _HC;
-    //G4TrackerHitList _hits;
     std::vector<TrackerHitsCollection*> _hitsCollections;
 };
 

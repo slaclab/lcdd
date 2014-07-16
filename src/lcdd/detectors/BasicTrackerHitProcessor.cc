@@ -2,11 +2,13 @@
 
 // LCDD
 #include "lcdd/detectors/BasicTrackerHitProcessor.hh"
-#include "lcdd/hits/TrackInformation.hh"
+#include "lcdd/detectors/CurrentTrackState.hh"
+#include "lcdd/geant4/VUserTrackInformation.hh"
 
 // Geant4
 #include "G4Geantino.hh"
 #include "G4ChargedGeantino.hh"
+#include "globals.hh"
 
 BasicTrackerHitProcessor::BasicTrackerHitProcessor(TrackerSD* tracker) :
         TrackerHitProcessor(tracker) {
@@ -31,12 +33,6 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
         return false;
     }
 
-    // Get the TrackInformation.
-    TrackInformation* trkInfo = TrackInformation::getTrackInformation(step->GetTrack());
-
-    // Set the hasTrackerHit flag to true on the TrackInformation.
-    trkInfo->setHasTrackerHit(true);
-
     // Get the track.
     G4Track* track = step->GetTrack();
 
@@ -47,7 +43,8 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     G4StepPoint* post = step->GetPostStepPoint();
 
     // Get the track ID.
-    G4int trackId = track->GetTrackID();
+    //G4int trackId = track->GetTrackID();
+    G4int trackID = CurrentTrackState::getCurrentTrackID();
 
     // Get the global time (ns).
     G4double time = track->GetGlobalTime();
@@ -83,7 +80,7 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     Id64bit id64 = _tracker->makeIdentifier(step);
 
     // Set the hit information from above.
-    hit->setTrackID(trackId);
+    hit->setTrackID(trackID);
     hit->setEdep(edep);
     hit->setPosition(mid);
     hit->setMomentum(momentum);
@@ -93,6 +90,13 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
 
     // Add the hit to the TrackerSD.
     _tracker->addHit(hit);
+
+    // Get the TrackInformation and flag track as having a tracker hit.
+    VUserTrackInformation* trackInformation = dynamic_cast<VUserTrackInformation*>(step->GetTrack()->GetUserInformation());
+    if (trackInformation)
+    	trackInformation->setHasTrackerHit();
+    else
+    	G4Exception("BasicTrackerHitProcessor::processHits", "", FatalException, "Missing required VUserTrackInformation.");
 
     // Return true because created new hit.
     return true;

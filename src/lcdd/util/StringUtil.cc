@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <sstream>
 #include <vector>
+#include <iomanip>
 
 const std::string StringUtil::ALPHA_STR = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const std::string StringUtil::NUM_STR = "1234567890";
@@ -18,6 +19,8 @@ const std::string StringUtil::NULL_STR = "";
 using std::string;
 using std::stringstream;
 using std::istringstream;
+using std::setw;
+using std::setfill;
 using std::vector;
 
 string StringUtil::toString(double d) {
@@ -128,4 +131,19 @@ void StringUtil::split(const string& str, const string& delimiters, vector<strin
         // Find next "non-delimiter"
         pos = str.find_first_of(delimiters, lastPos);
     }
+}
+
+std::string StringUtil::replace(std::string subject, const std::string& search, const std::string& replace) {
+    size_t pos = 0;
+    while ((pos = subject.find(search, pos)) != std::string::npos) {
+         subject.replace(pos, search.length(), replace);
+         pos += replace.length();
+    }
+    return subject;
+}
+
+std::string StringUtil::pad(std::string input, int width) {
+    stringstream ss;
+    ss << setfill('0') << setw(width) << input;
+    return ss.str();
 }

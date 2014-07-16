@@ -31,9 +31,9 @@ public:
         eNone = 0, eTracker = 1, eCalorimeter = 2
     };
 
-    static const std::string& trackerStr;
-    static const std::string& calorimeterStr;
-    static const std::string& noneStr;
+    static const std::string& TRACKER;
+    static const std::string& CALORIMETER;
+    static const std::string& UNKNOWN;
 
     typedef std::vector<HitProcessor*> HitProcessors;
 
@@ -178,32 +178,11 @@ public:
     virtual std::ostream& printBasicInfo(std::ostream& os);
 
     /**
-     * Print the number of hits to the output stream.
-     * @param[in] os The output stream.
-     * @return The same output stream.
-     */
-    virtual std::ostream& printNumberOfHits(std::ostream& os);
-
-    /**
-     * Print the number of hits to the output stream.
-     * @param[in] os The output stream.
-     * @return The same output stream.
-     */
-    virtual std::ostream& printEdep(std::ostream& os);
-
-    /**
      * Print the names of volumes associated to this detector.
      * @param[in] os The output stream.
      * @return The same output stream.
      */
     virtual std::ostream& printVolumes(std::ostream& os);
-
-    /**
-     * Print the list of hits.  Subclasses must implement this.
-     * @param[in] os The output stream.
-     * @return The same output stream.
-     */
-    virtual std::ostream& printHits(std::ostream& os);
 
     /**
      * Get the number of hits collections associated to this detector.
@@ -212,24 +191,10 @@ public:
     int getNumberOfHitsCollections() const;
 
     /**
-     * Get the total energy deposition from the hits of this detector.
-     * @note This method would requires access to concrete hit types,
-     *       so this function must be implemented by subclasses.
-     * @return The total energy deposition of all the hits.
-     */
-    virtual double getEdep() const;
-
-    /**
      * Get a list of G4LogicalVolume objects that have been assigned to this detector.
      * @return The list of G4LogicalVolume objects assigned to this detector.
      */
     std::vector<G4LogicalVolume*> getLogicalVolumes() const;
-
-    /**
-     * Clear the list of hits after event processing.
-     * @note Sub-classes must implement this method.
-     */
-    virtual void clearHits();
 
     /**
      * Add a hit processor.

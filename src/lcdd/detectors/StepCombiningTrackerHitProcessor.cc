@@ -2,7 +2,7 @@
 
 // LCDD
 #include "lcdd/detectors/StepCombiningTrackerHitProcessor.hh"
-#include "lcdd/hits/TrackInformation.hh"
+//#include "lcdd/hits/TrackInformation.hh"
 
 // Geant
 #include "G4Geantino.hh"
@@ -11,17 +11,6 @@
 StepCombiningTrackerHitProcessor::StepCombiningTrackerHitProcessor(TrackerSD* tracker) :
         TrackerHitProcessor(tracker), _currentTrackID(-1), _currentPV(0), _edepTotal(0.), _minTime(0.), _startedHit(false), _currentTrack(0) {
 }
-
-int _currentTrackID;
-G4VPhysicalVolume* _currentPV;
-G4ThreeVector _entryPoint;
-G4ThreeVector _exitPoint;
-G4ThreeVector _entryMomentum;
-G4ThreeVector _exitMomentum;
-G4double _edepTotal;
-G4double _minTime;
-bool _startedHit;
-G4Track* _currentTrack;
 
 StepCombiningTrackerHitProcessor::~StepCombiningTrackerHitProcessor() {
 }
@@ -153,7 +142,10 @@ bool StepCombiningTrackerHitProcessor::insertHit(G4Step* step) {
     _tracker->addHit(hit);
 
     // Set tracker hit flag on track information.
-    TrackInformation::getTrackInformation(_currentTrack)->setHasTrackerHit(true);
+    //TrackInformation* trackInfo = TrackInformation::getTrackInformation(_currentTrack);
+    //if (trackInfo != 0) {
+    //    trackInfo->setHasTrackerHit(true);
+    //}
 
     // Clear the cached hit data.
     clear();

@@ -23,20 +23,14 @@ SensitiveDetectorMessenger::SensitiveDetectorMessenger(SensitiveDetector* detect
 }
 
 SensitiveDetectorMessenger::~SensitiveDetectorMessenger() {
-    // TODO: put command deletes here
+    // TODO: Delete command objects here.
 }
 
 void SensitiveDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String newVals) {
     if (cmd == _printInfoCmd) {
         _detector->printBasicInfo(std::cout);
-    } else if (cmd == _printNHitsCmd) {
-        _detector->printNumberOfHits(std::cout);
-    } else if (cmd == _printTotalEdepCmd) {
-        _detector->printEdep(std::cout);
     } else if (cmd == _printVolumesCmd) {
         _detector->printVolumes(std::cout);
-    } else if (cmd == _printHitsCmd) {
-        _detector->printHits(std::cout);
     } else if (cmd == _verboseCmd) {
         _detector->setVerbose(_verboseCmd->GetNewIntValue(newVals));
     } else if (cmd == _activateCmd) {
@@ -57,7 +51,7 @@ void SensitiveDetectorMessenger::defineCommands(G4VSensitiveDetector* sd) {
     const G4String& name = sd->GetName();
 
     // Name of the sensitive detector's command directory.
-    const G4String& dirName = G4String("/detectors/" + name + "/");
+    const G4String& dirName = G4String("/lcdd/detectors/" + name + "/");
 
     // Create the sensitive detector's Geant4 macro command directory.
     _detectorDir = new G4UIdirectory(dirName.c_str());
@@ -67,21 +61,9 @@ void SensitiveDetectorMessenger::defineCommands(G4VSensitiveDetector* sd) {
     _printInfoCmd = new G4UIcommand(G4String(dirName + "print").c_str(), this);
     _printInfoCmd->SetGuidance(G4String("Print basic information about the sensitive detector " + name).c_str());
 
-    // Print number of hits command.
-    _printNHitsCmd = new G4UIcommand(G4String(dirName + "printNumberOfHits").c_str(), this);
-    _printInfoCmd->SetGuidance(G4String("Print the number of hits from the detector " + name).c_str());
-
-    // Print energy deposition.
-    _printTotalEdepCmd = new G4UIcommand(G4String(dirName + "printEdep").c_str(), this);
-    _printTotalEdepCmd->SetGuidance(G4String("Print the total energy deposition from the detector " + name).c_str());
-
     // Print energy deposition.
     _printVolumesCmd = new G4UIcommand(G4String(dirName + "printVolumes").c_str(), this);
     _printVolumesCmd->SetGuidance(G4String("Print a list of logical volume names associated with the detector " + name).c_str());
-
-    // Print energy deposition.
-    _printHitsCmd = new G4UIcommand(G4String(dirName + "printHits").c_str(), this);
-    _printHitsCmd->SetGuidance(G4String("Print a list of hits from the detector " + name).c_str());
 
     // Set the verbosity.
     _verboseCmd = new G4UIcmdWithAnInteger(G4String(dirName + "setVerbose").c_str(), this);
