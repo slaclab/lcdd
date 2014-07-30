@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/bfield/MagneticFieldOverlay.hh,v 1.8 2013-11-14 00:47:19 jeremy Exp $
-#ifndef LCDD_BFIELD_MAGNETICFIELDOVERLAY_HH
-#define LCDD_BFIELD_MAGNETICFIELDOVERLAY_HH 1
+#ifndef LCDD_BFIELD_MAGNETICFIELDOVERLAY_HH_
+#define LCDD_BFIELD_MAGNETICFIELDOVERLAY_HH_ 1
 
 // Geant4
 #include "G4MagneticField.hh"

@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/geant4/PhysVolIdMap.hh,v 1.8 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_GEANT4_PHYSVOLTOIDMAP_HH
-#define LCDD_GEANT4_PHYSVOLTOIDMAP_HH 1
+#ifndef LCDD_GEANT4_PHYSVOLTOIDMAP_HH_
+#define LCDD_GEANT4_PHYSVOLTOIDMAP_HH_ 1
 
 // LCDD
 #include "PhysVolId.hh"

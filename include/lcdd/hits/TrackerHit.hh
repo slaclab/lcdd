@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/hits/TrackerHit.hh,v 1.8 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_HITS_TRACKERHIT_HH
-#define LCDD_HITS_TRACKERHIT_HH 1
+#ifndef LCDD_HITS_TRACKERHIT_HH_
+#define LCDD_HITS_TRACKERHIT_HH_ 1
 
 // LCDD
 #include "lcdd/id/Id64bit.hh"

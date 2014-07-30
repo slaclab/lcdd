@@ -1,7 +1,5 @@
-// $Id: NistElementsDump.hh,v 1.7 2013-11-14 00:47:23 jeremy Exp $
-
-#ifndef LCDD_UTIL_NISTELEMENTSDUMP_HH
-#define LCDD_UTIL_NISTELEMENTSDUMP_HH 1
+#ifndef LCDD_UTIL_NISTELEMENTSDUMP_HH_
+#define LCDD_UTIL_NISTELEMENTSDUMP_HH_ 1
 
 // STL
 #include <iostream>

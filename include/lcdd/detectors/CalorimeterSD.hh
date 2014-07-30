@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/detectors/CalorimeterSD.hh,v 1.12 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_DETECTORS_CALORIMETERSD_HH
-#define LCDD_DETECTORS_CALORIMETERSD_HH 1
+#ifndef LCDD_DETECTORS_CALORIMETERSD_HH_
+#define LCDD_DETECTORS_CALORIMETERSD_HH_ 1
 
 // Geant4
 #include "lcdd/detectors/SensitiveDetector.hh"

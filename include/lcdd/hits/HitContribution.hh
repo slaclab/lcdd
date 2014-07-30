@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/hits/HitContribution.hh,v 1.6 2013-11-14 00:47:20 jeremy Exp $
-#ifndef LCDD_HITS_HITCONTRIBUTION_HH
-#define LCDD_HITS_HITCONTRIBUTION_HH 1
+#ifndef LCDD_HITS_HITCONTRIBUTION_HH_
+#define LCDD_HITS_HITCONTRIBUTION_HH_ 1
 
 // Geant4
 #include "globals.hh"

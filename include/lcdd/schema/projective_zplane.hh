@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/projective_zplane.hh,v 1.6 2013-11-14 00:47:22 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_PROJECTIVE_ZPLANE_HH
-#define LCDD_SCHEMA_PROJECTIVE_ZPLANE_HH 1
+#ifndef LCDD_SCHEMA_PROJECTIVE_ZPLANE_HH_
+#define LCDD_SCHEMA_PROJECTIVE_ZPLANE_HH_ 1
 
 // LCDD
 #include "ProjectiveZPlaneSegmentationType.hh"

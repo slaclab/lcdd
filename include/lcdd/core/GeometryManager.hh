@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/core/GeometryManager.hh,v 1.6 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_GEOMETRYMANAGER_HH
-#define LCDD_GEOMETRYMANAGER_HH 1
+#ifndef LCDD_CORE_GEOMETRYMANAGER_HH_
+#define LCDD_CORE_GEOMETRYMANAGER_HH_ 1
 
 class G4Run;
 class G4LogicalVolume;

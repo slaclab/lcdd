@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/CellReadout2DSegmentationType.hh,v 1.8 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_CELLREADOUT2DSEGMENTATIONTYPE_HH
-#define LCDD_CELLREADOUT2DSEGMENTATIONTYPE_HH 1
+#ifndef LCDD_CELLREADOUT2DSEGMENTATIONTYPE_HH_
+#define LCDD_CELLREADOUT2DSEGMENTATIONTYPE_HH_ 1
 
 // LCDD
 #include "SegmentationType.hh"

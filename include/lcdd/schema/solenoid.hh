@@ -1,7 +1,5 @@
-// $Id: solenoid.hh,v 1.6 2013-11-14 00:47:22 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_SOLENOID_HH
-#define LCDD_SCHEMA_SOLENOID_HH
+#ifndef LCDD_SCHEMA_SOLENOID_HH_
+#define LCDD_SCHEMA_SOLENOID_HH_ 1
 
 // LCDD
 #include "SolenoidType.hh"

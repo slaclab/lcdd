@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/core/LCDDMessenger.hh,v 1.7 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_CORE_LCDDMESSENGER_HH
-#define LCDD_CORE_LCDDMESSENGER_HH 1
+#ifndef LCDD_CORE_LCDDMESSENGER_HH_
+#define LCDD_CORE_LCDDMESSENGER_HH_ 1
 
 #include "G4UImessenger.hh"
 

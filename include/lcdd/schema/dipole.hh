@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/dipole.hh,v 1.6 2013-11-14 00:47:21 jeremy Exp $
-#ifndef LCDD_SCHEMA_DIPOLE_HH
-#define LCDD_SCHEMA_DIPOLE_HH
+#ifndef LCDD_SCHEMA_DIPOLE_HH_
+#define LCDD_SCHEMA_DIPOLE_HH_
 
 // GDML
 #include "Saxana/SAXObject.h"

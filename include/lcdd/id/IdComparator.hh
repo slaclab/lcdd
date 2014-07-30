@@ -1,7 +1,7 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/id/IdComparator.hh,v 1.8 2013-11-14 00:47:20 jeremy Exp $
-#ifndef LCDD_IDCOMPARATOR_HH
-#define LCDD_IDCOMPARATOR_HH 1
+#ifndef LCDD_ID_IDCOMPARATOR_HH_
+#define LCDD_ID_IDCOMPARATOR_HH_ 1
 
+// LCDD
 #include "lcdd/detectors/HitComparator.hh"
 
 /**

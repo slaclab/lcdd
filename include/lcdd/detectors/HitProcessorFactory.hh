@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/detectors/HitProcessorFactory.hh,v 1.3 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_DETECTORS_HITPROCESSORFACTORY_HH
-#define LCDD_DETECTORS_HITPROCESSORFACTORY_HH
+#ifndef LCDD_DETECTORS_HITPROCESSORFACTORY_HH_
+#define LCDD_DETECTORS_HITPROCESSORFACTORY_HH_
 
 // LCDD
 #include "lcdd/detectors/HitProcessor.hh"

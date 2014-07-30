@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/util/StringUtil.hh,v 1.6 2013-11-14 00:47:23 jeremy Exp $
-
-#ifndef LCDD_UTIL_STRINGUTIL_HH
-#define LCDD_UTIL_STRINGUTIL_HH 1
+#ifndef LCDD_UTIL_STRINGUTIL_HH_
+#define LCDD_UTIL_STRINGUTIL_HH_ 1
 
 // STL
 #include <string>

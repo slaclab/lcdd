@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/subscribers/volumeExtendedSubscriber.hh,v 1.4 2013-11-14 00:47:23 jeremy Exp $
-
-#ifndef LCDD_SUBSCRIBERS_VOLUMEEXTENDEDSUBSCRIBER_HH
-#define LCDD_SUBSCRIBERS_VOLUMEEXTENDEDSUBSCRIBER_HH 1
+#ifndef LCDD_SUBSCRIBERS_VOLUMEEXTENDEDSUBSCRIBER_HH_
+#define LCDD_SUBSCRIBERS_VOLUMEEXTENDEDSUBSCRIBER_HH_ 1
 
 // GDML
 #include "Saxana/SAXSubscriber.h"

@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/DipoleType.hh,v 1.7 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_DIPOLETYPE_HH
-#define LCDD_SCHEMA_DIPOLETYPE_HH 1
+#ifndef LCDD_SCHEMA_DIPOLETYPE_HH_
+#define LCDD_SCHEMA_DIPOLETYPE_HH_ 1
 
 // LCDD
 #include "FieldType.hh"

@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/segmentation/NonprojectiveCylinderSegmentation.hh,v 1.2 2013-11-14 00:47:23 jeremy Exp $
-#ifndef LCDD_SEGMENTATION_G4NONPROJECTIVECYLINDERSEGMENTATION
-#define LCDD_SEGMENTATION_G4NONPROJECTIVECYLINDERSEGMENTATION 1
+#ifndef LCDD_SEGMENTATION_G4NONPROJECTIVECYLINDERSEGMENTATION_
+#define LCDD_SEGMENTATION_G4NONPROJECTIVECYLINDERSEGMENTATION_ 1
 
 // LCDD
 #include "lcdd/segmentation/Segmentation.hh"

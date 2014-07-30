@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/id/IdField.hh,v 1.5 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_IDFIELD_HH
-#define LCDD_IDFIELD_HH 1
+#ifndef LCDD_ID_IDFIELD_HH_
+#define LCDD_ID_IDFIELD_HH_ 1
 
 // STL
 #include <string>

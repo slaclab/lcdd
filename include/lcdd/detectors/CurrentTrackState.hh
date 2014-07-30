@@ -1,10 +1,3 @@
-/*
- * CurrentTrackState.hh
- *
- *  Created on: Jun 24, 2014
- *      Author: jeremym
- */
-
 #ifndef LCDD_DETECTORS_CURRENTTRACKSTATE_HH_
 #define LCDD_DETECTORS_CURRENTTRACKSTATE_HH_ 1
 
@@ -21,7 +14,6 @@ private:
 public:
 
 	static void setCurrentTrackID(G4int trackID) {
-		//G4cout << "setCurrentTrackID - " << trackID << G4endl;
 		_currentTrackID = trackID;
 	}
 
@@ -43,4 +35,4 @@ public:
 	static G4int _currentPrimaryID;
 };
 
-#endif /* CURRENTTRACKSTATE_HH_ */
+#endif

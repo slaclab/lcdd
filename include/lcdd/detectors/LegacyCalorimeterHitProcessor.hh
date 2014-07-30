@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/detectors/LegacyCalorimeterHitProcessor.hh,v 1.4 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_DETECTORS_LEGACYCALORIMETERHITPROCESSOR_HH
-#define LCDD_DETECTORS_LEGACYCALORIMETERHITPROCESSOR_HH 1
+#ifndef LCDD_DETECTORS_LEGACYCALORIMETERHITPROCESSOR_HH_
+#define LCDD_DETECTORS_LEGACYCALORIMETERHITPROCESSOR_HH_ 1
 
 // LCDD
 #include "lcdd/detectors/CalorimeterHitProcessor.hh"

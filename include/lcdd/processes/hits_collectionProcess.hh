@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/processes/hits_collectionProcess.hh,v 1.3 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_PROCESSES_HITS_COLLECTIONPROCESS_HH
-#define LCDD_PROCESSES_HITS_COLLECTIONPROCESS_HH 1
+#ifndef LCDD_PROCESSES_HITS_COLLECTIONPROCESS_HH_
+#define LCDD_PROCESSES_HITS_COLLECTIONPROCESS_HH_ 1
 
 // GDML
 #include "Saxana/SAXStateProcess.h"

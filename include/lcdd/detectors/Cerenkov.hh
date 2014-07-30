@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/detectors/Cerenkov.hh,v 1.6 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_DETECTORS_CERENKOV_HH
-#define LCDD_DETECTORS_CERENKOV_HH 1
+#ifndef LCDD_DETECTORS_CERENKOV_HH_
+#define LCDD_DETECTORS_CERENKOV_HH_ 1
 
 // Geant4
 #include "G4PhysicsOrderedFreeVector.hh"

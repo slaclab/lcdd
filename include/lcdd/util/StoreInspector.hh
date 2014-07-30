@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/util/StoreInspector.hh,v 1.9 2013-11-14 00:47:23 jeremy Exp $
-
-#ifndef LCDD_UTIL_STOREINSPECTOR_HH
-#define LCDD_UTIL_STOREINSPECTOR_HH 1
+#ifndef LCDD_UTIL_STOREINSPECTOR_HH_
+#define LCDD_UTIL_STOREINSPECTOR_HH_ 1
 
 // LCDD
 #include "lcdd/core/LCDDProcessor.hh"

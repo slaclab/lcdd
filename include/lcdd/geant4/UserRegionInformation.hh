@@ -1,7 +1,5 @@
-//$Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/geant4/UserRegionInformation.hh,v 1.4 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_GEANT4_USERREGIONINFORMATION_HH
-#define LCDD_GEANT4_USERREGIONINFORMATION_HH 1
+#ifndef LCDD_GEANT4_USERREGIONINFORMATION_HH_
+#define LCDD_GEANT4_USERREGIONINFORMATION_HH_ 1
 
 // Geant4
 #include "G4VUserRegionInformation.hh"

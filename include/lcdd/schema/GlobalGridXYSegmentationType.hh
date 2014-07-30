@@ -1,10 +1,8 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/GlobalGridXYSegmentationType.hh,v 1.7 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_GLOBALGRIDXYSEGMENTATIONTYPE_HH
-#define LCDD_SCHEMA_GLOBALGRIDXYSEGMENTATIONTYPE_HH 1
+#ifndef LCDD_SCHEMA_GLOBALGRIDXYSEGMENTATIONTYPE_HH_
+#define LCDD_SCHEMA_GLOBALGRIDXYSEGMENTATIONTYPE_HH_ 1
 
 // LCDD
-#include "SegmentationType.hh"
+#include "lcdd/schema/SegmentationType.hh"
 
 // GDML
 #include "Saxana/SAXObject.h"

@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/DipoleCoeffType.hh,v 1.7 2013-11-14 00:47:21 jeremy Exp $
-#ifndef LCDD_SCHEMA_DIPOLECOEFFTYPE_HH
-#define LCDD_SCHEMA_DIPOLECOEFFTYPE_HH
+#ifndef LCDD_SCHEMA_DIPOLECOEFFTYPE_HH_
+#define LCDD_SCHEMA_DIPOLECOEFFTYPE_HH_ 1
 
 // STL
 #include <string>

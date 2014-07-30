@@ -1,7 +1,7 @@
 // $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/hits/CalorimeterHitMap.hh,v 1.3 2013-11-14 00:47:20 jeremy Exp $
 
-#ifndef lcdd_hits_CalorimeterHitMap_hh
-#define lcdd_hits_CalorimeterHitMap_hh 1
+#ifndef LCDD_HITS_CALORIMETER_HITMAP_HH_
+#define LCDD_HITS_CALORIMETER_HITMAP_HH_ 1
 
 // LCDD
 #include "lcdd/id/Id64bit.hh"

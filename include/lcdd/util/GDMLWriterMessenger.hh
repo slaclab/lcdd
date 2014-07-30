@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/util/GDMLWriterMessenger.hh,v 1.5 2013-11-14 00:47:23 jeremy Exp $
-
-#ifndef LCDD_UTIL_GDMLWRITERMESSENGER_HH
-#define LCDD_UTIL_GDMLWRITERMESSENGER_HH 1
+#ifndef LCDD_UTIL_GDMLWRITERMESSENGER_HH_
+#define LCDD_UTIL_GDMLWRITERMESSENGER_HH_ 1
 
 // Geant4
 #include "G4UImessenger.hh"

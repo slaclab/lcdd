@@ -1,5 +1,5 @@
-#ifndef LCDD_BFIELD_BOXDIPOLE_HH
-#define LCDD_BFIELD_BOXDIPOLE_HH 1
+#ifndef LCDD_BFIELD_BOXDIPOLE_HH_
+#define LCDD_BFIELD_BOXDIPOLE_HH_ 1
 
 // Geant4
 #include "G4MagneticField.hh"

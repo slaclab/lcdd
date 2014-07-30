@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/box_dipole.hh,v 1.6 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_BOX_DIPOLE_HH
-#define LCDD_SCHEMA_BOX_DIPOLE_HH 1
+#ifndef LCDD_SCHEMA_BOX_DIPOLE_HH_
+#define LCDD_SCHEMA_BOX_DIPOLE_HH_ 1
 
 // LCDD
 #include "BoxDipoleType.hh"

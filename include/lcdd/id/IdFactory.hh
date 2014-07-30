@@ -1,19 +1,18 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/id/IdFactory.hh,v 1.7 2013-11-14 00:47:20 jeremy Exp $
-#ifndef LCDD_IDFACTORY_HH
-#define LCDD_IDFACTORY_HH 1
+#ifndef LCDD_ID_IDFACTORY_HH_
+#define LCDD_ID_IDFACTORY_HH_ 1
 
 // LCDD
 #include "IdVec.hh"
 #include "IdSpec.hh"
 
-// std
+// STL
 #include <iostream>
 #include <vector>
 
 // LCDD
 class Segmentation;
 
-// G4
+// Geant4
 class G4Step;
 class G4VPhysicalVolume;
 
@@ -98,19 +97,6 @@ private:
      * @param[in] fieldName The name of the field.
      */
     static int findIdInPhysVols(const std::vector<G4VPhysicalVolume*>& pvs, const std::string& fieldName);
-
-    /**
-     * Add PhysVolId values from a step into the ID list.
-     * @param[in]  aStep The G4Step object.
-     * @param[out] v     The list of IDs to fill.
-     */
-    //static void addPhysVolIds(G4Step* aStep, IdVec& v);
-    /**
-     * Get the list of physical volumes from a step.
-     * @param[in] The G4Step object.
-     * @return The list of physical volumes.
-     */
-    //static std::vector<G4VPhysicalVolume*> getPhysVolList(G4Step* aStep);
 };
 
 #endif

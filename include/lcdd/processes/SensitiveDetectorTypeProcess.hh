@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/processes/SensitiveDetectorTypeProcess.hh,v 1.5 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_PROCESSES_SENSITIVEDETECTORTYPEPROCESS_HH
-#define LCDD_PROCESSES_SENSITIVEDETECTORTYPEPROCESS_HH 1
+#ifndef LCDD_PROCESSES_SENSITIVEDETECTORTYPEPROCESS_HH_
+#define LCDD_PROCESSES_SENSITIVEDETECTORTYPEPROCESS_HH_ 1
 
 // LCDD
 #include "lcdd/schema/SensitiveDetectorType.hh"

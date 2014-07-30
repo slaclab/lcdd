@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/bfield/RZBData.hh,v 1.8 2013-11-14 00:47:19 jeremy Exp $
-
-#ifndef LCDD_BFIELD_RZBDATA_HH
-#define LCDD_BFIELD_RZBDATA_HH 1
+#ifndef LCDD_BFIELD_RZBDATA_HH_
+#define LCDD_BFIELD_RZBDATA_HH_ 1
 
 /**
  * @brief A single data row for the RZFieldMap.

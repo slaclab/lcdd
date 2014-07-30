@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/processes/FieldTypeProcess.hh,v 1.5 2013-11-14 00:47:20 jeremy Exp $
-
-#ifndef LCDD_PROCESSES_FIELDTYPEPROCESS_HH
-#define LCDD_PROCESSES_FIELDTYPEPROCESS_HH 1
+#ifndef LCDD_PROCESSES_FIELDTYPEPROCESS_HH_
+#define LCDD_PROCESSES_FIELDTYPEPROCESS_HH_ 1
 
 // GDML
 #include "Saxana/ProcessingConfigurator.h"

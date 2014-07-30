@@ -1,9 +1,9 @@
-#ifndef lcdd_util_TimerUtil_hh_
-#define lcdd_util_TimerUtil_hh_ 1
+#ifndef LCDD_UTIL_TIMERUTIL_HH_
+#define LCDD_UTIL_TIMERUTIL_HH_ 1
 
 #include <sys/time.h>
 
-// clock_gettime is not defined on MacOS
+// Define clock_gettime for OSX.
 #ifdef __MACH__
 #include <mach/mach_time.h>
 #define CLOCK_REALTIME 0
@@ -20,8 +20,6 @@ int clock_gettime(int clk_id, struct timespec *t){
     return 0;
 }
 #endif
-
-
 
 #include <string>
 #include <map>

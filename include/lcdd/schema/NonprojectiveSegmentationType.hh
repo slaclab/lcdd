@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/NonprojectiveSegmentationType.hh,v 1.7 2013-11-14 00:47:21 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_NONPROJECTIVESEGMENTATIONTYPE_HH
-#define LCDD_SCHEMA_NONPROJECTIVESEGMENTATIONTYPE_HH 1
+#ifndef LCDD_SCHEMA_NONPROJECTIVESEGMENTATIONTYPE_HH_
+#define LCDD_SCHEMA_NONPROJECTIVESEGMENTATIONTYPE_HH_ 1
 
 // LCDD
 #include "SegmentationType.hh"

@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/id/IdVec.hh,v 1.5 2013-11-14 00:47:20 jeremy Exp $
-#ifndef LCDD_IDVEC_HH
-#define LCDD_IDVEC_HH
+#ifndef LCDD_ID_IDVEC_HH_
+#define LCDD_ID_IDVEC_HH_ 1
 
 // LCDD
 #include "Id64bit.hh"

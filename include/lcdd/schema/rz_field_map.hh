@@ -1,7 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/schema/rz_field_map.hh,v 1.6 2013-11-14 00:47:22 jeremy Exp $
-
-#ifndef LCDD_SCHEMA_RZ_FIELD_MAP_HH
-#define LCDD_SCHEMA_RZ_FIELD_MAP_HH 1
+#ifndef LCDD_SCHEMA_RZ_FIELD_MAP_HH_
+#define LCDD_SCHEMA_RZ_FIELD_MAP_HH_ 1
 
 // LCDD
 #include "RZFieldMapType.hh"

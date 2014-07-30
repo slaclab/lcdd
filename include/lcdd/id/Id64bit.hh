@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/include/lcdd/id/Id64bit.hh,v 1.8 2013-11-14 00:47:20 jeremy Exp $
-#ifndef LCDD_ID64BIT_HH
-#define LCDD_ID64BIT_HH 1
+#ifndef LCDD_ID_ID64BIT_HH_
+#define LCDD_ID_ID64BIT_HH_ 1
 
 // STL
 #include <stdint.h>
