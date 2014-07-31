@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/subscribers/visSubscriber.cc,v 1.3 2013-11-13 23:02:59 jeremy Exp $
-
 // LCDD
 #include "lcdd/core/LCDDProcessor.hh"
 #include "lcdd/schema/vis.hh"

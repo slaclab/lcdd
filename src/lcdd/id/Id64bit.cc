@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/id/Id64bit.cc,v 1.3 2013-11-13 23:02:57 jeremy Exp $
-
 #include "lcdd/id/Id64bit.hh"
 
 #include <iostream>

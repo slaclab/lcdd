@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/segmentation/ProjectiveZPlaneSegmentation.cc,v 1.2 2013-11-13 23:02:59 jeremy Exp $
+#include "lcdd/segmentation/ProjectiveZPlaneSegmentation.hh"
 
 // LCDD
-#include "lcdd/segmentation/ProjectiveZPlaneSegmentation.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
 
 ProjectiveZPlaneSegmentation::ProjectiveZPlaneSegmentation(G4int ntheta, G4int nphi) :

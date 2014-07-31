@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/SensitiveDetectorFactory.cc,v 1.9 2013-11-13 23:02:56 jeremy Exp $
+#include "lcdd/detectors/SensitiveDetectorFactory.hh"
 
 // LCDD
-#include "lcdd/detectors/SensitiveDetectorFactory.hh"
 #include "lcdd/id/IdComparator.hh"
 #include "lcdd/util/StringUtil.hh"
 #include "lcdd/detectors/PositionComparator.hh"

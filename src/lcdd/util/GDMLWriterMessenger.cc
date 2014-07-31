@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/util/GDMLWriterMessenger.cc,v 1.3 2013-11-13 23:02:59 jeremy Exp $
+#include "lcdd/util/GDMLWriterMessenger.hh"
 
 // LCDD
-#include "lcdd/util/GDMLWriterMessenger.hh"
 #include "lcdd/util/GDMLWriter.hh"
 
 // Geant4

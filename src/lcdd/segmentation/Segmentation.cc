@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/segmentation/Segmentation.cc,v 1.2 2013-11-13 23:02:59 jeremy Exp $
+#include "lcdd/segmentation/Segmentation.hh"
 
 // LCDD
-#include "lcdd/segmentation/Segmentation.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
 
 Segmentation::Segmentation(EType segType, int nbins) :

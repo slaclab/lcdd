@@ -1,12 +1,10 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/subscribers/solenoidSubscriber.cc,v 1.4 2013-11-13 23:02:59 jeremy Exp $
-
 // GDML
 #include "Saxana/SAXSubscriber.h"
 #include "Saxana/SAXComponentFactory.h"
 #include "G4Processor/GDMLProcessor.h"
 #include "G4Evaluator/GDMLExpressionEvaluator.h"
 
-// processor 
+// LCDD
 #include "lcdd/core/LCDDProcessor.hh"
 #include "lcdd/schema/solenoid.hh"
 #include "lcdd/bfield/Solenoid.hh"

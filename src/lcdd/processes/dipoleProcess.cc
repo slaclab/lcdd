@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/dipoleProcess.cc,v 1.2 2013-11-13 23:02:57 jeremy Exp $
-
 // LCDD
 #include "lcdd/schema/dipole.hh"
 

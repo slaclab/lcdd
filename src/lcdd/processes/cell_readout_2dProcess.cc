@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/cell_readout_2dProcess.cc,v 1.3 2013-11-13 23:02:57 jeremy Exp $
-
 // GDML
 #include "Saxana/ProcessingConfigurator.h"
 #include "Saxana/ProcessingContext.h"

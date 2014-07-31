@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/subscribers/limitsetSubscriber.cc,v 1.5 2013-11-13 23:02:59 jeremy Exp $
-
 // GDML
 #include "Saxana/SAXSubscriber.h"
 #include "Saxana/SAXComponentFactory.h"
@@ -12,6 +10,7 @@
 #include "lcdd/geant4/PhysicsLimitSet.hh"
 #include "lcdd/util/StringUtil.hh"
 
+// STL
 #include <string>
 #include <iostream>
 

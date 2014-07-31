@@ -8,8 +8,6 @@
 //  but since we are only interested in the number of photons created don't need to 
 //  actually create optical phtons and put them on the stack. 
 //--------------------------------------------------------------------------------------
-
-// LCDD
 #include "lcdd/detectors/Cerenkov.hh"
 
 // Geant4

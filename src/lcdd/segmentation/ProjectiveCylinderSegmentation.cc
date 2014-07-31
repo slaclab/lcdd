@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/segmentation/ProjectiveCylinderSegmentation.cc,v 1.2 2013-11-13 23:02:58 jeremy Exp $
+#include "lcdd/segmentation/ProjectiveCylinderSegmentation.hh"
 
 // LCDD
-#include "lcdd/segmentation/ProjectiveCylinderSegmentation.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
 
 // Geant4

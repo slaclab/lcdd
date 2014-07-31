@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/geant4/PhysVolId.cc,v 1.2 2013-11-13 23:02:57 jeremy Exp $
-
 #include "lcdd/geant4/PhysVolId.hh"
 
 PhysVolId::PhysVolId(ValueType val, std::string fld) :

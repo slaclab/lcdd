@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/HitProcessorManager.cc,v 1.3 2013-11-13 23:02:56 jeremy Exp $
+#include "lcdd/detectors/HitProcessorManager.hh"
 
 // LCDD
-#include "lcdd/detectors/HitProcessorManager.hh"
 #include "lcdd/detectors/LegacyCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/UnsegmentedCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/OpticalCalorimeterHitProcessor.hh"

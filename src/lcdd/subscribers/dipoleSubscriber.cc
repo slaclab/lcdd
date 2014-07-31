@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/subscribers/dipoleSubscriber.cc,v 1.4 2013-11-13 23:02:59 jeremy Exp $
-
 // GDML
 #include "Saxana/SAXSubscriber.h"
 #include "Saxana/SAXComponentFactory.h"

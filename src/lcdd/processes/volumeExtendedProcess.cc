@@ -1,6 +1,5 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/volumeExtendedProcess.cc,v 1.2 2013-11-13 23:02:58 jeremy Exp $
-#ifndef VolumeExtendedProcess_hh
-#define VolumeExtendedProcess_hh 1
+#ifndef LCDD_PROCESSES_VOLUMEEXTENDEDPROCESS_HH_
+#define LCDD_PROCESSES_VOLUMEEXTENDEDPROCESS_HH_ 1
 
 #include "Saxana/ProcessingConfigurator.h"
 #include "Saxana/ProcessingContext.h"

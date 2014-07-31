@@ -18,18 +18,23 @@ public:
     /**
      * Class constructor.
      */
-    hits_collection();
+    hits_collection() {
+    }
 
     /**
      * Class destructor.
      */
-    virtual ~hits_collection();
+    virtual ~hits_collection() {
+    }
 
     /**
      * Get the type of this SAXObject.
      * @return The type of this SAXObject.
      */
-    virtual SAXObject::Type type();
+    virtual SAXObject::Type type() {
+        return SAXObject::element;
+    }
+
 };
 
 #endif

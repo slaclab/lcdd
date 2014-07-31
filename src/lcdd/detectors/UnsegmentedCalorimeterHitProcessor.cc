@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/UnsegmentedCalorimeterHitProcessor.cc,v 1.4 2013-11-13 23:02:56 jeremy Exp $
-
-// LCDD
 #include "lcdd/detectors/UnsegmentedCalorimeterHitProcessor.hh"
 
 // Geant4

@@ -3,7 +3,6 @@
 //  S.Larsson and J. Generowicz.
 //
 
-// LCDD
 #include "lcdd/bfield/Cartesian3DMagneticFieldMap.hh"
 
 // STL

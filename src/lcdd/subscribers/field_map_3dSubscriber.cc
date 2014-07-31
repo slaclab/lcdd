@@ -1,6 +1,4 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/subscribers/field_map_3dSubscriber.cc,v 1.5 2013-11-13 23:02:59 jeremy Exp $
-
-// lcdd
+// LCDD
 #include "lcdd/core/LCDDProcessor.hh"
 #include "lcdd/schema/field_map_3d.hh"
 #include "lcdd/bfield/Cartesian3DMagneticFieldMap.hh"

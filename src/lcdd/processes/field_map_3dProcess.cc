@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/field_map_3dProcess.cc,v 1.5 2013-11-13 23:02:57 jeremy Exp $
-
 // LCDD
 #include "lcdd/processes/FieldMapTypeProcess.hh"
 #include "lcdd/schema/field_map_3d.hh"

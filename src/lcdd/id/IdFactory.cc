@@ -1,15 +1,15 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/id/IdFactory.cc,v 1.6 2013-11-13 23:02:57 jeremy Exp $
+#include "lcdd/id/IdFactory.hh"
 
 // Uncomment to enable verbose debug output from this class.
 //#define ID_DEBUG 1
 
 // LCDD
-#include "lcdd/detectors/SensitiveDetector.hh"
 #include "lcdd/detectors/CalorimeterSD.hh"
-#include "lcdd/segmentation/Segmentation.hh"
-#include "lcdd/id/IdManager.hh"
-#include "lcdd/id/IdFactory.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
+#include "lcdd/id/IdManager.hh"
+#include "lcdd/segmentation/Segmentation.hh"
+
+
 
 // Geant4
 #include "G4Step.hh"

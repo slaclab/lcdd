@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/id/IdVec.cc,v 1.3 2013-11-13 23:02:57 jeremy Exp $
-
-// LCDD
 #include "lcdd/id/IdVec.hh"
 
 IdVec::IdVec() {

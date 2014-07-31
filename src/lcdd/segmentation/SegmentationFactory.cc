@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/segmentation/SegmentationFactory.cc,v 1.3 2013-11-13 23:02:59 jeremy Exp $
+#include "lcdd/segmentation/SegmentationFactory.hh"
 
 // LCDD
-#include "lcdd/segmentation/SegmentationFactory.hh"
 #include "lcdd/schema/grid_xyz.hh"
 #include "lcdd/schema/global_grid_xy.hh"
 #include "lcdd/schema/nonprojective_cylinder.hh"

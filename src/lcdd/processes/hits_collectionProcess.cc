@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/hits_collectionProcess.cc,v 1.3 2013-11-13 23:02:57 jeremy Exp $
-
 // LCDD
 #include "lcdd/processes/hits_collectionProcess.hh"
 #include "lcdd/schema/hits_collection.hh"

@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/bfield/FieldManager.cc,v 1.3 2013-11-13 23:02:56 jeremy Exp $
+#include "lcdd/bfield/FieldManager.hh"
 
 // LCDD
-#include "lcdd/bfield/FieldManager.hh"
 #include "lcdd/core/LCDDProcessor.hh"
 
 FieldManager* FieldManager::_instance = 0;

@@ -14,18 +14,22 @@ public:
     /**
      * Class constructor.
      */
-    hit_processor();
+    hit_processor() {
+    }
 
     /**
      * Class destructor.
      */
-    virtual ~hit_processor();
+    virtual ~hit_processor() {
+    }
 
     /**
      * Get the type of this SAXObject.
      * @return The type of this SAXObject.
      */
-    virtual SAXObject::Type type();
+    virtual SAXObject::Type type() {
+        return SAXObject::element;
+    }
 };
 
 #endif

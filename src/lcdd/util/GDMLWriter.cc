@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/util/GDMLWriter.cc,v 1.2 2013-11-13 23:02:59 jeremy Exp $
-
-// LCDD
 #include "lcdd/util/GDMLWriter.hh"
 
 // GDML

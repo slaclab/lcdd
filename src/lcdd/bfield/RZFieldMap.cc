@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/bfield/RZFieldMap.cc,v 1.3 2013-11-13 23:02:56 jeremy Exp $
-
-// LCDD
 #include "lcdd/bfield/RZFieldMap.hh"
 
 // Geant4

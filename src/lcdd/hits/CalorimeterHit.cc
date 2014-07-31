@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/hits/CalorimeterHit.cc,v 1.8 2013-11-13 23:02:57 jeremy Exp $
-
-// LCDD
 #include "lcdd/hits/CalorimeterHit.hh"
 
 // Geant4

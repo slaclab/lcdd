@@ -18,31 +18,41 @@ public:
     /**
      * Class constructor.
      */
-    HitProcessorType();
+    HitProcessorType() {
+    }
+
 
     /**
      * Class destructor.
      */
-    virtual ~HitProcessorType();
+    virtual ~HitProcessorType() {
+    }
 
     /**
      * Set the type of the HitProcessor.
      * @param s The type of the HitProcessor.
      */
-    void set_type(const std::string& s);
+    void set_type(const std::string& s) {
+        _type = s;
+    }
 
     /**
      * Get the type of the HitProcessor.
      * @return The type of the HitProcessor.
      */
-    const std::string& get_type() const;
+    const std::string& get_type() const {
+        return _type;
+    }
 
     /**
      * Add child content.
      * @param tag The tag of the child.
      * @param so The SAXObject of the child.
      */
-    void add_content(const std::string& tag, SAXObject* so);
+    void add_content(const std::string& tag, SAXObject* saxObject) {
+        ContentGroup::ContentItem contentItem = { tag, saxObject };
+        _sequence.add_content(contentItem);
+    }
 
 private:
     std::string _type;

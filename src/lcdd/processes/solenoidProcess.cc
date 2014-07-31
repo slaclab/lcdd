@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/solenoidProcess.cc,v 1.3 2013-11-13 23:02:58 jeremy Exp $
-
 // LCDD
 #include "lcdd/schema/solenoid.hh"
 #include "lcdd/processes/FieldTypeProcess.hh"

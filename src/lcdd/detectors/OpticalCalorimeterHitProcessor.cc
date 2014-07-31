@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/OpticalCalorimeterHitProcessor.cc,v 1.7 2013-11-14 00:46:45 jeremy Exp $
+#include "lcdd/detectors/OpticalCalorimeterHitProcessor.hh"
 
 // LCDD
-#include "lcdd/detectors/OpticalCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
 
 // Geant4

@@ -1,5 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/processes/idspecrefProcess.cc,v 1.2 2013-11-13 23:02:58 jeremy Exp $
-
 // GDML
 #include "Processes/ReferenceTypeProcess.h"
 

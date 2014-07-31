@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/bfield/BoxDipole.cc,v 1.3 2013-11-13 23:02:56 jeremy Exp $
-
-// LCDD
 #include "lcdd/bfield/BoxDipole.hh"
 
 BoxDipole::~BoxDipole() {

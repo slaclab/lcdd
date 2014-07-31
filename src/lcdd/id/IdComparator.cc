@@ -1,6 +1,3 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/id/IdComparator.cc,v 1.2 2013-11-13 23:02:57 jeremy Exp $
-
-// LCDD
 #include "lcdd/id/IdComparator.hh"
 
 IdComparator::IdComparator() {

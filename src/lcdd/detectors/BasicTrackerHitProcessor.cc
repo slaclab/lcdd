@@ -1,7 +1,6 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/detectors/BasicTrackerHitProcessor.cc,v 1.3 2013-11-13 23:02:56 jeremy Exp $
+#include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 
 // LCDD
-#include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 #include "lcdd/detectors/CurrentTrackState.hh"
 #include "lcdd/geant4/VUserTrackInformation.hh"
 

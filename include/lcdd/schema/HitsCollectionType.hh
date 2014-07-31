@@ -18,24 +18,30 @@ public:
     /**
      * Class constructor.
      */
-    HitsCollectionType();
+    HitsCollectionType() {
+    }
 
     /**
      * Class destructor.
      */
-    virtual ~HitsCollectionType();
+    virtual ~HitsCollectionType() {
+    }
 
     /**
      * Set the name of the HitsCollection.
      * @param s The name of the HitsCollection.
      */
-    void set_name(const std::string& s);
+    void set_name(const std::string& s) {
+        _name = s;
+    }
 
     /**
      * Get the name of the HitsCollection.
      * @return The name of the HitsCollection.
      */
-    const std::string& get_name() const;
+    const std::string& get_name() const {
+        return _name;
+    }
 
 private:
     std::string _name;

@@ -1,7 +1,6 @@
-// $Id: NistElementsDump.cc,v 1.3 2013-11-13 23:02:59 jeremy Exp $
+#include "lcdd/util/NistElementsDump.hh"
 
 // LCDD
-#include "lcdd/util/NistElementsDump.hh"
 #include "lcdd/util/StringUtil.hh"
 
 // GDML

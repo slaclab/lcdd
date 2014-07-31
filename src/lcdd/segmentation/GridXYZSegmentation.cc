@@ -1,9 +1,7 @@
-// $Header: /nfs/slac/g/lcd/cvs/lcdroot/lcdd/src/lcdd/segmentation/GridXYZSegmentation.cc,v 1.2 2013-11-13 23:02:58 jeremy Exp $
+#include "lcdd/segmentation/GridXYZSegmentation.hh"
 
 // LCDD
-#include "lcdd/segmentation/GridXYZSegmentation.hh"
 #include "lcdd/detectors/ReadoutUtil.hh"
-//#include "lcdd/util/TimeUtil.hh"
 
 // Geant4
 #include "G4NavigationHistory.hh"
