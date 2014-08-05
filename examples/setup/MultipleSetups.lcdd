@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcdd xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcdd/1.0/lcdd.xsd">
+  <header>
+    <detector name="MultipleSetups" />
+  </header>
+  <iddict />
+  <sensitive_detectors />
+  <limits />
+  <regions />
+  <display />
+  <gdml>
+    <define>
+      <rotation name="identity_rot" x="0.0" y="0.0" z="0.0" unit="radian" />
+      <position name="identity_pos" x="0.0" y="0.0" z="0.0" unit="mm" />
+    </define>
+    <materials>
+      <element name="N" formula="N" Z="7.0">
+        <atom type="A" unit="g/mol" value="14.00674" />
+      </element>
+      <element name="O" formula="O" Z="8.0">
+        <atom type="A" unit="g/mol" value="15.9994" />
+      </element>
+      <element name="Ar" formula="Ar" Z="18.0">
+        <atom type="A" unit="g/mol" value="39.948" />
+      </element>
+      <material name="Air">
+        <D type="density" unit="g/cm3" value="0.0012" />
+        <fraction n="0.754" ref="N" />
+        <fraction n="0.234" ref="O" />
+        <fraction n="0.012" ref="Ar" />
+      </material>
+    </materials>
+    <solids>
+      <box name="WorldBox" x="1000.0" y="1000.0" z="1000.0" />
+      <box name="BoxSolid" x="200.0" y="200.0" z="200.0" />
+      <tube name="TubeSolid" deltaphi="pi*2" rmin="0.0" z="200.0" rmax="100.0" />
+    </solids>
+    <structure>
+      <volume name="BoxVolume">
+        <materialref ref="Air" />
+        <solidref ref="BoxSolid" />
+      </volume>
+      <volume name="TubeVolume">
+        <materialref ref="Air" />
+        <solidref ref="TubeSolid" />
+      </volume>
+      <volume name="WorldVolume">
+        <materialref ref="Air" />
+        <solidref ref="WorldBox" />
+        <physvol>
+          <volumeref ref="BoxVolume" />
+          <positionref ref="identity_pos" />
+          <rotationref ref="identity_rot" />
+        </physvol>
+      </volume>
+      <volume name="WorldVolume2">
+        <materialref ref="Air" />
+        <solidref ref="WorldBox" />
+        <physvol>
+          <volumeref ref="TubeVolume" />
+          <positionref ref="identity_pos" />
+          <rotationref ref="identity_rot" />
+        </physvol>
+      </volume>
+    </structure>
+    <setup name="Default" version="1.0">
+      <world ref="WorldVolume" />
+    </setup>
+    <setup name="Setup2" version="1.0">
+      <world ref="WorldVolume2" />
+    </setup>
+  </gdml>
+  <fields />
+</lcdd>
