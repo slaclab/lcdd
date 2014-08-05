@@ -8,7 +8,11 @@
 class G4VPhysicalVolume;
 
 /**
- * @brief The parser for reading LCDD XML files into Geant4.
+ * @class LCDDParser
+ * @brief
+ * The parser for reading LCDD XML files into Geant4.
+ * @note
+ * This class extends the GDML parser to read LCDD.
  */
 class LCDDParser {
 
@@ -40,7 +44,7 @@ public:
 
     /**
      * Set the URI of the LCDD or GDML file to build.
-     * @param[in] URI The URI of the LCDD file.
+     * @param[in] URI The URI of the input document.
      */
     void setURI(std::string URI);
 
@@ -57,24 +61,6 @@ public:
      * @warning Not sure what this does!
      */
     void setVersion(std::string version);
-
-    /**
-     * Get the URI parameter value.
-     * @return The current URI.
-     */
-    const std::string& URI();
-
-    /**
-     * Get the current setup name.
-     * @return The current setup name.
-     */
-    const std::string& setupName();
-
-    /**
-     * Get the current version.
-     * @return The current version.
-     */
-    const std::string& version();
 
     /**
      * Check if the current setup is valid.
@@ -95,27 +81,14 @@ private:
     void initialize();
 
     /**
-     * Initialize the parser.
-     */
-    void initializeParser();
-
-    /**
      * Add the subscriber for handling LCDD extension elements on the volume tags.
      */
     void addVolumeExtendedSubscriber();
 
     /**
-     * Set all parser parameters.
-     * @param[in] URI       The location of the geometry file.
-     * @param[in] setupName The setup name.
-     * @param[in] version   The version.
+     * Setup the parser configuration from the current instance variables.
      */
-    void setupParserConfig(const std::string& URI, const std::string& setupName, const std::string& version);
-
-    /**
-     * This sets up the parser configuration from the current instance variables.
-     */
-    void setupParserConfig();
+    void configure();
 
 private:
 
@@ -131,7 +104,6 @@ private:
     bool _setURI;
 
     G4VPhysicalVolume* _world;
-
     static LCDDParser* _instance;
 
 };

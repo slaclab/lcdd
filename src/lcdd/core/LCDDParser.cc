@@ -19,14 +19,19 @@ extern "C" void LCDDLibLoad();
 LCDDParser* LCDDParser::_instance = 0;
 
 LCDDParser::LCDDParser() :
-        _URI(""), _setupName(""), _version(""), _initialized(false), _constructed(false), _setURI(false) {
+        _URI(""),
+        _setupName("Default"),
+        _version("1.0"),
+        _initialized(false),
+        _constructed(false),
+        _setURI(false),
+        _world(NULL) {
 }
 
 LCDDParser* LCDDParser::instance() {
     if (_instance == 0) {
         _instance = new LCDDParser();
     }
-
     return _instance;
 }
 
@@ -34,70 +39,74 @@ LCDDParser::~LCDDParser() {
     finalize();
 }
 
-void LCDDParser::setupParserConfig() {
-    setupParserConfig(_URI, _setupName, _version);
-}
+void LCDDParser::configure() {
 
-void LCDDParser::setupParserConfig(const std::string& URI, const std::string&, const std::string& version) {
-    // settings from messenger commands
-    std::cout << "LCDD URI <" << _URI << ">" << std::endl;
-    //std::cout << "SetupName <" << m_setupName << ">" << std::endl;
-    std::cout << "Version <" << _version << ">" << std::endl;
+    G4cout << "LCDD Setup:" << G4endl;
+    G4cout << "  URI <" << _URI << ">" << G4endl;
+    G4cout << "  SetupName <" << _setupName << ">" << G4endl;
+    G4cout << "  Version <" << _version << ">" << G4endl;
+    G4cout << G4endl;
 
-    // set configuration vals
-    _config.SetURI(URI);
-    //m_config.SetSetupName(setupName);
-    _config.SetSetupVersion(version);
+    // Set the configuration values.
+    _config.SetURI(_URI);
+    _config.SetSetupVersion(_version);
+    _config.SetSetupName(_setupName);
 
-    // set config in parser
+    // The the configuration of the parser.
     _sxp.Configure(&_config);
 }
 
-void LCDDParser::initializeParser() {
-    // standard SAX parser init
-    _sxp.Initialize();
-
-    // load custom LCDD tag handlers
-    LCDDLibLoad();
-
-    addVolumeExtendedSubscriber();
-}
-
 void LCDDParser::initialize() {
+    // Not already initialized?
     if (!_initialized) {
-        initializeParser();
+        // Initialize the SAX parser.
+        _sxp.Initialize();
+
+        // Load the LCDD tag handlers.
+        LCDDLibLoad();
+
+        // Add the subscriber for the extended GDML volume tag.
+        addVolumeExtendedSubscriber();
+
+        // Set initialized to true.
         _initialized = true;
+    } else {
+        G4cerr << "WARNING: LCDDParser was already initialized!" << G4endl;
     }
 }
 
 G4VPhysicalVolume* LCDDParser::construct() {
+    // Not already constructed?
     if (!_constructed) {
 
-        // initialize
+        // Initialize the parser.
         initialize();
 
-        // set GDML parser params from inst vars
-        setupParserConfig();
+        // Configure the parser with the setup parameters.
+        configure();
 
-        // run the parser
+        // Run the parser on the input document.
         _sxp.Run();
 
-        // get world volume from GDML
+        // Get the world volume created by the parser.
         try {
+            // Set the reference to the world volume.
             _world = (G4VPhysicalVolume*) GDMLProcessor::GetInstance()->GetWorldVolume();
         } catch (std::exception& e) {
+            // Something went wrong in the detector construction.  Probably an invalid document.
             G4Exception("", "", FatalException, "Failed to get the world volume.");
         }
 
-        // Setup magnetic field.
+        // Setup the magnetic field manager.
         FieldManager::instance()->setup();
 
         // This method should only be called once.
         _constructed = true;
     } else {
-        std::cerr << "LCDD geometry was already constructed." << std::endl;
+        std::cerr << "WARNING: LCDD geometry was already constructed!" << std::endl;
     }
 
+    // Return the world volume.
     return _world;
 }
 
@@ -118,25 +127,11 @@ void LCDDParser::setVersion(std::string version) {
     _version = version;
 }
 
-const std::string& LCDDParser::URI() {
-    return _URI;
-}
-
-const std::string& LCDDParser::setupName() {
-    return _setupName;
-}
-
-const std::string& LCDDParser::version() {
-    return _version;
-}
-
 bool LCDDParser::isValidSetup() {
     bool valid = true;
-
     if (!_setURI) {
         valid = false;
     }
-
     return valid;
 }
 
@@ -146,4 +141,3 @@ void LCDDParser::addVolumeExtendedSubscriber() {
     SAXSubscriberPool* pool = const_cast<SAXSubscriberPool*>(_sxp.GetSubscriberPool());
     pool->AddSubscriber("volume", obj);
 }
-
