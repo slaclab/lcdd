@@ -45,6 +45,22 @@ public:
     }
 
     /**
+     * Set the hits collection name of the HitProcessor.
+     * @param s The type of the HitProcessor.
+     */
+    void set_collection_name(const std::string& s) {
+        _collection_name = s;
+    }
+
+    /**
+     * Get the hits collection name of the HitProcessor.
+     * @return The type of the HitProcessor.
+     */
+    const std::string& get_collection_name() const {
+        return _collection_name;
+    }
+
+    /**
      * Add child content.
      * @param tag The tag of the child.
      * @param so The SAXObject of the child.
@@ -56,6 +72,7 @@ public:
 
 private:
     std::string _type;
+    std::string _collection_name;
     ContentSequence _sequence;
 };
 

@@ -1,4 +1,4 @@
-#include "lcdd/geant4/PhysVolIdMap.hh"
+#include "lcdd/id/PhysVolIdMap.hh"
 
 PhysVolIdMap::PhysVolIdMap() {
 }

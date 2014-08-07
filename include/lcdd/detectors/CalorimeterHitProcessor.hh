@@ -18,7 +18,8 @@ public:
     /**
      * Class destructor.
      */
-    virtual ~CalorimeterHitProcessor();
+    virtual ~CalorimeterHitProcessor() {
+    }
 
 protected:
 
@@ -26,7 +27,9 @@ protected:
      * Class constructor.
      * @param[in] ro The CellReadout used by the processor.
      */
-    CalorimeterHitProcessor(CalorimeterSD* calorimeter);
+    CalorimeterHitProcessor()
+        : _calorimeter(NULL) {
+    }
 
 public:
 
@@ -35,10 +38,28 @@ public:
      * @param[in] step The G4Step object of the energy deposition.
      * @todo This should really be pure virtual, but I can't get it to link correctly.
      */
-    virtual bool processHits(G4Step* step);
+    virtual bool processHits(G4Step* step) = 0;
+
+    /**
+     * Get the Calorimeter associated with this HitProcessor.
+     */
+    CalorimeterSD* getCalorimeter() {
+        return dynamic_cast<CalorimeterSD*>(getSensitiveDetector());
+    }
+
+    /**
+     * Override super class method to set reference to CalorimeterSD.
+     * @param[in] detector The SensitiveDetector associated to this HitProcessor.
+     */
+    void setSensitiveDetector(SensitiveDetector* detector) {
+        HitProcessor::setSensitiveDetector(detector);
+        _calorimeter = dynamic_cast<CalorimeterSD*>(getSensitiveDetector());
+    }
 
 protected:
+
     CalorimeterSD* _calorimeter;
+
 };
 
 #endif

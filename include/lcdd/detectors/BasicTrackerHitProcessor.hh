@@ -15,7 +15,7 @@ public:
     /**
      * Class constructor.
      */
-    BasicTrackerHitProcessor(TrackerSD* tracker);
+    BasicTrackerHitProcessor();
 
     /**
      * Class destructor.
@@ -31,14 +31,15 @@ public:
 };
 
 /**
+ * @brief
  * The factory for creating new BasicTrackerHitProcessor objects.
  */
 class BasicTrackerHitProcessorFactory: public HitProcessorFactory {
 
 public:
 
-    HitProcessor* createHitProcessor(SensitiveDetector* sd) {
-        return new BasicTrackerHitProcessor(dynamic_cast<TrackerSD*>(sd));
+    HitProcessor* createHitProcessor() {
+        return new BasicTrackerHitProcessor();
     }
 
     const std::string& handlesType() {

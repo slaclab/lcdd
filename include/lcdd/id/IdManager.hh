@@ -4,8 +4,8 @@
 // LCDD
 #include "lcdd/id/IdSpec.hh"
 #include "lcdd/id/IdVec.hh"
-#include "lcdd/geant4/PhysVolId.hh"
-#include "lcdd/geant4/PhysVolIdMap.hh"
+#include "lcdd/id/PhysVolId.hh"
+#include "lcdd/id/PhysVolIdMap.hh"
 
 // Geant4
 #include "G4VPhysicalVolume.hh"

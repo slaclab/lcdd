@@ -1,10 +1,3 @@
-/**
- * @mainpage Linear Collider Detector Description (LCDD) Documentation
- *
- * @par
- * LCDD is a framework for description of detector geometries and associated information
- * at runtime using a XML language and parser.
- */
 #include "lcdd/core/LCDDDetectorConstruction.hh"
 
 // LCDD
@@ -50,8 +43,6 @@ G4VPhysicalVolume* LCDDDetectorConstruction::Construct() {
     // start build timer
     G4Timer geoTimer;
     geoTimer.Start();
-
-    G4cout << "Started geometry construction timer." << G4endl;
 
     // get geometry from the global parser instance, which will die on failure
     G4VPhysicalVolume* pv = LCDDParser::instance()->construct();

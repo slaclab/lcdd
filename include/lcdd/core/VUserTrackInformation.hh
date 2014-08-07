@@ -4,6 +4,7 @@
 #include "G4Track.hh"
 
 /**
+ * @brief
  * A pure virtual class for track information in LCDD,
  * which allows an external module to define the implementation,
  * e.g. SLIC.

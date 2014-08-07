@@ -4,6 +4,10 @@
 // LCDD
 #include "lcdd/detectors/HitProcessorFactory.hh"
 
+/**
+ * @brief
+ * The global registry of all HitProcessor objects
+ */
 class HitProcessorManager {
 
 private:

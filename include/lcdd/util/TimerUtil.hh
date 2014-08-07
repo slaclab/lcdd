@@ -25,6 +25,10 @@ int clock_gettime(int clk_id, struct timespec *t){
 #include <map>
 #include <iostream>
 
+/**
+ * @brief
+ * A collection of static utilities for timing methods
+ */
 class TimerUtil {
 
     static std::map<std::string, long> _timerMap;

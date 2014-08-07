@@ -8,7 +8,6 @@
 class G4VPhysicalVolume;
 
 /**
- * @class LCDDParser
  * @brief
  * The parser for reading LCDD XML files into Geant4.
  * @note

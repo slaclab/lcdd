@@ -3,6 +3,7 @@
 // LCDD
 #include "lcdd/id/IdManager.hh"
 #include "lcdd/id/IdFactory.hh"
+#include "lcdd/detectors/HitProcessor.hh"
 #include "lcdd/detectors/SensitiveDetectorMessenger.hh"
 
 // Geant4
@@ -24,10 +25,16 @@ const std::string& SensitiveDetector::TRACKER = "tracker";
 const std::string& SensitiveDetector::CALORIMETER = "calorimeter";
 const std::string& SensitiveDetector::UNKNOWN = "unknown";
 
-SensitiveDetector::SensitiveDetector(G4String sdName, G4String hcName, EType sdType) :
-        G4VSensitiveDetector(sdName), _idspec(0), _type(sdType) {
-    // insert hits collection name into SD's name vector
-    collectionName.insert(hcName);
+SensitiveDetector::SensitiveDetector(G4String name, G4String theCollectionName, EType detectorType) :
+        G4VSensitiveDetector(name),
+        _idspec(NULL),
+        _type(detectorType),
+        _verbose(false),
+        _endcap(false),
+        _ecut(0) {
+
+    // Insert the collection names into the SD's name vector.
+    collectionName.insert(theCollectionName);
 
     // register detector with G4SDManager
     G4SDManager::GetSDMpointer()->AddNewDetector(this);
@@ -36,17 +43,20 @@ SensitiveDetector::SensitiveDetector(G4String sdName, G4String hcName, EType sdT
     _messenger = new SensitiveDetectorMessenger(this);
 
     // Only one HC 
-    _hcids.clear(); // Is this needed???
+    _hcids.clear(); // FIXME: Is this needed here???
     _hcids.push_back(-1);
 }
 
-SensitiveDetector::SensitiveDetector(G4String sdName, const vector<G4String>& hcNames, EType sdType) :
-        G4VSensitiveDetector(sdName), _idspec(0), _type(sdType) {
-    _hcids.clear(); // Is this needed???
+SensitiveDetector::SensitiveDetector(G4String sensitiveDetectorName, const vector<G4String>& theCollectionNames, EType detectorType) :
+        G4VSensitiveDetector(sensitiveDetectorName),
+        _idspec(0),
+        _type(detectorType) {
 
-    for (int i = 0; i < (int) hcNames.size(); i++) {
+    _hcids.clear(); // FIXME: Is this needed???
+
+    for (int i = 0; i < (int) theCollectionNames.size(); i++) {
         // insert hits collection name into SD's name vector
-        collectionName.insert(hcNames[i]);
+        collectionName.insert(theCollectionNames[i]);
         _hcids.push_back(-1);
     }
 
@@ -251,6 +261,7 @@ void SensitiveDetector::setHCID(G4int hcid, G4int nHC) {
 }
 
 void SensitiveDetector::addHitProcessor(HitProcessor* processor) {
+    processor->setSensitiveDetector(this);
     _hitProcessors.push_back(processor);
 }
 
@@ -260,6 +271,6 @@ SensitiveDetector::HitProcessors SensitiveDetector::getHitProcessors() {
 
 void SensitiveDetector::addHitProcessors(std::vector<HitProcessor*> processors) {
     for (HitProcessors::iterator it = processors.begin(); it != processors.end(); it++) {
-        _hitProcessors.push_back(*it);
+        addHitProcessor((*it));
     }
 }

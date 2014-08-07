@@ -5,6 +5,10 @@
 #include "lcdd/detectors/HitProcessor.hh"
 #include "lcdd/detectors/SensitiveDetector.hh"
 
+/**
+ * @brief
+ * A factory class for creating HitProcessor objects from a type string
+ */
 class HitProcessorFactory {
 public:
 
@@ -25,7 +29,7 @@ public:
      * @param[in] sd The SensitiveDetector to which the HitProcessor will be added.
      * @return The specific implementation of HitProcessor produced by this factory.
      */
-    virtual HitProcessor* createHitProcessor(SensitiveDetector* sd) = 0;
+    virtual HitProcessor* createHitProcessor() = 0;
 
     /**
      * Get the type of HitProcessor created by this factory e.g. name of the class.

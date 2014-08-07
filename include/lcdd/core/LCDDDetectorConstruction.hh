@@ -1,3 +1,10 @@
+/**
+ * @mainpage Linear Collider Detector Description (LCDD) Documentation
+ *
+ * @par
+ * LCDD is a framework for description of %detector geometries and associated information
+ * at runtime using a XML language and parser.
+ */
 #ifndef LCDD_CORE_LCDDDETECTORCONSTRUCTION_HH_
 #define LCDD_CORE_LCDDDETECTORCONSTRUCTION_HH_ 1
 

@@ -6,7 +6,7 @@
 // LCDD
 #include "lcdd/schema/region.hh"
 #include "lcdd/core/LCDDProcessor.hh"
-#include "lcdd/geant4/UserRegionInformation.hh"
+#include "lcdd/core/UserRegionInformation.hh"
 #include "lcdd/schema/LimitSetType.hh"
 #include "lcdd/util/StringUtil.hh"
 

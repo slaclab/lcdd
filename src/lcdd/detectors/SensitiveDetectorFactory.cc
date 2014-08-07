@@ -5,18 +5,19 @@
 #include "lcdd/util/StringUtil.hh"
 #include "lcdd/detectors/PositionComparator.hh"
 #include "lcdd/detectors/HitProcessorManager.hh"
-#include "lcdd/detectors/LegacyCalorimeterHitProcessor.hh"
+#include "lcdd/detectors/BasicCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 #include "lcdd/detectors/ScoringTrackerHitProcessor.hh"
 #include "lcdd/schema/hit_processor.hh"
-#include "lcdd/schema/hits_collection.hh"
+
+#include <algorithm>
 
 SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXObject* object) {
+
     const SensitiveDetectorType* sensitiveDetectorType = dynamic_cast<const SensitiveDetectorType*>(object);
     SensitiveDetector* sensitiveDetector = 0;
     IdSpec* idspec = 0;
     std::vector<HitProcessor*> hitProcessors;
-    std::vector<std::string> hitProcessorNames;
     std::vector<G4String> hitsCollections;
 
     // The SAXObject must extend SensitiveDetectorType.
@@ -24,6 +25,12 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
 
         // Get the SensitiveDetector's basic type string.
         std::string sensitiveDetectorTypeName = sensitiveDetectorType->get_type();
+
+        // If there is a collection name on the SD itself, add it to the list.
+        std::string hitsCollectionName = sensitiveDetectorType->get_hitsCollectionName();
+        if (hitsCollectionName != "") {
+            hitsCollections.push_back(sensitiveDetectorType->get_hitsCollectionName());
+        }
 
         // Process element content for objects that need to be created before the SD.
         ContentSequence* seq = const_cast<ContentSequence*>(sensitiveDetectorType->get_content());
@@ -48,50 +55,60 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
                     G4Exception("", "", FatalException, "IdSpec does not exist.");
                 }
 
-                // Process hit_processor child tag.
+            // Process hit_processor child tag.
             } else if (childTag == "hit_processor") {
 
                 // Cast object to appropriate element type.
-                const hit_processor* hitProcessor = dynamic_cast<const hit_processor*>(seq->content(i).object);
+                const hit_processor* element = dynamic_cast<const hit_processor*>(seq->content(i).object);
 
-                // Push type name of HitProcessor onto list to be created later once SD is available.
-                hitProcessorNames.push_back(hitProcessor->get_type());
+                // Create the HitProcessor.
+                HitProcessorFactory* hitProcessorFactory = HitProcessorManager::instance()->getFactory(element->get_type());
+                if (hitProcessorFactory == NULL)
+                    G4Exception("", "", FatalException, "HitProcessorFactory was not found.");
+                HitProcessor* hitProcessor = hitProcessorFactory->createHitProcessor();
 
-                // Process hits_collection child tag.
-            } else if (childTag == "hits_collection") {
+                // Set the hits collection name (optional).
+                G4String hitsCollection = element->get_collection_name();
+                if (hitsCollection != "") {
+                    G4cout << "set collection name on HitProcessor: " << hitsCollection << G4endl;
+                    hitProcessor->setCollectionName(hitsCollection);
+                }
 
-                // Cast object to appropriate element type.
-                const hits_collection* hitsCollection = dynamic_cast<const hits_collection*>(seq->content(i).object);
+                // Add hits collection name to the list unless it is already defined by the SD.
+                if (hitsCollection != "") {
+                    if (std::find(hitsCollections.begin(), hitsCollections.end(), hitsCollection) == hitsCollections.end()) {
+                        hitsCollections.push_back(hitsCollection);
+                    }
+                }
 
-                // Get the name of the hits collection.
-                const std::string& name = hitsCollection->get_name();
-
-                // Add hits collection to the list.
-                hitsCollections.push_back(name);
+                // Add the HitsProcessor to the list for the SD.
+                hitProcessors.push_back(hitProcessor);
             }
         }
 
-        // This is for backward compatibility when hits collection is specified as an attribute value
-        // on the detector's XML element.
-        std::string hitsCollectionName = sensitiveDetectorType->get_hitsCollectionName();
-        if (hitsCollectionName != "") {
-            hitsCollections.push_back(sensitiveDetectorType->get_hitsCollectionName());
+        // Add default HitProcessor if none was provided explicitly in the SD's XML element.
+        if (hitProcessors.size() == 0) {
+            if (sensitiveDetectorTypeName == "tracker") {
+                hitProcessors.push_back(HitProcessorManager::instance()->getFactory("BasicTrackerHitProcessor")->createHitProcessor());
+            } else if (sensitiveDetectorTypeName == "calorimeter") {
+                hitProcessors.push_back(HitProcessorManager::instance()->getFactory("BasicCalorimeterHitProcessor")->createHitProcessor());
+            }
         }
 
-        // If no hits collections were added then make a default HitsCollection with the name of the SD.
+        // If no hits collection names were provided explicitly, then make a default one from the name of the SD.
         if (hitsCollections.size() == 0) {
             hitsCollections.push_back(sensitiveDetectorType->get_name());
         }
 
         // Create the SD object based on its type of calorimeter or tracker.
         if (sensitiveDetectorTypeName == "calorimeter") {
-            // Create calorimeter SD.
+            // Create the CalorimeterSD with its hits collection names.
             sensitiveDetector = createCalorimeter(object, hitsCollections);
         } else if (sensitiveDetectorTypeName == "tracker") {
-            // Create tracker SD.
+            // Create the TrackerSD with its hits collection names.
             sensitiveDetector = createTracker(object, hitsCollections);
         } else {
-            // Type is not recognized.  This shouldn't happen!
+            // The type is not recognized.  This shouldn't ever happen!
             G4cerr << "Invalid sensitive detector type: " << sensitiveDetectorTypeName << G4endl;
             G4Exception("", "", FatalException, "Unknown sensitive detector type.");
         }
@@ -104,50 +121,15 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
         // Set the IdSpec.
         sensitiveDetector->setIdSpec(idspec);
 
-        // Create HitProcessors from list of type names.
-        for (std::vector<std::string>::iterator it = hitProcessorNames.begin(); it != hitProcessorNames.end(); it++) {
-            std::string type = (*it);
-            HitProcessorFactory* hitProcessorFactory = HitProcessorManager::instance()->getFactory(type);
-            if (hitProcessorFactory == 0) {
-                std::cerr << "HitProcessorFactory was not found for type: " << type << std::endl;
-                G4Exception("", "", FatalException, "HitProcessor not found");
-            }
-            HitProcessor* processor = hitProcessorFactory->createHitProcessor(sensitiveDetector);
-
-            //std::cout << "create hits processor: " << type << std::endl;
-
-            // Add the HitProcessor to the list.
-            hitProcessors.push_back(processor);
-        }
-
-        // Add the HitProcessors from the list.
-        if (hitProcessors.size() > 0) {
-            // Add HitProcessors created from XML if they were listed explicitly as child elements.
-            sensitiveDetector->addHitProcessors(hitProcessors);
-        } else {
-            // Need to add default HitProcessors because none were specified in the detector's XML.
-            if (sensitiveDetectorTypeName == "tracker") {
-                // Add the default TrackerHitProcessor.
-                sensitiveDetector->addHitProcessor(
-                        HitProcessorManager::instance()->getFactory("BasicTrackerHitProcessor")->createHitProcessor(sensitiveDetector));
-            } else if (sensitiveDetectorTypeName == "calorimeter") {
-                // Add the default CalorimeterHitProcessor.
-                sensitiveDetector->addHitProcessor(
-                        HitProcessorManager::instance()->getFactory("LegacyCalorimeterHitProcessor")->createHitProcessor(sensitiveDetector));
-            }
-        }
+        // Add the list of HitProcessors.  This will automatically cause the HitProcessor setup code
+        // to be called to configure it for this SD.
+        sensitiveDetector->addHitProcessors(hitProcessors);
 
         // Register the SensitiveDetector with the LCDDProcessor.
         std::string sensitiveDetectorName = sensitiveDetector->GetName();
-        //std::cout << "adding sensitive detector: " << sensitiveDetectorName << std::endl;
-        //std::cout << "  HCs: ";
-        //for (std::vector<G4String>::iterator it = hitsCollections.begin(); it != hitsCollections.end(); it++) {
-        //	std::cout << (*it) << " ";
-        //}
-        //std::cout << std::endl;
         LCDDProcessor::instance()->addSensitiveDetector(sensitiveDetectorName, sensitiveDetector);
     } else {
-        // This should never really happen.
+        // This should never really happen!
         G4Exception("", "", FatalException, "Failed cast to SensitiveDetectorType.");
     }
 
@@ -172,9 +154,6 @@ SensitiveDetector* SensitiveDetectorFactory::createCalorimeter(const SAXObject* 
             break;
         }
     }
-
-    // Get the calorimeter XML object.
-    const calorimeter* cal = dynamic_cast<const calorimeter*>(object);
 
     // Create the calorimeter SD.
     return new CalorimeterSD(sensitiveDetectorType->get_name(), hitsCollections, segmentation);
@@ -209,6 +188,5 @@ bool SensitiveDetectorFactory::isSegmentationTag(const std::string& s) {
     // FIXME This should automatically know all segmentation types somehow.
     //       Can this be read from the schema?
     //       http://xerces-c.sourcearchive.com/documentation/3.1.1-1/SchemaGrammar_8hpp_source.html
-    return (s == "projective_cylinder" || s == "grid_xyz" || s == "global_grid_xy" || s == "nonprojective_cylinder" || s == "projective_zplane"
-            || s == "cell_readout_2d");
+    return (s == "projective_cylinder" || s == "grid_xyz" || s == "global_grid_xy" || s == "projective_zplane" || s == "cell_readout_2d");
 }

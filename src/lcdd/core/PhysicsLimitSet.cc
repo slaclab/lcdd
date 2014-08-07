@@ -1,4 +1,4 @@
-#include "lcdd/geant4/PhysicsLimitSet.hh"
+#include "lcdd/core/PhysicsLimitSet.hh"
 
 // Geant4
 #include "G4Track.hh"
@@ -96,11 +96,6 @@ PhysicsLimitSet::LimitValueType PhysicsLimitSet::getLimitForParticle(LimitNameTy
 PhysicsLimitSet::LimitValueType PhysicsLimitSet::getLimitForParticle(LimitNameType limitName, const G4Track& aTrack) {
     return getLimitForParticle(limitName, getParticleType(aTrack));
 }
-
-//void PhysicsLimitSet::setName(const G4String& n)
-//{
-//    _name = n;
-//}
 
 G4String& PhysicsLimitSet::getName() {
     return _name;

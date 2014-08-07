@@ -7,6 +7,10 @@
 // GDML
 #include "Saxana/SAXObject.h"
 
+/**
+ * @brief
+ * The hit_processor element from the schema
+ */
 class hit_processor: public SAXObject, public HitProcessorType {
 
 public:

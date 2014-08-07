@@ -133,10 +133,6 @@ G4ThreeVector StepReadout::momentum() const {
     return track()->GetMomentum();
 }
 
-//TrackInformation* StepReadout::trackInformation() const {
-//    return TrackInformation::getTrackInformation(track());
-//}
-
 G4ThreeVector StepReadout::prePosition() const {
     return pre()->GetPosition();
 }

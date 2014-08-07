@@ -5,7 +5,7 @@
 
 // LCDD
 #include "lcdd/core/LCDDProcessor.hh"
-#include "lcdd/geant4/LCDDHeaderRecord.hh"
+#include "lcdd/core/LCDDHeaderRecord.hh"
 #include "lcdd/schema/header.hh"
 #include "lcdd/schema/detector.hh"
 #include "lcdd/schema/generator.hh"

@@ -1,4 +1,4 @@
-#include "lcdd/detectors/LegacyCalorimeterHitProcessor.hh"
+#include "lcdd/detectors/BasicCalorimeterHitProcessor.hh"
 
 // LCDD
 #include "lcdd/detectors/CurrentTrackState.hh"
@@ -8,14 +8,13 @@
 #include "G4Geantino.hh"
 #include "G4ChargedGeantino.hh"
 
-LegacyCalorimeterHitProcessor::LegacyCalorimeterHitProcessor(CalorimeterSD* calorimeter) :
-        CalorimeterHitProcessor(calorimeter) {
+BasicCalorimeterHitProcessor::BasicCalorimeterHitProcessor() {
 }
 
-LegacyCalorimeterHitProcessor::~LegacyCalorimeterHitProcessor() {
+BasicCalorimeterHitProcessor::~BasicCalorimeterHitProcessor() {
 }
 
-bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
+bool BasicCalorimeterHitProcessor::processHits(G4Step* step) {
 
     // Get the energy deposition.
     G4double edep = step->GetTotalEnergyDeposit();
@@ -39,7 +38,6 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
     G4ThreeVector globalCellPosition = segmentation->getGlobalHitPosition(step);
 
     // Set the segmentation bin values from the step.
-    //segmentation->resetBins();
     segmentation->setBins(step);
 
     // Create a 64-bit ID from the step information.
@@ -55,7 +53,7 @@ bool LegacyCalorimeterHitProcessor::processHits(G4Step* step) {
         hit = new CalorimeterHit(id, edep, globalCellPosition);
 
         // Add the new hit to the calorimeter.
-        _calorimeter->addHit(hit);
+        _calorimeter->addHit(hit, _collectionIndex);
 
     } else {
 

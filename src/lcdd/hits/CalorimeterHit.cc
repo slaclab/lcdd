@@ -111,13 +111,6 @@ const HitContributionList& CalorimeterHit::getHitContributions() const {
     return _particleList;
 }
 
-//void CalorimeterHit::setId64bit(Id64bit::ElementType id0, Id64bit::ElementType id1)
-//{
-//    _id.setId0(id0);
-//    _id.setId1(id1);
-//    _id.encode();
-//}
-
 const Id64bit& CalorimeterHit::getId64bit() const {
     return _id;
 }

@@ -1,6 +1,7 @@
 #ifndef LCDD_DETECTORS_TRACKERHITPROCESSOR_HH_
 #define LCDD_DETECTORS_TRACKERHITPROCESSOR_HH_ 1
 
+#include "lcdd/detectors/HitProcessor.hh"
 #include "lcdd/detectors/TrackerSD.hh"
 
 /**
@@ -13,12 +14,14 @@ public:
      * Class constructor.
      * @param[in] tracker Pointer to TrackerSD.
      */
-    TrackerHitProcessor(TrackerSD* tracker);
+    TrackerHitProcessor() {
+    }
 
     /**
      * Class destructor.
      */
-    virtual ~TrackerHitProcessor();
+    virtual ~TrackerHitProcessor() {
+    }
 
     /**
      * Process hits to produce steps.
@@ -27,9 +30,12 @@ public:
      */
     virtual bool processHits(G4Step* step) = 0;
 
-protected:
-
-    TrackerSD* _tracker;
+    /**
+     * Get the Calorimeter associated with this HitProcessor.
+     */
+    inline TrackerSD* getTracker() {
+        return dynamic_cast<TrackerSD*>(getSensitiveDetector());
+    }
 };
 
 #endif

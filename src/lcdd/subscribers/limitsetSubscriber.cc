@@ -7,7 +7,7 @@
 #include "lcdd/schema/limit.hh"
 #include "lcdd/schema/limitset.hh"
 #include "lcdd/core/LCDDProcessor.hh"
-#include "lcdd/geant4/PhysicsLimitSet.hh"
+#include "lcdd/core/PhysicsLimitSet.hh"
 #include "lcdd/util/StringUtil.hh"
 
 // STL
@@ -33,14 +33,12 @@ public:
     }
 
     virtual void Activate(const SAXObject* object) {
-        //std::cout << "limitsetSubscriber::Activate()" << std::endl;
         if (object != 0) {
 
             GDMLExpressionEvaluator* calc = GDMLProcessor::GetInstance()->GetEvaluator();
             const limitset* lsobj = dynamic_cast<const limitset*>(object);
 
             if (lsobj != 0) {
-                //std::cout << "got limitset: " << lsobj->get_name() << std::endl;
 
                 PhysicsLimitSet* ls = new PhysicsLimitSet(lsobj->get_name());
 

@@ -4,10 +4,7 @@
 #include <iostream>
 
 TrackerSD::TrackerSD(G4String sdName, std::vector<G4String> hitsCollectionNames) :
-        SensitiveDetector(sdName, hitsCollectionNames, SensitiveDetector::eTracker)
-//, _HC(0)
-{
-    //_hits.clear();
+        SensitiveDetector(sdName, hitsCollectionNames, SensitiveDetector::eTracker) {
     // The actual pointers to the collections are overridden later in Initialize.
     for (int i = 0; i < (int) hitsCollectionNames.size(); i++) {
         _hitsCollections.push_back(0);
@@ -20,8 +17,6 @@ TrackerSD::~TrackerSD() {
 void TrackerSD::Initialize(G4HCofThisEvent *HCE) {
     // Loop over number of hits collections defined by this detector.
     for (int i = 0; i < getNumberOfHitsCollections(); i++) {
-
-        //std::cout << "TrackerSD::Initialize - initializing hits collection <" << collectionName[i] << ">" << std::endl;
 
         // Overwrite pointer to the dummy collection that was added in the constructor.
         _hitsCollections[i] = new TrackerHitsCollection(GetName(), collectionName[i]);

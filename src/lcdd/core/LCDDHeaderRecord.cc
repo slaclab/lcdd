@@ -1,4 +1,4 @@
-#include "lcdd/geant4/LCDDHeaderRecord.hh"
+#include "lcdd/core/LCDDHeaderRecord.hh"
 
 LCDDHeaderRecord::LCDDHeaderRecord() {
 }

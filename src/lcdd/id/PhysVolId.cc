@@ -1,4 +1,4 @@
-#include "lcdd/geant4/PhysVolId.hh"
+#include "lcdd/id/PhysVolId.hh"
 
 PhysVolId::PhysVolId(ValueType val, std::string fld) :
         _value(val), _fieldName(fld) {

@@ -7,12 +7,13 @@
 
 // LCDD
 #include "lcdd/detectors/StepReadout.hh"
-#include "lcdd/detectors/HitProcessor.hh"
 #include "lcdd/id/IdSpec.hh"
 #include "lcdd/id/Id64bit.hh"
 
 class G4UImessenger;
 class G4VHitsCollection;
+
+class HitProcessor;
 
 /**
  * @brief A basic implementation of G4VSensitiveDetector.
@@ -26,7 +27,9 @@ public:
      * EType indicates the basic type of detector, e.g. tracker or calorimeter.
      */
     enum EType {
-        eNone = 0, eTracker = 1, eCalorimeter = 2
+        eNone = 0,
+        eTracker = 1,
+        eCalorimeter = 2
     };
 
     static const std::string& TRACKER;

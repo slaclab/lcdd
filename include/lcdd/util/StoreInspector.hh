@@ -5,8 +5,8 @@
 #include "lcdd/core/LCDDProcessor.hh"
 #include "lcdd/id/IdManager.hh"
 #include "lcdd/detectors/SensitiveDetector.hh"
-#include "lcdd/geant4/PhysicsLimitSet.hh"
-#include "lcdd/geant4/UserRegionInformation.hh"
+#include "lcdd/core/PhysicsLimitSet.hh"
+#include "lcdd/core/UserRegionInformation.hh"
 
 // Geant4
 #include "G4UIcmdWithAString.hh"
@@ -37,10 +37,9 @@
 #include <cassert>
 #include <cmath>
 
-using std::endl;
-
 /**
- * @brief Templated class for printing the contents of a Geant4 or LCDD object store using a G4UIcommand.
+ * @brief
+ * Templated class for printing the contents of a Geant4 or LCDD object store using a G4UIcommand.
  * @note
  * The store must have an STL vector or map as its backing data structure.
  */
@@ -153,12 +152,12 @@ public:
      * @return The same output stream.
      */
     std::ostream& printStore(std::ostream& os) {
-        os << "********* " + _name + " store ********" << endl << endl;
+        os << "********* " + _name + " store ********" << std::endl << std::endl;
         for (const_iterator it = _container->begin(); it != _container->end(); it++) {
             printObject(os, getObjectName(it), getObject(it));
-            os << "-------------------------------------" << endl;
+            os << "-------------------------------------" << std::endl;
         }
-        os << "*************************************" << endl << endl;
+        os << "*************************************" << std::endl << std::endl;
         return os;
     }
 
@@ -169,8 +168,8 @@ public:
      * @param[in] object The object to print.
      */
     std::ostream& printObject(std::ostream& os, const std::string& name, Object* obj) {
-        os << _name << " - " << name << endl;
-        os << (*obj) << endl;
+        os << _name << " - " << name << std::endl;
+        os << (*obj) << std::endl;
         return os;
     }
 
@@ -200,7 +199,7 @@ public:
             if (obj != 0) {
                 printObject(std::cout, name, obj);
             } else {
-                std::cerr << "ERROR: Object named " + name + " was not found in the " + _name + " store!" << endl;
+                std::cerr << "ERROR: Object named " + name + " was not found in the " + _name + " store!" << std::endl;
             }
         } else {
             printStore(std::cout);
@@ -236,11 +235,11 @@ typedef StoreInspector<G4MagneticField, LCDDProcessor::MagneticFields> G4Magneti
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream& os, PhysicsLimitSet& limset) {
-    os << endl;
+    os << std::endl;
     for (PhysicsLimitSet::LimitSetMap::const_iterator it = limset.getLimitSetMap().begin(); it != limset.getLimitSetMap().end(); it++) {
 
         const PhysicsLimitSet::LimitNameType& name = it->first;
-        os << name << endl;
+        os << name << std::endl;
 
         std::string unit = "";
         if (name == "ekin_min") {
@@ -259,10 +258,10 @@ std::ostream& operator<<(std::ostream& os, PhysicsLimitSet& limset) {
             const PhysicsLimitSet::LimitMap& limmap = it->second;
             for (PhysicsLimitSet::LimitMap::const_iterator iit = limmap.begin(); iit != limmap.end(); iit++) {
 
-                os << '\t' << iit->first << '\t' << G4BestUnit(iit->second, unit) << endl;
+                os << '\t' << iit->first << '\t' << G4BestUnit(iit->second, unit) << std::endl;
             }
         } else {
-            os << "Unknown limit type " << name << endl;
+            os << "Unknown limit type " << name << std::endl;
         }
     }
     return os;
@@ -275,10 +274,10 @@ std::ostream& operator<<(std::ostream& os, PhysicsLimitSet& limset) {
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
-    os << "solid: " << lv.GetSolid()->GetName() << endl;
-    os << "material: " << lv.GetMaterial()->GetName() << endl;
-    os << "mass: " << G4BestUnit(lv.GetMass(), "Mass") << endl;
-    os << "daughters: " << lv.GetNoDaughters() << endl;
+    os << "solid: " << lv.GetSolid()->GetName() << std::endl;
+    os << "material: " << lv.GetMaterial()->GetName() << std::endl;
+    os << "mass: " << G4BestUnit(lv.GetMass(), "Mass") << std::endl;
+    os << "daughters: " << lv.GetNoDaughters() << std::endl;
 
     G4UserLimits* lim = lv.GetUserLimits();
     os << "limits: ";
@@ -287,7 +286,7 @@ std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
     } else {
         os << "NONE";
     }
-    os << endl;
+    os << std::endl;
 
     G4VSensitiveDetector* sd = lv.GetSensitiveDetector();
     os << "SD: ";
@@ -296,7 +295,7 @@ std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
     } else {
         os << "NONE";
     }
-    os << endl;
+    os << std::endl;
 
     G4Region* reg = lv.GetRegion();
     os << "region: ";
@@ -305,7 +304,7 @@ std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
     } else {
         os << "NONE";
     }
-    os << endl;
+    os << std::endl;
 
     const G4VisAttributes* vis = lv.GetVisAttributes();
     os << "visattributes: ";
@@ -314,7 +313,7 @@ std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
     } else {
         os << "NONE";
     }
-    os << endl;
+    os << std::endl;
 
     return os;
 }
@@ -326,17 +325,17 @@ std::ostream& operator<<(std::ostream &os, G4LogicalVolume &lv) {
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream &os, G4VPhysicalVolume &pv) {
-    os << "lvolume: " << pv.GetLogicalVolume()->GetName() << endl;
-    os << "pos: " << pv.GetTranslation() << endl;
+    os << "lvolume: " << pv.GetLogicalVolume()->GetName() << std::endl;
+    os << "pos: " << pv.GetTranslation() << std::endl;
     const G4RotationMatrix* rot = pv.GetRotation();
     os << "rot: ";
     if (0 != rot) {
         rot->print(os);
     } else {
-        os << "NONE" << endl;
+        os << "NONE" << std::endl;
     }
-    os << "copyNo: " << pv.GetCopyNo() << endl;
-    os << "# copies: " << pv.GetMultiplicity() << endl;
+    os << "copyNo: " << pv.GetCopyNo() << std::endl;
+    os << "# copies: " << pv.GetMultiplicity() << std::endl;
     return os;
 }
 /**
@@ -346,12 +345,12 @@ std::ostream& operator<<(std::ostream &os, G4VPhysicalVolume &pv) {
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream& os, IdSpec& id) {
-    os << "# fields: " << id.getNumFields() << endl;
-    os << endl;
-    os << "label\tstart\tlength\tsigned" << endl;
+    os << "# fields: " << id.getNumFields() << std::endl;
+    os << std::endl;
+    os << "label\tstart\tlength\tsigned" << std::endl;
     for (IdSpec::IdFields::const_iterator it = id.IdFieldsBegin(); it != id.IdFieldsEnd(); it++) {
         IdField* field = *it;
-        os << field->getLabel() << '\t' << field->getStart() << '\t' << field->getLength() << '\t' << field->getSigned() << endl;
+        os << field->getLabel() << '\t' << field->getStart() << '\t' << field->getLength() << '\t' << field->getSigned() << std::endl;
     }
     return os;
 }
@@ -363,14 +362,14 @@ std::ostream& operator<<(std::ostream& os, IdSpec& id) {
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream& os, SensitiveDetector& sd) {
-    os << "fullPath: " << sd.GetFullPathName() << endl;
-    os << "HC: " << sd.getHCName() << endl;
-    os << "HCID: " << sd.getHCID() << endl;
-    os << "verbose: " << sd.getVerbose() << endl;
-    os << "ecut: " << sd.getEnergyCut() << endl;
-    os << "hasIdSpec: " << sd.hasIdSpec() << endl;
-    os << "isEndcap: " << sd.getEndcapFlag() << endl;
-    os << "isActive: " << sd.isActive() << endl;
+    os << "fullPath: " << sd.GetFullPathName() << std::endl;
+    os << "HC: " << sd.getHCName() << std::endl;
+    os << "HCID: " << sd.getHCID() << std::endl;
+    os << "verbose: " << sd.getVerbose() << std::endl;
+    os << "ecut: " << sd.getEnergyCut() << std::endl;
+    os << "hasIdSpec: " << sd.hasIdSpec() << std::endl;
+    os << "isEndcap: " << sd.getEndcapFlag() << std::endl;
+    os << "isActive: " << sd.isActive() << std::endl;
     return os;
 }
 
@@ -381,13 +380,13 @@ std::ostream& operator<<(std::ostream& os, SensitiveDetector& sd) {
  * @return The same output stream.
  */
 std::ostream& operator<<(std::ostream &os, G4Region &reg) {
-    os << "prod cut: " << reg.GetProductionCuts()->GetProductionCut(0) << endl;
+    os << "prod cut: " << reg.GetProductionCuts()->GetProductionCut(0) << std::endl;
     UserRegionInformation* regInfo = static_cast<UserRegionInformation*>(reg.GetUserInformation());
     if (0 != regInfo) {
-        os << "store secondaries: " << regInfo->getStoreSecondaries() << endl;
-        os << "energy threshold: " << regInfo->getThreshold() << endl;
+        os << "store secondaries: " << regInfo->getStoreSecondaries() << std::endl;
+        os << "energy threshold: " << regInfo->getThreshold() << std::endl;
     } else {
-        os << "NO G4UserRegionInformation" << endl;
+        os << "NO G4UserRegionInformation" << std::endl;
     }
     return os;
 }
@@ -411,10 +410,10 @@ std::ostream& operator<<(std::ostream& os, G4MagneticField& f) {
  */
 std::ostream& operator<<(std::ostream& os, G4VisAttributes &vis) {
     const G4Color& color = vis.GetColor();
-    os << "RGB: " << color.GetRed() << " " << color.GetGreen() << " " << color.GetBlue() << endl;
-    os << "Alpha: " << color.GetAlpha() << endl;
-    os << "visible: " << vis.IsVisible() << endl;
-    os << "show daughters: " << !vis.IsDaughtersInvisible() << endl;
+    os << "RGB: " << color.GetRed() << " " << color.GetGreen() << " " << color.GetBlue() << std::endl;
+    os << "Alpha: " << color.GetAlpha() << std::endl;
+    os << "visible: " << vis.IsVisible() << std::endl;
+    os << "show daughters: " << !vis.IsDaughtersInvisible() << std::endl;
 
     os << "forced drawing style: ";
     if (vis.IsForceDrawingStyle()) {
@@ -427,7 +426,7 @@ std::ostream& operator<<(std::ostream& os, G4VisAttributes &vis) {
     } else {
         os << "NONE";
     }
-    os << endl;
+    os << std::endl;
 
     return os;
 }

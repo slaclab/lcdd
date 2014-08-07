@@ -1,35 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE xs:schema >
-
 <xs:schema attributeFormDefault="unqualified"
            elementFormDefault="unqualified"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0/">
-    
+           xmlns:lcdd="http://www.lcsim.org/schemas/lcdd/1.0/">    
     <xs:complexType name="HitProcessorType">
         <xs:attribute name="type" type="xs:string" use="required"/>
-    </xs:complexType>
-    
-    <xs:complexType name="HitsCollectionType">
-        <xs:attribute name="name" type="xs:string" use="required"/>
-    </xs:complexType>
-
-    <xs:complexType name="SensitiveDetectorType">
-    
+        <xs:attribute name="collection_name" type="xs:string" use="optional"/>
+    </xs:complexType>    
+    <xs:complexType name="SensitiveDetectorType">    
         <xs:annotation>
             <xs:documentation>
                 Sensitive detector type with a name, ID, and hits collection
             </xs:documentation>
-        </xs:annotation>
-        
+        </xs:annotation>        
         <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="1" name="idspecref" type="ReferenceType" />
             <xs:choice minOccurs="0" maxOccurs="unbounded">                
                 <xs:element name="hit_processor" type="HitProcessorType" />
-                <xs:element name="hits_collection" type="HitsCollectionType" />
             </xs:choice>
         </xs:sequence>
-
         <xs:attribute name="name"               type="xs:ID" use="required" />
         <xs:attribute name="hits_collection"    type="xs:string" />
         <xs:attribute name="endcap_flag"        type="xs:boolean" default="false" />
@@ -42,10 +32,8 @@
                     <xs:maxInclusive value="2"/>
                 </xs:restriction>
             </xs:simpleType>
-        </xs:attribute>
-                
+        </xs:attribute>                
     </xs:complexType>
-
     <xs:element abstract="true" name="sd" type="SensitiveDetectorType">
         <xs:annotation>
             <xs:documentation>
@@ -53,7 +41,6 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="SensitiveDetectorsType">
         <xs:annotation>
             <xs:documentation>
@@ -64,19 +51,17 @@
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="sd" />
         </xs:sequence>
     </xs:complexType>
-
     <xs:element name="sensitive_detectors" type="SensitiveDetectorsType">
         <xs:annotation>
             <xs:documentation>
-                Sensitive detector container element
+                SD container element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="CalorimeterType">
         <xs:annotation>
             <xs:documentation>
-                Calorimeter sensitive detector type
+                Calorimeter SD type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -94,20 +79,18 @@
                 </xs:attribute>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-  
+    </xs:complexType>  
     <xs:element name="calorimeter" substitutionGroup="sd" type="CalorimeterType">
         <xs:annotation>
             <xs:documentation>
-                Calorimeter sensitive detector element
+                Calorimeter SD element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="TrackerType">
         <xs:annotation>
             <xs:documentation>
-                Tracker sensitive detector type
+                Tracker SD type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -116,15 +99,13 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
     <xs:element name="tracker" substitutionGroup="sd" type="TrackerType">
         <xs:annotation>
             <xs:documentation>
-                Tracker element
+                Tracker SD element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="SegmentationType">
         <xs:annotation>
             <xs:documentation>
@@ -132,19 +113,17 @@
             </xs:documentation>
         </xs:annotation>
     </xs:complexType>
-
     <xs:element abstract="true" name="segmentation" type="SegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Abstract segmentation
+                Abstract segmentation type
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="NonprojectiveSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                NP segmentation type.
+                Nonprojective segmentation type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -156,22 +135,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:complexType name="NonprojectiveCylinderSegmentationType">
-        <xs:annotation>
-            <xs:documentation>
-                NP segmentation type for cylinders.
-            </xs:documentation>
-        </xs:annotation>
-        <xs:complexContent>
-            <xs:extension base="SegmentationType">
-                <xs:attribute name="grid_size_z" type="xs:double" use="required"/>
-                <xs:attribute name="grid_size_phi" type="xs:double" use="required"/>
-                <xs:attribute default="mm"  name="lunit"  type="xs:string"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-    
     <xs:complexType name="CellReadout2DSegmentationType">
         <xs:annotation>
             <xs:documentation>
@@ -185,28 +148,25 @@
                 <xs:attribute default="mm"  name="lunit"  type="xs:string"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-    
+    </xs:complexType>    
     <xs:element name="cell_readout_2d" substitutionGroup="segmentation" type="CellReadout2DSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                The element definition for the CellReadout2DSegmentationType.
+                Cell Readout 2D type
             </xs:documentation>
         </xs:annotation>
-    </xs:element>
-    
+    </xs:element>    
     <xs:element name="grid_xyz" substitutionGroup="segmentation" type="NonprojectiveSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                NP segmentation element for polygons such as boxes and trapezoids.
+                Grid XYZ type 
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="GlobalGridXYSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Type for global grid in XY.
+                Global grid XY type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -217,27 +177,17 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
     <xs:element name="global_grid_xy" substitutionGroup="segmentation" type="GlobalGridXYSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Element for global grid in XY.
+                Global grid XY element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
-    <xs:element name="nonprojective_cylinder" substitutionGroup="segmentation" type="NonprojectiveCylinderSegmentationType">
-        <xs:annotation>
-            <xs:documentation>
-                NP cylinder segmentation element for cylinders.
-            </xs:documentation>
-        </xs:annotation>
-    </xs:element>
-
     <xs:complexType name="ProjectiveCylinderSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Prj segmentation type
+                Projective segmentation type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -247,19 +197,17 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
     <xs:element name="projective_cylinder" substitutionGroup="segmentation" type="ProjectiveCylinderSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Prj segmentation element
+                Projective segmentation element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
     <xs:complexType name="ProjectiveZPlaneSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Prj ZPlane segmentation type
+                Projective ZPlane segmentation type
             </xs:documentation>
         </xs:annotation>
         <xs:complexContent>
@@ -269,13 +217,11 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
     <xs:element name="projective_zplane" substitutionGroup="segmentation" type="ProjectiveZPlaneSegmentationType">
         <xs:annotation>
             <xs:documentation>
-                Prj ZPlane segmentation element
+                Projective ZPlane segmentation element
             </xs:documentation>
         </xs:annotation>
     </xs:element>
-
 </xs:schema>

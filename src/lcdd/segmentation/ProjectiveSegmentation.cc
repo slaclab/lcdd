@@ -49,50 +49,7 @@ G4ThreeVector ProjectiveSegmentation::getGlobalHitPosition(const G4Step* aStep) 
     return pos;
 }
 
-/*
- G4ThreeVector ProjectiveSegmentation::getGlobalHitPos(const G4StepPoint* aPreStepPoint)
- {
- // DEBUG
- //G4cout << "G4ProjectiveSegmentation::getGlobalHitPos()" << G4endl;
- //
 
- // divide entire theta, phi range into bins; bins always positive
- // theta, phi coord of step midpoint
- // compute bin numbers
- // get dim from bins
-
- // get radius, z components (probably from subclass function)
- double rcyl = getRadius(aPreStepPoint);
- double zcell = getZ(aPreStepPoint);
-
- // get phi component
- double cphi = getPhiDim(aPreStepPoint);
-
- // compute x, y cells
- double xcell = rcyl * cos(cphi);
- double ycell = rcyl * sin(cphi);
-
- G4ThreeVector pos(xcell, ycell, zcell);
-
- //G4ThreeVector midPos = ReadoutUtil::computeMidPos( aStep );
-
- // DEBUG: print all
- //G4cout << "sphi <" << midPos.phi() << ">" << G4endl;
- //G4cout << "cphi <" << cphi << ">" << G4endl;
- //G4cout << "sphi - cphi = " << midPos.phi() - cphi << G4endl;
-
- //G4cout << "stheta <" << midPos.theta() << ">" << G4endl;
- //G4cout << "ctheta <" << getThetaDim( aStep ) << ">" << G4endl;
- //G4cout << "stheta - ctheta = " << midPos.theta() - getThetaDim( aStep ) << G4endl;
-
- //G4cout << "rcyl <" << rcyl << ">" << G4endl;
- //G4cout << "zcell <" << zcell << ">" << G4endl;
- //G4cout << "globalCellPos <" << pos << ">" << G4endl;
- //
-
- return pos;
- }
- */
 
 void ProjectiveSegmentation::setBins(const G4Step* aStep) {
     G4ThreeVector globalMidPos = ReadoutUtil::computeMidPos(aStep);
@@ -100,16 +57,6 @@ void ProjectiveSegmentation::setBins(const G4Step* aStep) {
     setBin(0, getThetaBin(globalMidPos));
     setBin(1, getPhiBin(globalMidPos));
 }
-
-/*
- void ProjectiveSegmentation::setBins(const G4StepPoint* aPreStepPoint)
- {
- G4ThreeVector globalPos = aPreStepPoint->GetPosition();
-
- setBin(0, getThetaBin(globalPos));
- setBin(1, getPhiBin(globalPos));
- }
- */
 
 G4int ProjectiveSegmentation::getNtheta() const {
     return _ntheta;
@@ -154,23 +101,11 @@ double ProjectiveSegmentation::getRadius(const G4Step* aStep) {
     return ReadoutUtil::computeMidPos(aStep).mag();
 }
 
-//double ProjectiveSegmentation::getRadius(const G4StepPoint* aPreStepPoint)
-//{
-//G4cout << "G4ProjectiveSegmentation::getRadius()" << G4endl;
-//    return aPreStepPoint->GetPosition().mag();
-//}
-
 // default impl. returns z of pos
 double ProjectiveSegmentation::getZ(const G4Step* aStep) {
     //G4cout << "G4ProjectiveSegmentation::getZ()" << G4endl;
     return ReadoutUtil::computeMidPos(aStep).z();
 }
-
-//double ProjectiveSegmentation::getZ(const G4StepPoint* aPreStepPoint)
-//{
-//G4cout << "G4ProjectiveSegmentation::getZ()" << G4endl;
-//    return aPreStepPoint->GetPosition().z();
-//}
 
 double ProjectiveSegmentation::getThetaDim(const int &thetaBin) const {
     return Segmentation::computeDim(thetaBin, _divTheta);
@@ -187,14 +122,6 @@ double ProjectiveSegmentation::getThetaDim(const G4Step* aStep) {
     return ctheta;
 }
 
-//double ProjectiveSegmentation::getThetaDim(const G4StepPoint* aPreStepPoint)
-//{
-//G4cout << "G4ProjectiveSegmentation::getThetaDim(G4Step*)" << G4endl;
-//    G4ThreeVector globalStepPos = aPreStepPoint->GetPosition();
-//    double ctheta = getThetaDim(getThetaBin(globalStepPos));
-//    return ctheta;
-//}
-
 double ProjectiveSegmentation::getPhiDim(const G4Step* aStep) {
     //G4cout << "G4ProjectiveSegmentation::getPhiDim(G4Step*)" << G4endl;
 
@@ -202,12 +129,3 @@ double ProjectiveSegmentation::getPhiDim(const G4Step* aStep) {
     double cphi = getPhiDim(getPhiBin(globalStepPos));
     return cphi;
 }
-//double ProjectiveSegmentation::getPhiDim(const G4StepPoint* aPreStepPoint)
-//{
-//G4cout << "G4ProjectiveSegmentation::getPhiDim(G4Step*)" << G4endl;
-
-//    G4ThreeVector globalStepPos = aPreStepPoint->GetPosition();
-//    double cphi = getPhiDim(getPhiBin(globalStepPos));
-//    return cphi;
-//}
-

@@ -29,8 +29,6 @@ public:
     }
 
     virtual void Activate(const SAXObject* object) {
-        //std::cout << "visSubscriber::Activate()" << std::endl;
-
         if (object != 0) {
             const vis* vobj = dynamic_cast<const vis*>(object);
 
@@ -62,15 +60,13 @@ public:
                     SAXObject* child_obj = seq->content(i).object;
 
                     if (child_tag == "color") {
-                        //std::cout << "handling color" << std::endl;
+
                         color* c = dynamic_cast<color*>(child_obj);
 
                         double r = StringUtil::toDouble(c->get_R());
                         double g = StringUtil::toDouble(c->get_G());
                         double b = StringUtil::toDouble(c->get_B());
                         double alpha = StringUtil::toDouble(c->get_alpha());
-
-                        //std::cout << "r g b alpha: " << r << " " << g << " " << b << " " << alpha << std::endl;
 
                         g4vis->SetColor(r, g, b, alpha);
 

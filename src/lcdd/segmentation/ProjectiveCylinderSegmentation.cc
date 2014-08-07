@@ -21,13 +21,6 @@ double ProjectiveCylinderSegmentation::getRadius(const G4Step* aStep) {
     return ReadoutUtil::computeTubsMidRadius(ReadoutUtil::getTubs(aStep));
 }
 
-/*
- double ProjectiveCylinderSegmentation::getRadius(const G4StepPoint* aPreStepPoint)
- {
- return ReadoutUtil::computeTubsMidRadius(ReadoutUtil::getTubs(aPreStepPoint));
- }
- */
-
 double ProjectiveCylinderSegmentation::getZ(const G4Step* aStep) {
     double rcyl = getRadius(aStep);
 
@@ -40,21 +33,7 @@ double ProjectiveCylinderSegmentation::getZ(const G4Step* aStep) {
 
     return zcell;
 }
-/*
- double ProjectiveCylinderSegmentation::getZ(const G4StepPoint* aPreStepPoint)
- {
- double rcyl = getRadius(aPreStepPoint);
 
- double ctheta = getThetaDim(aPreStepPoint);
-
- // ctheta in 0 to pi ...
- // ctheta < pi/2 should be negative
-
- double zcell = rcyl / tan(ctheta);
-
- return zcell;
- }
- */
 bool ProjectiveCylinderSegmentation::isValidSolid(G4VSolid* s) {
     bool valid = Segmentation::isValidSolid(s);
 

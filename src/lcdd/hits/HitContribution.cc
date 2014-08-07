@@ -26,12 +26,7 @@ HitContribution::HitContribution(int trackID, const G4Step* aStep) {
 
     _trackID = trackID;
 
-    // Set edep according to type of track.
-    //if (track->GetDefinition() == G4OpticalPhoton::OpticalPhotonDefinition()) {
-    //    _edep = track->GetTotalEnergy();
-    //} else {
     _edep = aStep->GetTotalEnergyDeposit();
-    //}
 
     // PDG ID.
     _PdgId = track->GetDefinition()->GetPDGEncoding();
@@ -50,13 +45,6 @@ HitContribution::HitContribution(const G4Step* aStep) {
     // Get the track.
     const G4Track* track = aStep->GetTrack();
 
-    // Get the track information.
-    //TrackInformation* trackInfo = static_cast<TrackInformation*>(track->GetUserInformation());
-
-    // Get the track ID.
-    //if (trackInfo) {
-    //    _trackID = trackInfo->getOriginalTrackID();
-    //}
     _trackID = track->GetTrackID();
 
     // Set edep according to type of track.

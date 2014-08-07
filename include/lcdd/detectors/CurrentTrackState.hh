@@ -4,6 +4,10 @@
 // Geant4
 #include "globals.hh"
 
+/**
+ * @brief
+ * A global static track ID to be set externally from LCDD
+ */
 class CurrentTrackState {
 
 private:

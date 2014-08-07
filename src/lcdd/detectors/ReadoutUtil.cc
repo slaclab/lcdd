@@ -32,11 +32,6 @@ G4VSolid* ReadoutUtil::getSolidFromStepPoint(const G4StepPoint* aStepPoint) {
     return aStepPoint->GetTouchableHandle()->GetVolume()->GetLogicalVolume()->GetSolid();
 }
 
-//G4TouchableHandle ReadoutUtil::getTouchableFromStep(const G4Step* aStep)
-//{
-//    return aStep->GetPreStepPoint()->GetTouchableHandle();
-//}
-
 G4ThreeVector ReadoutUtil::getVolumeGlobalPosition(const G4StepPoint* aStepPoint, const G4ThreeVector& pnt) {
     return aStepPoint->GetTouchableHandle()->GetHistory()->GetTopTransform().Inverse().TransformPoint(pnt);
 }

@@ -12,7 +12,7 @@
 #include "lcdd/core/LCDDProcessor.hh"
 #include "lcdd/id/IdManager.hh"
 #include "lcdd/detectors/SensitiveDetector.hh"
-#include "lcdd/geant4/PhysicsLimitSet.hh"
+#include "lcdd/core/PhysicsLimitSet.hh"
 #include "lcdd/schema/sensitive_detector.hh"
 #include "lcdd/schema/RegionType.hh"
 #include "lcdd/schema/physvolidElem.hh"

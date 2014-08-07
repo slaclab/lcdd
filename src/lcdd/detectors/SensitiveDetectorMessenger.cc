@@ -15,7 +15,6 @@ SensitiveDetectorMessenger::SensitiveDetectorMessenger(SensitiveDetector* detect
     if (_detectorsDir == 0) {
         makeDetectorsDir();
     }
-
     defineCommands(_detector);
 }
 
@@ -35,11 +34,10 @@ void SensitiveDetectorMessenger::SetNewValue(G4UIcommand* cmd, G4String newVals)
     } else if (cmd == _ecutCmd) {
         _detector->setEcut(_ecutCmd->GetNewDoubleValue(newVals));
     }
-
 }
 
 void SensitiveDetectorMessenger::makeDetectorsDir() {
-    _detectorsDir = new G4UIdirectory("/detectors/");
+    _detectorsDir = new G4UIdirectory("/lcdd/detectors/");
     _detectorsDir->SetGuidance("Commands for sensitive detectors. [LCDD]");
 }
 

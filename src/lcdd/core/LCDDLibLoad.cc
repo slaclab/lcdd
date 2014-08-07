@@ -27,13 +27,11 @@ void LCDDLoadProcesses() {
 
     // hit_processor
     LOAD_COMPONENT (hit_processorProcess);
-    LOAD_COMPONENT (hits_collectionProcess);
 
     // segmentations
     LOAD_COMPONENT (grid_xyzProcess);
     LOAD_COMPONENT (projective_cylinderProcess);
     LOAD_COMPONENT (projective_zplaneProcess);
-    LOAD_COMPONENT (nonprojective_cylinderProcess);
     LOAD_COMPONENT (global_grid_xyProcess);
     LOAD_COMPONENT (cell_readout_2dProcess);
 
@@ -74,9 +72,6 @@ void LCDDLoadProcesses() {
 void LCDDLoadSubscribers() {
     // subscribers
     LOAD_COMPONENT (headerSubscriber);
-
-    // volume extended
-    //LOAD_COMPONENT(volumeExtendedSubscriber);
 
     // SDs
     LOAD_COMPONENT (calorimeterSubscriber);

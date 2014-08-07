@@ -70,19 +70,6 @@ G4bool CalorimeterSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
     return SensitiveDetector::ProcessHits(aStep, 0);
 }
 
-/*
-std::ostream& CalorimeterSD::printHits(std::ostream& os) {
-     for (int i = 0; i < getNumberOfHitsCollections(); i++) {
-     os << getHitsCollection(i)->GetName() << std::endl;
-     for (CalorimeterHitList::const_iterator iter = _hitsVector[i].begin(); iter != _hitsVector[i].end(); iter++) {
-     os << "    " << **iter;
-     }
-     }
-     os << std::endl;
-    return os;
-}
-*/
-
 void CalorimeterSD::EndOfEvent(G4HCofThisEvent *) {
 
     // Delete hit maps.

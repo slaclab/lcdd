@@ -1,7 +1,7 @@
 #include "lcdd/core/GeometryManager.hh"
 
 // LCDD
-#include "lcdd/geant4/UserRegionInformation.hh"
+#include "lcdd/core/UserRegionInformation.hh"
 //#include "lcdd/core/G4StoreManager.hh"
 
 // GDML

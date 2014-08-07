@@ -7,20 +7,26 @@
 #include <string>
 
 /**
- * @brief Pure virtual base class for calorimeter cell readouts to implement.
- * @todo Move to DDSegmentation package.
+ * @brief
+ * Pure virtual base class for calorimeter cell readouts to implement.
  */
 class CellReadout {
 
 public:
 
-    /** 2D XY position. */
+    /**
+     * @brief
+     * 2D XY position
+     */
     struct Position2D {
         double x;
         double y;
     };
 
-    /** Cell ID represented as a pair of int values. */
+    /**
+     * @brief
+     * Cell ID represented as a pair of int values
+     */
     struct CellId {
         int ix;
         int iy;

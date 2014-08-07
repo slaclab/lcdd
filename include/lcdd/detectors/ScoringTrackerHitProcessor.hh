@@ -6,7 +6,8 @@
 #include "lcdd/detectors/HitProcessorFactory.hh"
 
 /**
- * HitProcessor to implement scoring behavior, that only records a hit per track.
+ * @brief
+ * HitProcessor to implement scoring behavior, that only records a hit per track
  */
 class ScoringTrackerHitProcessor: public TrackerHitProcessor {
 
@@ -16,7 +17,7 @@ public:
      * Class constructor.
      * @param[in] tracker The tracker SD.
      */
-    ScoringTrackerHitProcessor(TrackerSD* tracker);
+    ScoringTrackerHitProcessor();
 
     /**
      * Class destructor.
@@ -35,14 +36,15 @@ private:
 };
 
 /**
- * The factory for creating new BasicTrackerHitProcessor objects.
+ * @brief
+ * The factory for creating new ScoringTrackerHitProcessor objects
  */
 class ScoringTrackerHitProcessorFactory: public HitProcessorFactory {
 
 public:
 
-    HitProcessor* createHitProcessor(SensitiveDetector* sd) {
-        return new ScoringTrackerHitProcessor(dynamic_cast<TrackerSD*>(sd));
+    HitProcessor* createHitProcessor() {
+        return new ScoringTrackerHitProcessor();
     }
 
     const std::string& handlesType() {

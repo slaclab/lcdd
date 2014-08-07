@@ -8,8 +8,8 @@
 
 // LCDD
 #include "lcdd/detectors/SensitiveDetector.hh"
-#include "lcdd/geant4/PhysicsLimitSet.hh"
-#include "lcdd/geant4/LCDDHeaderRecord.hh"
+#include "lcdd/core/PhysicsLimitSet.hh"
+#include "lcdd/core/LCDDHeaderRecord.hh"
 
 // STL
 #include <string>

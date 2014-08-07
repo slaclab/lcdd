@@ -2,21 +2,23 @@
 
 // LCDD
 #include "lcdd/detectors/CurrentTrackState.hh"
-#include "lcdd/geant4/VUserTrackInformation.hh"
+#include "lcdd/core/VUserTrackInformation.hh"
 
 // Geant4
 #include "G4Geantino.hh"
 #include "G4ChargedGeantino.hh"
 #include "globals.hh"
 
-BasicTrackerHitProcessor::BasicTrackerHitProcessor(TrackerSD* tracker) :
-        TrackerHitProcessor(tracker) {
+BasicTrackerHitProcessor::BasicTrackerHitProcessor() {
 }
 
 BasicTrackerHitProcessor::~BasicTrackerHitProcessor() {
 }
 
 bool BasicTrackerHitProcessor::processHits(G4Step* step) {
+
+    TrackerSD* tracker = getTracker();
+
     // Get the total energy deposition.
     G4double edep = step->GetTotalEnergyDeposit();
 
@@ -28,7 +30,7 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     }
 
     // Check edep < cut and not Geantino.
-    if (edep <= _tracker->getEnergyCut() && isGeantino == false) {
+    if (edep <= tracker->getEnergyCut() && isGeantino == false) {
         return false;
     }
 
@@ -76,7 +78,7 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     TrackerHit* hit = new TrackerHit();
 
     // Create the hit's identifier.
-    Id64bit id64 = _tracker->makeIdentifier(step);
+    Id64bit id64 = tracker->makeIdentifier(step);
 
     // Set the hit information from above.
     hit->setTrackID(trackID);
@@ -88,7 +90,7 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     hit->setLength(length);
 
     // Add the hit to the TrackerSD.
-    _tracker->addHit(hit);
+    tracker->addHit(hit, _collectionIndex);
 
     // Get the TrackInformation and flag track as having a tracker hit.
     VUserTrackInformation* trackInformation = dynamic_cast<VUserTrackInformation*>(step->GetTrack()->GetUserInformation());

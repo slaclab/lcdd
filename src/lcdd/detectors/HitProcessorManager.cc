@@ -1,12 +1,9 @@
 #include "lcdd/detectors/HitProcessorManager.hh"
 
 // LCDD
-#include "lcdd/detectors/LegacyCalorimeterHitProcessor.hh"
-#include "lcdd/detectors/UnsegmentedCalorimeterHitProcessor.hh"
-#include "lcdd/detectors/OpticalCalorimeterHitProcessor.hh"
+#include "lcdd/detectors/BasicCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 #include "lcdd/detectors/ScoringTrackerHitProcessor.hh"
-#include "lcdd/detectors/StepCombiningTrackerHitProcessor.hh"
 
 HitProcessorManager* HitProcessorManager::_manager = 0;
 
@@ -25,12 +22,9 @@ HitProcessorManager* HitProcessorManager::instance() {
 }
 
 void HitProcessorManager::registerDefaultFactories() {
-    registerFactory(new LegacyCalorimeterHitProcessorFactory());
-    registerFactory(new UnsegmentedCalorimeterHitProcessorFactory());
-    registerFactory(new OpticalCalorimeterHitProcessorFactory());
+    registerFactory(new BasicCalorimeterHitProcessorFactory());
     registerFactory(new ScoringTrackerHitProcessorFactory());
     registerFactory(new BasicTrackerHitProcessorFactory());
-    registerFactory(new StepCombiningTrackerHitProcessorFactory());
 }
 
 void HitProcessorManager::registerFactory(HitProcessorFactory* factory) {

@@ -1,51 +1,62 @@
 // LCDD
-#include "lcdd/processes/hit_processorProcess.hh"
 #include "lcdd/schema/hit_processor.hh"
 
 // GDML
 #include "Saxana/ProcessingContext.h"
 #include "Saxana/SAXComponentFactory.h"
+#include "Saxana/SAXStateProcess.h"
+#include "Saxana/SAXObject.h"
 
-hit_processorProcess::hit_processorProcess() :
+/**
+ * The SAX process for hit_processor elements.
+ */
+class hit_processorProcess: public SAXStateProcess {
+
+    public:
+
+    hit_processorProcess() :
         SAXStateProcess(0), _obj(0) {
-}
+    }
 
-hit_processorProcess::hit_processorProcess(ProcessingContext* context) :
+    hit_processorProcess(ProcessingContext* context) :
         SAXStateProcess(context), _obj(0) {
+    }
 
-}
+    virtual ~hit_processorProcess() {
+    }
 
-hit_processorProcess::~hit_processorProcess() {
+    void StartElement(const std::string& name, const ASCIIAttributeList& attrs) {
+        SAXObject** obj = Context()->GetTopObject();
+        hit_processor* hitProcessor = new hit_processor;
 
-}
+        hitProcessor->set_type(attrs.getValue("type"));
+        hitProcessor->set_collection_name(attrs.getValue("collection_name"));
 
-void hit_processorProcess::StartElement(const std::string& name, const ASCIIAttributeList& attrs) {
-    SAXObject** obj = Context()->GetTopObject();
-    hit_processor* hitProcessor = new hit_processor;
+        _obj = hitProcessor;
+        *obj = hitProcessor;
+    }
 
-    hitProcessor->set_type(attrs.getValue("type"));
+    void EndElement(const std::string&) {
+    }
 
-    _obj = hitProcessor;
-    *obj = hitProcessor;
-}
+    void Characters(const std::string&) {
+    }
 
-void hit_processorProcess::EndElement(const std::string&) {
-}
+    // TODO: Add this back if there are child elements added to HitsProcessor XML type.
+    void StackPopNotify(const std::string& name) {
+    //    SAXObject** so = Context()->GetTopObject();
+    //    HitProcessorType* hitProcessorType = dynamic_cast<HitProcessorType*>(_obj);
+        // Push child elements into type object.
+    //    hitProcessorType->add_content(name, *so);
+    }
 
-void hit_processorProcess::Characters(const std::string&) {
-}
+    const std::string& State() const {
+        static std::string tag = "hit_processor";
+        return tag;
+    }
 
-void hit_processorProcess::StackPopNotify(const std::string& name) {
-    SAXObject** so = Context()->GetTopObject();
-    HitProcessorType* hitProcessorType = dynamic_cast<HitProcessorType*>(_obj);
-
-    // Push child elements into type object.
-    hitProcessorType->add_content(name, *so);
-}
-
-const std::string& hit_processorProcess::State() const {
-    static std::string tag = "hit_processor";
-    return tag;
-}
+    private:
+        SAXObject* _obj;
+};
 
 DECLARE_PROCESS_FACTORY(hit_processorProcess)

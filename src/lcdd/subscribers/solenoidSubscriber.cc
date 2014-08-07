@@ -27,14 +27,11 @@ public:
     }
 
     virtual void Activate(const SAXObject* object) {
-        //std::cout << "solenoidSubscriber" << std::endl;
-
         GDMLExpressionEvaluator* calc = GDMLProcessor::GetInstance()->GetEvaluator();
         if (object != 0) {
             const solenoid* obj = dynamic_cast<const solenoid*>(object);
 
             if (obj) {
-                //std::cout << "GOT SOLENOID: " << obj->get_name() << std::endl;
 
                 double outer_field, inner_field;
                 double zmin, zmax;
