@@ -4,6 +4,7 @@
 #include "lcdd/detectors/BasicCalorimeterHitProcessor.hh"
 #include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 #include "lcdd/detectors/ScoringTrackerHitProcessor.hh"
+#include "lcdd/detectors/DDSegmentationCalorimeterHitProcessor.hh"
 
 HitProcessorManager* HitProcessorManager::_manager = 0;
 
@@ -25,6 +26,8 @@ void HitProcessorManager::registerDefaultFactories() {
     registerFactory(new BasicCalorimeterHitProcessorFactory());
     registerFactory(new ScoringTrackerHitProcessorFactory());
     registerFactory(new BasicTrackerHitProcessorFactory());
+
+    registerFactory(new DDSegmentationCalorimeterHitProcessorFactory());
 }
 
 void HitProcessorManager::registerFactory(HitProcessorFactory* factory) {

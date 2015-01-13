@@ -9,6 +9,9 @@
 #include <iostream>
 #include <vector>
 
+// DD4HEP
+#include "DDSegmentation/Segmentation.h"
+
 // LCDD
 class Segmentation;
 
@@ -60,6 +63,8 @@ public:
      * @return The vector of ID field values.
      */
     static IdVec createOrderedIdVec(G4Step* aStep, const SensitiveDetector* sd);
+
+    static DD4hep::DDSegmentation::VolumeID createVolumeId(G4Step*, IdSpec*);
 
 private:
 

@@ -12,11 +12,11 @@
 G4Allocator<CalorimeterHit> CalorimeterHitAllocator;
 
 CalorimeterHit::CalorimeterHit() :
-        G4VHit(), _edep(0), _endcap(false) {
+        G4VHit(), _edep(0) {
 }
 
 CalorimeterHit::CalorimeterHit(Id64bit id, G4double edep, G4ThreeVector globalCellPos) :
-        G4VHit(), _edep(edep), _pos(globalCellPos), _endcap(false), _id(id) {
+        G4VHit(), _edep(edep), _pos(globalCellPos), _id(id) {
 }
 
 CalorimeterHit::~CalorimeterHit() {
@@ -27,7 +27,6 @@ CalorimeterHit::CalorimeterHit(const CalorimeterHit &right) :
     _edep = right._edep;
     _pos = right._pos;
     _id = right._id;
-    _endcap = right._endcap;
 }
 
 const CalorimeterHit& CalorimeterHit::operator=(const CalorimeterHit &right) {
@@ -113,12 +112,4 @@ const HitContributionList& CalorimeterHit::getHitContributions() const {
 
 const Id64bit& CalorimeterHit::getId64bit() const {
     return _id;
-}
-
-void CalorimeterHit::setEndcapFlag(bool ec) {
-    _endcap = ec;
-}
-
-bool CalorimeterHit::getEndcapFlag() {
-    return _endcap;
 }

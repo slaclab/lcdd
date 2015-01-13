@@ -9,8 +9,27 @@
 #include "lcdd/detectors/BasicTrackerHitProcessor.hh"
 #include "lcdd/detectors/ScoringTrackerHitProcessor.hh"
 #include "lcdd/schema/hit_processor.hh"
+#include "lcdd/schema/cartesian_grid_xy.hh"
+#include "lcdd/schema/cartesian_grid_xz.hh"
+#include "lcdd/schema/cartesian_grid_xyz.hh"
+#include "lcdd/schema/projective_cylinder.hh"
+
+// GDML
+#include "G4Evaluator/GDMLExpressionEvaluator.h"
+
+// DD4hep
+#include "DDSegmentation/CartesianGridXY.h"
+#include "DDSegmentation/CartesianGridXZ.h"
+#include "DDSegmentation/CartesianGridXYZ.h"
+#include "DDSegmentation/ProjectiveCylinder.h"
+
+using DD4hep::DDSegmentation::CartesianGridXY;
+using DD4hep::DDSegmentation::CartesianGridXZ;
+using DD4hep::DDSegmentation::CartesianGridXYZ;
+using DD4hep::DDSegmentation::ProjectiveCylinder;
 
 #include <algorithm>
+#include <exception>
 
 SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXObject* object) {
 
@@ -121,8 +140,13 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
         // Set the IdSpec.
         sensitiveDetector->setIdSpec(idspec);
 
+        // Create DDSegmentation if exists, which requires idspec and SensitiveDetector to be instantiated beforehand.
+        // FIXME: This is a weird place for this to happen I guess.
+        if (dynamic_cast<CalorimeterSD*>(sensitiveDetector) != NULL)
+            createDDSegmentation((CalorimeterSD*)sensitiveDetector, seq);
+
         // Add the list of HitProcessors.  This will automatically cause the HitProcessor setup code
-        // to be called to configure it for this SD.
+        // to be called in order to configure it for this SD.
         sensitiveDetector->addHitProcessors(hitProcessors);
 
         // Register the SensitiveDetector with the LCDDProcessor.
@@ -136,6 +160,133 @@ SensitiveDetector* SensitiveDetectorFactory::createSensitiveDetector(const SAXOb
     return sensitiveDetector;
 }
 
+// FIXME: The grid size calculations should apply a length unit.
+void SensitiveDetectorFactory::createDDSegmentation(CalorimeterSD* calorimeter, ContentSequence* seq) {
+
+    GDMLExpressionEvaluator* calc = GDMLProcessor::GetInstance()->GetEvaluator();
+
+    size_t count = seq->size();
+    for (size_t i = 0; i < count; i++) {
+        std::string childTag = seq->content(i).tag;
+        const ContentGroup::ContentItem& segitem = seq->content(i);
+        DD4hep::DDSegmentation::Segmentation* segmentation = NULL;
+        if (childTag == "cartesian_grid_xy") {
+
+            cartesian_grid_xy* element = dynamic_cast<cartesian_grid_xy*>(segitem.object);
+            CartesianGridXY* cartesianGridXY = new CartesianGridXY(calorimeter->getIdSpec()->getFieldDescription());
+
+            double gridSizeX, gridSizeY, offsetX, offsetY;
+            gridSizeX = gridSizeY = offsetX = offsetY = 0;
+            std::string rawValue = element->get_grid_size_x();
+            gridSizeX = calc->Eval(rawValue);
+
+            rawValue = element->get_grid_size_y();
+            gridSizeY = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_x();
+            offsetX = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_y();
+            offsetY = calc->Eval(rawValue);
+
+            cartesianGridXY->setGridSizeX(gridSizeX);
+            cartesianGridXY->setGridSizeY(gridSizeY);
+            cartesianGridXY->setOffsetX(offsetX);
+            cartesianGridXY->setOffsetY(offsetY);
+
+            segmentation = cartesianGridXY;
+
+        } else if (childTag == "cartesian_grid_xyz") {
+            cartesian_grid_xyz* element = dynamic_cast<cartesian_grid_xyz*>(segitem.object);
+            CartesianGridXYZ* cartesianGridXYZ = new CartesianGridXYZ(calorimeter->getIdSpec()->getFieldDescription());
+
+            double gridSizeX, gridSizeY, gridSizeZ, offsetX, offsetY, offsetZ;
+            gridSizeX = gridSizeY = gridSizeZ = offsetX = offsetY = offsetZ = 0;
+
+            std::string rawValue = element->get_grid_size_x();
+            gridSizeX = calc->Eval(rawValue);
+
+            rawValue = element->get_grid_size_y();
+            gridSizeY = calc->Eval(rawValue);
+
+            rawValue = element->get_grid_size_z();
+            gridSizeZ = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_x();
+            offsetX = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_y();
+            offsetY = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_z();
+            offsetZ = calc->Eval(rawValue);
+
+            cartesianGridXYZ->setGridSizeX(gridSizeX);
+            cartesianGridXYZ->setGridSizeY(gridSizeY);
+            cartesianGridXYZ->setGridSizeZ(gridSizeZ);
+            cartesianGridXYZ->setOffsetX(offsetX);
+            cartesianGridXYZ->setOffsetY(offsetY);
+            cartesianGridXYZ->setOffsetZ(offsetZ);
+
+            segmentation = cartesianGridXYZ;
+        } else if (childTag == "cartesian_grid_xz") {
+            cartesian_grid_xz* element = dynamic_cast<cartesian_grid_xz*>(segitem.object);
+            CartesianGridXZ* cartesianGridXZ = new CartesianGridXZ(calorimeter->getIdSpec()->getFieldDescription());
+
+            double gridSizeX, gridSizeZ, offsetX, offsetZ;
+            gridSizeX = gridSizeZ = offsetX = offsetZ = 0;
+
+            std::string rawValue = element->get_grid_size_x();
+            gridSizeX = calc->Eval(rawValue);
+
+            rawValue = element->get_grid_size_z();
+            gridSizeZ = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_x();
+            offsetX = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_z();
+            offsetZ = calc->Eval(rawValue);
+
+            cartesianGridXZ->setGridSizeX(gridSizeX);
+            cartesianGridXZ->setGridSizeZ(gridSizeZ);
+            cartesianGridXZ->setOffsetX(offsetX);
+            cartesianGridXZ->setOffsetZ(offsetZ);
+
+            segmentation = cartesianGridXZ;
+        } else if (childTag == "projective_cylinder") {
+
+            projective_cylinder* element = dynamic_cast<projective_cylinder*>(segitem.object);
+            ProjectiveCylinder* projectiveCylinder = new ProjectiveCylinder(calorimeter->getIdSpec()->getFieldDescription());
+
+            double thetaBins, phiBins, offsetTheta, offsetPhi;
+            thetaBins = phiBins = offsetTheta = offsetPhi;
+
+            std::string rawValue = element->get_theta_bins();
+            thetaBins = calc->Eval(rawValue);
+
+            rawValue = element->get_phi_bins();
+            phiBins = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_theta();
+            offsetTheta = calc->Eval(rawValue);
+
+            rawValue = element->get_offset_phi();
+            offsetPhi = calc->Eval(rawValue);
+
+            projectiveCylinder->setThetaBins(thetaBins);
+            projectiveCylinder->setPhiBins(phiBins);
+            projectiveCylinder->setOffsetTheta(offsetTheta);
+            projectiveCylinder->setOffsetPhi(offsetPhi);
+
+            segmentation = projectiveCylinder;
+        }
+
+        if (segmentation != NULL)
+            calorimeter->setDDSegmentation(segmentation);
+    }
+}
+
 SensitiveDetector* SensitiveDetectorFactory::createCalorimeter(const SAXObject* object, const std::vector<G4String>& hitsCollections) {
     const SensitiveDetectorType* sensitiveDetectorType = dynamic_cast<const SensitiveDetectorType*>(object);
     Segmentation* segmentation = 0;
@@ -143,20 +294,21 @@ SensitiveDetector* SensitiveDetectorFactory::createCalorimeter(const SAXObject* 
     // Create the segmentation child object prior to the calorimeter.
     ContentSequence* seq = const_cast<ContentSequence*>(sensitiveDetectorType->get_content());
     size_t count = seq->size();
-    bool fnd_seg = false;
     for (size_t i = 0; i < count; i++) {
         std::string child_tag = seq->content(i).tag;
         const ContentGroup::ContentItem& segitem = seq->content(i);
         // Create segmentation using factory.
         if (isSegmentationTag(child_tag)) {
             segmentation = SegmentationFactory::createSegmentation(segitem.object, segitem.tag);
-            fnd_seg = true;
             break;
         }
     }
 
-    // Create the calorimeter SD.
-    return new CalorimeterSD(sensitiveDetectorType->get_name(), hitsCollections, segmentation);
+    // Create the CalorimeterSD object.
+    CalorimeterSD* calorimeter = new CalorimeterSD(sensitiveDetectorType->get_name(), hitsCollections, segmentation);
+
+    // Return the detector that was created.
+    return calorimeter;
 }
 
 TrackerSD* SensitiveDetectorFactory::createTracker(const SAXObject* object, const std::vector<G4String>& hitsCollections) {
@@ -185,8 +337,12 @@ int SensitiveDetectorFactory::convertVerbose(const SensitiveDetectorType* sdt) {
 }
 
 bool SensitiveDetectorFactory::isSegmentationTag(const std::string& s) {
-    // FIXME This should automatically know all segmentation types somehow.
-    //       Can this be read from the schema?
+    // FIXME This should automatically know all segmentation types.
+    //       Can they be read from the schema?
     //       http://xerces-c.sourcearchive.com/documentation/3.1.1-1/SchemaGrammar_8hpp_source.html
-    return (s == "projective_cylinder" || s == "grid_xyz" || s == "global_grid_xy" || s == "projective_zplane" || s == "cell_readout_2d");
+    return (s == "projective_cylinder_old" ||
+            s == "grid_xyz" ||
+            s == "global_grid_xy" ||
+            s == "projective_zplane" ||
+            s == "cell_readout_2d");
 }

@@ -12,18 +12,30 @@
 using std::vector;
 
 CalorimeterSD::CalorimeterSD(G4String sdName, G4String hcName, Segmentation* sdSeg) :
-        SensitiveDetector(sdName, hcName, SensitiveDetector::eCalorimeter), _segmentation(sdSeg) {
+        SensitiveDetector(sdName, hcName, SensitiveDetector::eCalorimeter), _segmentation(sdSeg), _ddsegmentation(NULL) {
     // Setup a dummy hits collection that will be overridden later.
     _hitsCollections.push_back(NULL);
 }
 
 CalorimeterSD::CalorimeterSD(G4String sdName, const vector<G4String>& hcNames, Segmentation* sdSeg) :
-        SensitiveDetector(sdName, hcNames, SensitiveDetector::eCalorimeter), _segmentation(sdSeg) {
+        SensitiveDetector(sdName, hcNames, SensitiveDetector::eCalorimeter), _segmentation(sdSeg), _ddsegmentation(NULL) {
     // Setup entries for each hits collection.  These null pointers will be overridden later.
     for (int i = 0; i < (int) hcNames.size(); i++) {
         _hitsCollections.push_back(NULL);
     }
 }
+
+/*
+CalorimeterSD::CalorimeterSD(
+        G4String sensitiveDetectorName,
+        const vector<G4String>& hitsCollectionNames,
+        DD4hep::DDSegmentation::Segmentation* segmentation) :
+        SensitiveDetector(sensitiveDetectorName, hitsCollectionNames, SensitiveDetector::eCalorimeter), _ddsegmentation(segmentation) {
+    for (int i = 0; i < (int) hitsCollectionNames.size(); i++) {
+        _hitsCollections.push_back(NULL);
+    }
+}
+*/
 
 CalorimeterSD::~CalorimeterSD() {
 }
@@ -62,8 +74,16 @@ void CalorimeterSD::Initialize(G4HCofThisEvent *HCE) {
     }
 }
 
+void CalorimeterSD::setDDSegmentation(DD4hep::DDSegmentation::Segmentation* ddsegmentation) {
+    _ddsegmentation = ddsegmentation;
+}
+
 Segmentation* CalorimeterSD::getSegmentation() const {
     return _segmentation;
+}
+
+DD4hep::DDSegmentation::Segmentation* CalorimeterSD::getDDSegmentation() const {
+    return _ddsegmentation;
 }
 
 G4bool CalorimeterSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
@@ -99,4 +119,8 @@ void CalorimeterSD::addHit(CalorimeterHit* hit, int collectionIndex) {
 
 CalorimeterHit* CalorimeterSD::findHit(const Id64bit& id, int collectionIndex) {
     return _hitMaps[collectionIndex]->get(id);
+}
+
+CalorimeterHitMap* CalorimeterSD::getCalorimeterHitMap(int collectionIndex) {
+    return _hitMaps[collectionIndex];
 }

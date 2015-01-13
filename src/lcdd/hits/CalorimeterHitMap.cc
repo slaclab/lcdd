@@ -15,6 +15,10 @@ CalorimeterHit* CalorimeterHitMap::get(const Id64bit& id) {
     return _map[id.getValue()];
 }
 
+CalorimeterHit* CalorimeterHitMap::get(Id64bit::ValueType value) {
+    return _map[value];
+}
+
 void CalorimeterHitMap::clear() {
     _map.clear();
 }

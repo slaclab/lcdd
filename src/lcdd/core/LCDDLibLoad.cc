@@ -9,38 +9,44 @@ extern "C" {
  */
 void LCDDLoadProcesses() {
 
-    // header
+    // Header
     LOAD_COMPONENT (headerProcess);
     LOAD_COMPONENT (detectorProcess);
     LOAD_COMPONENT (authorProcess);
     LOAD_COMPONENT (generatorProcess);
     LOAD_COMPONENT (commentProcess);
 
-    // volume extended
+    // Volume extended
     LOAD_COMPONENT (volumeExtendedProcess);
     LOAD_COMPONENT (physvolidProcess);
 
-    // SDs
+    // Sensitive Detectors
     LOAD_COMPONENT (calorimeterProcess);
     LOAD_COMPONENT (trackerProcess);
     LOAD_COMPONENT (sdrefProcess);
 
-    // hit_processor
+    // Hit Processors
     LOAD_COMPONENT (hit_processorProcess);
 
-    // segmentations
+    // Segmentations (legacy)
     LOAD_COMPONENT (grid_xyzProcess);
     LOAD_COMPONENT (projective_cylinderProcess);
     LOAD_COMPONENT (projective_zplaneProcess);
     LOAD_COMPONENT (global_grid_xyProcess);
     LOAD_COMPONENT (cell_readout_2dProcess);
 
-    // Ids
+    // New DD4hep Segmentations
+    LOAD_COMPONENT (cartesian_grid_xyProcess);
+    LOAD_COMPONENT (cartesian_grid_xzProcess);
+    LOAD_COMPONENT (cartesian_grid_xyzProcess);
+    LOAD_COMPONENT (projective_cylinderProcess);
+
+    // Identifiers
     LOAD_COMPONENT (idspecProcess);
     LOAD_COMPONENT (idfieldProcess);
     LOAD_COMPONENT (idspecrefProcess);
 
-    // field
+    // B-fields
     LOAD_COMPONENT (fieldrefProcess);
     LOAD_COMPONENT (global_fieldProcess);
     LOAD_COMPONENT (solenoidProcess);
@@ -51,36 +57,36 @@ void LCDDLoadProcesses() {
     LOAD_COMPONENT (box_dipoleProcess);
     LOAD_COMPONENT (field_map_3dProcess)
 
-    // region
+    // Region
     LOAD_COMPONENT (regionProcess);
     LOAD_COMPONENT (regionrefProcess);
 
-    // display
+    // Visualization
     LOAD_COMPONENT (visProcess);
     LOAD_COMPONENT (visrefProcess);
     LOAD_COMPONENT (colorProcess);
 
-    // limit
+    // Physics limits
     LOAD_COMPONENT (limitsetProcess);
     LOAD_COMPONENT (limitsetrefProcess);
     LOAD_COMPONENT (limitProcess);
 }
 
 /**
- * Function for loading LCDD subscribers.
+ * Function for loading LCDD subscribers to create runtime objects.
  */
 void LCDDLoadSubscribers() {
-    // subscribers
+    // Header
     LOAD_COMPONENT (headerSubscriber);
 
-    // SDs
+    // Sensitive Detectors
     LOAD_COMPONENT (calorimeterSubscriber);
     LOAD_COMPONENT (trackerSubscriber);
 
-    // Ids
+    // Identifiers
     LOAD_COMPONENT (idspecSubscriber);
 
-    // field
+    // B-fields
     LOAD_COMPONENT (solenoidSubscriber);
     LOAD_COMPONENT (rz_field_mapSubscriber);
     LOAD_COMPONENT (dipoleSubscriber);
@@ -88,13 +94,13 @@ void LCDDLoadSubscribers() {
     LOAD_COMPONENT (global_fieldSubscriber);
     LOAD_COMPONENT (field_map_3dSubscriber);
 
-    // region
+    // Regions
     LOAD_COMPONENT (regionSubscriber);
 
-    // display
+    // Visualization
     LOAD_COMPONENT (visSubscriber);
 
-    // limit
+    // Physics limits
     LOAD_COMPONENT (limitsetSubscriber);
 }
 

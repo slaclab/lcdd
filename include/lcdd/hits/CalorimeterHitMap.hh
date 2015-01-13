@@ -47,6 +47,8 @@ public:
      */
     CalorimeterHit* get(const Id64bit& id);
 
+    CalorimeterHit* get(Id64bit::ValueType);
+
     /**
      * Get the size of the map.
      * @return The size of the map.

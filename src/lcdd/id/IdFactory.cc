@@ -381,3 +381,21 @@ bool IdFactory::hasPhysVolId(const std::vector<G4VPhysicalVolume*>& pvs, const s
 
     return fnd;
 }
+
+DD4hep::DDSegmentation::VolumeID IdFactory::createVolumeId(G4Step* aStep, IdSpec* idspec) {
+    IdVec idvec;
+    for (IdSpec::IdFields::const_iterator iter = idspec->IdFieldsBegin(); iter != idspec->IdFieldsEnd(); iter++) {
+        IdField* field = *iter;
+        std::vector<G4VPhysicalVolume*> pvolumes = ReadoutUtil::getPhysVolList(aStep);
+        if (hasPhysVolId(pvolumes, field->getLabel())) {
+            int pvolId = findIdInPhysVols(pvolumes, field->getLabel());
+            idvec.addFieldValue(pvolId);
+        } else {
+            idvec.addFieldValue(0);
+        }
+    }
+    Id64bit id = IdFactory::createIdentifier(idvec, idspec);
+    id.encode();
+    Id64bit::ValueType volId = id.getValue();
+    return (DD4hep::DDSegmentation::VolumeID)volId;
+}

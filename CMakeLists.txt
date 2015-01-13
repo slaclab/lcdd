@@ -50,6 +50,14 @@ ELSE()
     MESSAGE( STATUS "Found GDML: ${GDML_DIR}" )
 ENDIF()
 
+# find DDSegmentation
+FIND_PACKAGE(DDSegmentation REQUIRED)
+if ( NOT DDSegmentation_FOUND )
+    MESSAGE( FATAL_ERROR "DDSegmentation was not found!  Define DDSegmentation_DIR when calling cmake." )
+ELSE()
+    MESSAGE( STATUS "Found DDSegmentation: ${DDSegmentation_DIR}" )
+ENDIF()
+
 # local includes
 SET( LCDD_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include )
 INCLUDE_DIRECTORIES( ${LCDD_INCLUDE_DIR} )
@@ -65,13 +73,13 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 ADD_DEFINITIONS( ${Geant4_DEFINITIONS} )
 
 # include directories
-INCLUDE_DIRECTORIES( ${XERCES_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( ${XERCES_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIRS} ${DDSegmentation_INCLUDE_DIRS} )
 
 # add GDML link directory
-LINK_DIRECTORIES( ${GDML_LIBRARY_DIR} )
+LINK_DIRECTORIES( ${GDML_LIBRARY_DIR} ${DDSegmentation_LIBRARY_DIR} )
 
 # libraries
-LINK_LIBRARIES( ${XERCES_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} )
+LINK_LIBRARIES( ${XERCES_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} ${DDSegmentation_LIBRARIES} )
 
 # output shared library
 ADD_LIBRARY( lcdd SHARED ${library_sources} )

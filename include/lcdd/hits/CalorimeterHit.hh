@@ -142,18 +142,6 @@ public:
      */
     const Id64bit& getId64bit() const;
 
-    /**
-     * Set the endcap flag.
-     * @param[in] ec The endcap flag.
-     */
-    void setEndcapFlag(bool ec = true);
-
-    /**
-     * Get the endcap flag.
-     * @return The endcap flag.
-     */
-    bool getEndcapFlag();
-
 private:
 
     // 64-bit id.
@@ -164,9 +152,6 @@ private:
 
     // Position.
     G4ThreeVector _pos;
-
-    // Endcap flag.
-    bool _endcap;
 
     // List of contributions by MCParticle.
     HitContributionList _particleList;

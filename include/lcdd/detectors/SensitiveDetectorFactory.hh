@@ -85,6 +85,14 @@ private:
      * @return True if segmentation tag is valid; false if not.
      */
     static bool isSegmentationTag(const std::string& s);
+
+    /**
+     * Create a DDSegmentation Segmentation object, if found in the XML content,
+     * and register it with the CalorimeterSD.
+     * @param[in] calorimeter The CalorimeterSD which will use the Segmentation.
+     * @param[in] seq The XML content of the calorimeter element.
+     */
+    static void createDDSegmentation(CalorimeterSD* calorimeter, ContentSequence* seq);
 };
 
 #endif

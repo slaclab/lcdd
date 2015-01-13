@@ -8,6 +8,11 @@
 #include "lcdd/hits/CalorimeterHitMap.hh"
 #include "lcdd/segmentation/Segmentation.hh"
 
+// DD4HEP
+#include "DDSegmentation/Segmentation.h"
+
+#include <vector>
+
 /**
  * @brief The implementation of a calorimeter that accumulates energy depositions by event.
  */
@@ -29,7 +34,7 @@ public:
      * @param[in] sdSeg    The detector's segmentation object for dividing into artificial cells.
      * @param[in] compare  The hit comparator to be used by this detector.
      */
-    CalorimeterSD(G4String sdName, G4String hcName, Segmentation* sdSeg);
+    CalorimeterSD(G4String sensitiveDetectorName, G4String hitsCollectionName, Segmentation* segmentation);
 
     /**
      * Class constructor.
@@ -38,7 +43,7 @@ public:
      * @param[in] sdSeg    The detector's segmentation object for dividing into artificial cells.
      * @param[in] compare  The hit comparator to be used by this detector.
      */
-    CalorimeterSD(G4String sdName, const std::vector<G4String>& hcNames, Segmentation* sdSeg);
+    CalorimeterSD(G4String sensitiveDetectorName, const std::vector<G4String>& hitsCollectionName, Segmentation* segmentation);
 
     /**
      * Class destructor.
@@ -70,11 +75,16 @@ public:
     Segmentation* getSegmentation() const;
 
     /**
-     * Print out the hit data to an output stream.
-     * @param[in] os The output stream.
-     * @return The same output stream.
+     * Set the DD4hep Segmentation of this Calorimeter.
+     * @param[in] segmentation The Segmentation object.
      */
-    //std::ostream& printHits(std::ostream& os);
+    void setDDSegmentation(DD4hep::DDSegmentation::Segmentation* segmentation);
+
+    /**
+     * Get the DD4HEP Segmentation of this CalorimeterSD.
+     * @return The DD4HEP Segmentation or NULL if not set.
+     */
+    DD4hep::DDSegmentation::Segmentation* getDDSegmentation() const;
 
     /**
      * Print the calorimeter's basic information.
@@ -99,6 +109,12 @@ public:
      */
     CalorimeterHit* findHit(const Id64bit& id, int collectionIndex = 0);
 
+    /**
+     * Get a CalorimeterHitMap by collection index.
+     * @return The CalorimeterHitMap by collection index.
+     */
+    CalorimeterHitMap* getCalorimeterHitMap(int index);
+
 protected:
 
     /**
@@ -112,6 +128,8 @@ protected:
 
     // The calorimeter's virtual segmentation.
     Segmentation* _segmentation;
+
+    DD4hep::DDSegmentation::Segmentation* _ddsegmentation;
 
     // Pointers to current hits collections.
     std::vector<CalorimeterHitsCollection*> _hitsCollections;

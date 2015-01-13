@@ -1,12 +1,5 @@
-/*
- * projective_cylinderProcess.cc
- *
- *  Created on: Aug 12, 2014
- *      Author: jeremym
- */
-
 // LCDD
-#include "lcdd/schema/projective_cylinder.hh"
+#include "lcdd/schema/projective_cylinder_old.hh"
 
 // GDML
 #include "Saxana/ProcessingConfigurator.h"
@@ -23,15 +16,15 @@
 /**
  * @brief SAX process for projective_cylinder element.
  */
-class projective_cylinderProcess: public SAXStateProcess {
+class projective_cylinder_oldProcess: public SAXStateProcess {
 
 public:
 
-    projective_cylinderProcess(const ProcessingContext* context = 0) :
+    projective_cylinder_oldProcess(const ProcessingContext* context = 0) :
             SAXStateProcess(context), m_obj(0) {
     }
 
-    virtual ~projective_cylinderProcess() {
+    virtual ~projective_cylinder_oldProcess() {
     }
 
     virtual const SAXComponentObject* Build() const {
@@ -39,18 +32,17 @@ public:
     }
 
     virtual void StartElement(const std::string&, const ASCIIAttributeList& attrs) {
+        //std::cout << "projective_cylinderProcess::StartElement: " << name << std::endl;
 
         SAXObject** obj = Context()->GetTopObject();
 
-        projective_cylinder* element = new projective_cylinder;
+        projective_cylinder_old* prj = new projective_cylinder_old;
 
-        element->set_theta_bins(attrs.getValue("theta_bins"));
-        element->set_phi_bins(attrs.getValue("phi_bins"));
-        element->set_offset_theta(attrs.getValue("offset_theta"));
-        element->set_offset_phi(attrs.getValue("offset_phi"));
+        prj->set_ntheta(attrs.getValue("ntheta"));
+        prj->set_nphi(attrs.getValue("nphi"));
 
-        m_obj = element;
-        *obj = element;
+        m_obj = prj;
+        *obj = prj;
     }
 
     virtual void EndElement(const std::string&) {
@@ -63,7 +55,7 @@ public:
     }
 
     virtual const std::string& State() const {
-        static std::string tag = "projective_cylinder";
+        static std::string tag = "projective_cylinder_old";
         return tag;
     }
 
@@ -72,6 +64,5 @@ private:
     SAXObject* m_obj;
 };
 
-DECLARE_PROCESS_FACTORY(projective_cylinderProcess)
-
+DECLARE_PROCESS_FACTORY(projective_cylinder_oldProcess)
 
