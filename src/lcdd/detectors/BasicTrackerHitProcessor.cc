@@ -17,8 +17,6 @@ BasicTrackerHitProcessor::~BasicTrackerHitProcessor() {
 
 bool BasicTrackerHitProcessor::processHits(G4Step* step) {
 
-    //G4cout << "BasicTrackerHitProcessor::processHits" << G4endl;
-
     TrackerSD* tracker = getTracker();
 
     // Get the total energy deposition.
@@ -38,8 +36,6 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
 
     // Get the track.
     G4Track* track = step->GetTrack();
-
-    //G4cout << "  trackID: " << track->GetTrackID() << G4endl;
 
     // Get the pre-step point.
     G4StepPoint* pre = step->GetPreStepPoint();
@@ -70,7 +66,6 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
     G4ThreeVector momentum = (end - start);
 
     // If the momentum is > 0 then set to average momentum.
-    // FIXME: Not sure I understand this!!!
     if (momentum.mag() > 0) {
         momentum.setMag(averageMomentum);
     }
@@ -86,10 +81,6 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
 
     VUserTrackInformation* trackInformation =
             dynamic_cast<VUserTrackInformation*>(step->GetTrack()->GetUserInformation());
-
-    // If there is a user track info object, then flag it as having a hit.
-    //if (trackInformation)
-    //        trackInformation->setHasTrackerHit();
 
     // Set the hit information from above.
     if (trackInformation != NULL) {
@@ -110,11 +101,6 @@ bool BasicTrackerHitProcessor::processHits(G4Step* step) {
 
     // Add the hit to the TrackerSD.
     tracker->addHit(hit, _collectionIndex);
-
-    //G4cout << "  CurrentTrackState::getCurrentTrackID: "
-    //        << CurrentTrackState::getCurrentTrackID() << G4endl;
-    //else
-    //	G4Exception("BasicTrackerHitProcessor::processHits", "", FatalException, "Missing required VUserTrackInformation.");
 
     // Return true because created new hit.
     return true;

@@ -73,6 +73,9 @@ public:
         return _collectionIndex;
     }
 
+    virtual void reset() {
+    }
+
 protected:
 
     SensitiveDetector* _detector;

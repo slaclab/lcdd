@@ -28,8 +28,8 @@ const std::string& SensitiveDetector::UNKNOWN = "unknown";
 SensitiveDetector::SensitiveDetector(G4String name, G4String theCollectionName, EType detectorType) :
         G4VSensitiveDetector(name),
         _idspec(NULL),
-        _type(detectorType),
         _verbose(false),
+        _type(detectorType),
         _endcap(false),
         _ecut(0) {
 
@@ -78,6 +78,9 @@ void SensitiveDetector::Initialize(G4HCofThisEvent*) {
 }
 
 void SensitiveDetector::EndOfEvent(G4HCofThisEvent*) {
+    for (HitProcessors::iterator it = _hitProcessors.begin(); it != _hitProcessors.end(); it++) {
+        (*it)->reset();
+    }
 }
 
 G4bool SensitiveDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*) {

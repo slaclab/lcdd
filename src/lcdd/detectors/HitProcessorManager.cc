@@ -26,7 +26,6 @@ void HitProcessorManager::registerDefaultFactories() {
     registerFactory(new BasicCalorimeterHitProcessorFactory());
     registerFactory(new ScoringTrackerHitProcessorFactory());
     registerFactory(new BasicTrackerHitProcessorFactory());
-
     registerFactory(new DDSegmentationCalorimeterHitProcessorFactory());
 }
 

@@ -15,6 +15,7 @@ ScoringTrackerHitProcessor::~ScoringTrackerHitProcessor() {
 }
 
 bool ScoringTrackerHitProcessor::processHits(G4Step* step) {
+
     bool sameTrack = false;
 
     int trackId = step->GetTrack()->GetTrackID();
@@ -69,13 +70,6 @@ bool ScoringTrackerHitProcessor::processHits(G4Step* step) {
         newHit->setTdep(tdep);
         newHit->setId(id64.getId0());
         newHit->setLength(length);
-
-        // Get the TrackInformation and flag track as having a tracker hit.
-
-        //if (trackInformation)
-        //    trackInformation->setHasTrackerHit();
-        //else
-        //    G4Exception("ScoringTrackerHitProcessor::processHits", "", FatalException, "Missing required VUserTrackInformation.");
 
         // Add hit to detector.
         getTracker()->addHit(newHit, getCollectionIndex());

@@ -30,6 +30,13 @@ public:
      */
     bool processHits(G4Step* step);
 
+    /**
+     * Reset state of hit processor.
+     */
+    void reset() {
+        _currentTrackId = -1;
+    }
+
 private:
 
     int _currentTrackId;

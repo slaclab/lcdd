@@ -21,17 +21,9 @@ public:
 		_currentTrackID = trackID;
 	}
 
-	//static void setCurrentPrimaryID(G4int trackID) {
-	//	_currentPrimaryID = trackID;
-	//}
-
 	static G4int getCurrentTrackID() {
 		return _currentTrackID;
 	}
-
-	//static G4int getCurrentPrimaryID() {
-	//	return _currentPrimaryID;
-	//}
 
 public:
 
