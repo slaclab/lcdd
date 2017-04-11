@@ -12,13 +12,13 @@
 using std::vector;
 
 CalorimeterSD::CalorimeterSD(G4String sdName, G4String hcName, Segmentation* sdSeg) :
-        SensitiveDetector(sdName, hcName, SensitiveDetector::eCalorimeter), _segmentation(sdSeg), _ddsegmentation(NULL) {
+        SensitiveDetector(sdName, hcName, SensitiveDetector::eCalorimeter), _segmentation(sdSeg) {
     // Setup a dummy hits collection that will be overridden later.
     _hitsCollections.push_back(NULL);
 }
 
 CalorimeterSD::CalorimeterSD(G4String sdName, const vector<G4String>& hcNames, Segmentation* sdSeg) :
-        SensitiveDetector(sdName, hcNames, SensitiveDetector::eCalorimeter), _segmentation(sdSeg), _ddsegmentation(NULL) {
+        SensitiveDetector(sdName, hcNames, SensitiveDetector::eCalorimeter), _segmentation(sdSeg) {
     // Setup entries for each hits collection.  These null pointers will be overridden later.
     for (int i = 0; i < (int) hcNames.size(); i++) {
         _hitsCollections.push_back(NULL);
@@ -74,16 +74,8 @@ void CalorimeterSD::Initialize(G4HCofThisEvent *HCE) {
     }
 }
 
-void CalorimeterSD::setDDSegmentation(DD4hep::DDSegmentation::Segmentation* ddsegmentation) {
-    _ddsegmentation = ddsegmentation;
-}
-
 Segmentation* CalorimeterSD::getSegmentation() const {
     return _segmentation;
-}
-
-DD4hep::DDSegmentation::Segmentation* CalorimeterSD::getDDSegmentation() const {
-    return _ddsegmentation;
 }
 
 G4bool CalorimeterSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {

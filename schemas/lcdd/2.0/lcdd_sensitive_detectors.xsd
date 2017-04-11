@@ -197,7 +197,7 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-    <xs:element name="projective_cylinder_old" substitutionGroup="segmentation" type="ProjectiveCylinderSegmentationType">
+    <xs:element name="projective_cylinder" substitutionGroup="segmentation" type="ProjectiveCylinderSegmentationType">
         <xs:annotation>
             <xs:documentation>
                 Projective segmentation element
@@ -224,53 +224,5 @@
             </xs:documentation>
         </xs:annotation>
     </xs:element>    
-    
-    <!-- Definitions for DDSegmentation types. -->
-               
-    <xs:complexType name="CartesianGridXYType">
-        <xs:complexContent>
-            <xs:extension base="SegmentationType">
-                <xs:attribute name="grid_size_x" type="xs:double" use="required"/>
-                <xs:attribute name="grid_size_y" type="xs:double" use="required"/>
-                <xs:attribute name="offset_x" type="xs:double" default="0.0"/>
-                <xs:attribute name="offset_y" type="xs:double" default="0.0"/>
-            </xs:extension>            
-        </xs:complexContent>    
-    </xs:complexType>    
-    <xs:element name="cartesian_grid_xy" substitutionGroup="segmentation" type="CartesianGridXYType"/>
-    
-    <xs:complexType name="CartesianGridXYZType">
-        <xs:complexContent>
-            <xs:extension base="CartesianGridXYType">
-                <xs:attribute name="grid_size_z" type="xs:double" use="required"/>
-                <xs:attribute name="offset_z" type="xs:double" default="0.0"/>
-            </xs:extension>
-        </xs:complexContent>    
-    </xs:complexType>
-    <xs:element name="cartesian_grid_xyz" substitutionGroup="segmentation" type="CartesianGridXYZType"/>
-    
-    <xs:complexType name="CartesianGridXZType">
-        <xs:complexContent>
-            <xs:extension base="SegmentationType">
-                <xs:attribute name="grid_size_x" type="xs:double" use="required"/>
-                <xs:attribute name="grid_size_z" type="xs:double" use="required"/>
-                <xs:attribute name="offset_x" type="xs:double" default="0.0"/>
-                <xs:attribute name="offset_z" type="xs:double" default="0.0"/>            
-            </xs:extension>
-        </xs:complexContent>    
-    </xs:complexType>
-    <xs:element name="cartesian_grid_xz" substitutionGroup="segmentation" type="CartesianGridXZType"/>
-        
-    <xs:complexType name="ProjectiveCylinderType">
-        <xs:complexContent>
-            <xs:extension base="SegmentationType">
-                <xs:attribute name="theta_bins" type="xs:double" use="required"/>
-                <xs:attribute name="phi_bins" type="xs:double" use="required"/>
-                <xs:attribute name="offset_theta" type="xs:double" default="0.0"/>
-                <xs:attribute name="offset_phi" type="xs:double" default="0.0"/>
-            </xs:extension>        
-        </xs:complexContent>
-    </xs:complexType>
-    <xs:element name="projective_cylinder" substitutionGroup="segmentation" type="ProjectiveCylinderType"/>
     
 </xs:schema>

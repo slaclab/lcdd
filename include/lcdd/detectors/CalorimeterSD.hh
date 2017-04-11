@@ -8,9 +8,6 @@
 #include "lcdd/hits/CalorimeterHitMap.hh"
 #include "lcdd/segmentation/Segmentation.hh"
 
-// DD4HEP
-#include "DDSegmentation/Segmentation.h"
-
 #include <vector>
 
 /**
@@ -75,18 +72,6 @@ public:
     Segmentation* getSegmentation() const;
 
     /**
-     * Set the DD4hep Segmentation of this Calorimeter.
-     * @param[in] segmentation The Segmentation object.
-     */
-    void setDDSegmentation(DD4hep::DDSegmentation::Segmentation* segmentation);
-
-    /**
-     * Get the DD4HEP Segmentation of this CalorimeterSD.
-     * @return The DD4HEP Segmentation or NULL if not set.
-     */
-    DD4hep::DDSegmentation::Segmentation* getDDSegmentation() const;
-
-    /**
      * Print the calorimeter's basic information.
      * @param[in] os The output stream.
      * @return The same output stream.
@@ -128,8 +113,6 @@ protected:
 
     // The calorimeter's virtual segmentation.
     Segmentation* _segmentation;
-
-    DD4hep::DDSegmentation::Segmentation* _ddsegmentation;
 
     // Pointers to current hits collections.
     std::vector<CalorimeterHitsCollection*> _hitsCollections;

@@ -28,18 +28,12 @@ void LCDDLoadProcesses() {
     // Hit Processors
     LOAD_COMPONENT (hit_processorProcess);
 
-    // Segmentations (legacy)
+    // Segmentations
     LOAD_COMPONENT (grid_xyzProcess);
     LOAD_COMPONENT (projective_cylinderProcess);
     LOAD_COMPONENT (projective_zplaneProcess);
     LOAD_COMPONENT (global_grid_xyProcess);
     LOAD_COMPONENT (cell_readout_2dProcess);
-
-    // New DD4hep Segmentations
-    LOAD_COMPONENT (cartesian_grid_xyProcess);
-    LOAD_COMPONENT (cartesian_grid_xzProcess);
-    LOAD_COMPONENT (cartesian_grid_xyzProcess);
-    LOAD_COMPONENT (projective_cylinderProcess);
 
     // Identifiers
     LOAD_COMPONENT (idspecProcess);

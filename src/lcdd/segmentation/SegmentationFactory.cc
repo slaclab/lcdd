@@ -3,7 +3,7 @@
 // LCDD
 #include "lcdd/schema/grid_xyz.hh"
 #include "lcdd/schema/global_grid_xy.hh"
-#include "lcdd/schema/projective_cylinder_old.hh"
+#include "lcdd/schema/projective_cylinder.hh"
 #include "lcdd/schema/projective_zplane.hh"
 #include "lcdd/schema/cell_readout_2d.hh"
 #include "lcdd/segmentation/Segmentation.hh"
@@ -29,7 +29,7 @@ Segmentation* SegmentationFactory::createSegmentation(SAXObject* obj, const std:
     GDMLExpressionEvaluator* calc = GDMLProcessor::GetInstance()->GetEvaluator();
 
     if (tag == "projective_cylinder") {
-        projective_cylinder_old* prj = dynamic_cast<projective_cylinder_old*>(obj);
+        projective_cylinder* prj = dynamic_cast<projective_cylinder*>(obj);
         if (prj) {
             int ntheta, nphi;
             std::string sval = prj->get_ntheta();

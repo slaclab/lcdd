@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# Eclipse config
+.project
+.cproject
+
+# build dir
+/build

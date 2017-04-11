@@ -15,18 +15,8 @@ SET( LCDD_VERSION_MAJOR 4 )
 SET( LCDD_VERSION_MINOR 1 )
 SET( LCDD_VERSION_PATCH 1 )
 
-# find ilcutil
-FIND_PACKAGE( ILCUTIL COMPONENTS ILCSOFT_CMAKE_MODULES REQUIRED )
-
-# load default settings from ILCSOFT_CMAKE_MODULES
-INCLUDE( ilcsoft_default_settings )
-INCLUDE( ExternalProject )
-
 # add path containing CMake macros for this project
 LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
-
-# macro for generating configuration output
-INCLUDE( MacroGeneratePackageConfigFiles )
 
 # find Xerces C++
 FIND_PACKAGE( XERCES REQUIRED )
@@ -50,14 +40,6 @@ ELSE()
     MESSAGE( STATUS "Found GDML: ${GDML_DIR}" )
 ENDIF()
 
-# find DDSegmentation
-FIND_PACKAGE(DDSegmentation REQUIRED)
-if ( NOT DDSegmentation_FOUND )
-    MESSAGE( FATAL_ERROR "DDSegmentation was not found!  Define DDSegmentation_DIR when calling cmake." )
-ELSE()
-    MESSAGE( STATUS "Found DDSegmentation: ${DDSegmentation_DIR}" )
-ENDIF()
-
 # local includes
 SET( LCDD_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include )
 INCLUDE_DIRECTORIES( ${LCDD_INCLUDE_DIR} )
@@ -65,21 +47,17 @@ INCLUDE_DIRECTORIES( ${LCDD_INCLUDE_DIR} )
 # get list of LCDD sources
 FILE( GLOB_RECURSE library_sources ${PROJECT_SOURCE_DIR}/src/*.cc )
 
-# default compilation flags
-ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
-ADD_DEFINITIONS( "-Wno-long-long" )
-
 # additional compilation flags
-ADD_DEFINITIONS( ${Geant4_DEFINITIONS} )
+ADD_DEFINITIONS(${Geant4_DEFINITIONS})
 
 # include directories
-INCLUDE_DIRECTORIES( ${XERCES_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIRS} ${DDSegmentation_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( ${XERCES_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIRS} )
 
 # add GDML link directory
-LINK_DIRECTORIES( ${GDML_LIBRARY_DIR} ${DDSegmentation_LIBRARY_DIR} )
+LINK_DIRECTORIES( ${GDML_LIBRARY_DIR} )
 
 # libraries
-LINK_LIBRARIES( ${XERCES_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} ${DDSegmentation_LIBRARIES} )
+LINK_LIBRARIES( ${XERCES_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} )
 
 # output shared library
 ADD_LIBRARY( lcdd SHARED ${library_sources} )
@@ -87,9 +65,6 @@ ADD_LIBRARY( lcdd SHARED ${library_sources} )
 # install library
 SET( LCDD_LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib )
 INSTALL( TARGETS lcdd DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
-
-# generate package configuration
-GENERATE_PACKAGE_CONFIGURATION_FILES( LCDDConfig.cmake LCDDConfigVersion.cmake LCDDLibDeps.cmake )
 
 # configure and output documentation using doxygen
 OPTION( INSTALL_DOC "Set to OFF to skip build/install documentation" ON ) 
@@ -114,21 +89,6 @@ IF ( INSTALL_DOC )
     # add doxygen documentation to install step
     INSTALL( CODE "EXECUTE_PROCESS( COMMAND doxygen ${PROJECT_SOURCE_DIR}/config/doxygen/lcdd_doxygen.cfg)" )
     
-    # check for Xalan XSLT processor for creating schema documentation
-    IF ( DEFINED XALAN_DIR )
-    
-        MESSAGE( STATUS "Found Xalan: ${XALAN_DIR}" )
-   	    MESSAGE( STATUS "XALAN_DIR is set.  XML schema documentation will be created." )
-   	    
-   	    # create script with local settings
-   	    CONFIGURE_FILE( ${PROJECT_SOURCE_DIR}/scripts/create-schema-doc.sh.in ${PROJECT_SOURCE_DIR}/scripts/create-schema-doc.sh )
-   	    
-   	    # run script to generate schema doc
-   	    INSTALL( CODE "EXECUTE_PROCESS( COMMAND ${PROJECT_SOURCE_DIR}/scripts/create-schema-doc.sh)" )
-   	    
-   	ELSE()
-   	    MESSAGE( STATUS "XALAN_DIR not set.  XML schema documentation will not be created." ) 
-    ENDIF()
 ELSE() 
     # message that documentation is off for this build
     MESSAGE( STATUS "INSTALL_DOC is set to OFF.  Documentation will not be created." ) 

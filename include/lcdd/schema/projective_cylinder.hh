@@ -1,27 +1,21 @@
-/*
- * projective_cylinder.hh
- *
- *  Created on: Aug 12, 2014
- *      Author: jeremym
- */
-
 #ifndef LCDD_SCHEMA_PROJECTIVE_CYLINDER_HH_
-#define LCDD_SCHEMA_PROJECTIVE_CYLINDER_HH_
+#define LCDD_SCHEMA_PROJECTIVE_CYLINDER_HH_ 1
 
 // LCDD
-#include "lcdd/schema/ProjectiveCylinderType.hh"
+#include "ProjectiveCylinderSegmentationType.hh"
 
 // GDML
 #include "Saxana/SAXObject.h"
 
-
 /**
  * @brief
- * The projective_cylinder type from the schema
+ * The projective_cylinder element from the schema.
+ * @note
+ * The projective_cylinder from DD4hep will replace this.
  */
-class projective_cylinder : public SAXObject, public ProjectiveCylinderType {
+class projective_cylinder: public SAXObject, public ProjectiveCylinderSegmentationType {
 
-    public:
+public:
 
     /**
      * Class constructor.
@@ -44,4 +38,4 @@ class projective_cylinder : public SAXObject, public ProjectiveCylinderType {
     }
 };
 
-#endif /* PROJECTIVE_CYLINDER_HH_ */
+#endif

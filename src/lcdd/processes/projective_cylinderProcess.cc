@@ -1,10 +1,3 @@
-/*
- * projective_cylinderProcess.cc
- *
- *  Created on: Aug 12, 2014
- *      Author: jeremym
- */
-
 // LCDD
 #include "lcdd/schema/projective_cylinder.hh"
 
@@ -39,18 +32,17 @@ public:
     }
 
     virtual void StartElement(const std::string&, const ASCIIAttributeList& attrs) {
+        //std::cout << "projective_cylinderProcess::StartElement: " << name << std::endl;
 
         SAXObject** obj = Context()->GetTopObject();
 
-        projective_cylinder* element = new projective_cylinder;
+        projective_cylinder* prj = new projective_cylinder;
 
-        element->set_theta_bins(attrs.getValue("theta_bins"));
-        element->set_phi_bins(attrs.getValue("phi_bins"));
-        element->set_offset_theta(attrs.getValue("offset_theta"));
-        element->set_offset_phi(attrs.getValue("offset_phi"));
+        prj->set_ntheta(attrs.getValue("ntheta"));
+        prj->set_nphi(attrs.getValue("nphi"));
 
-        m_obj = element;
-        *obj = element;
+        m_obj = prj;
+        *obj = prj;
     }
 
     virtual void EndElement(const std::string&) {
@@ -73,5 +65,4 @@ private:
 };
 
 DECLARE_PROCESS_FACTORY(projective_cylinderProcess)
-
 
