@@ -66,6 +66,9 @@ ADD_LIBRARY( lcdd SHARED ${library_sources} )
 SET( LCDD_LIB_INSTALL_DIR ${CMAKE_INSTALL_PREFIX}/lib )
 INSTALL( TARGETS lcdd DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
 
+# install header files
+INSTALL( DIRECTORY ${LCDD_INCLUDE_DIR}/lcdd/ DESTINATION include/lcdd/ )
+
 # configure and output documentation using doxygen
 OPTION( INSTALL_DOC "Set to OFF to skip build/install documentation" ON ) 
 IF ( INSTALL_DOC )
