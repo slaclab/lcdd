@@ -69,6 +69,9 @@ INSTALL( TARGETS lcdd DESTINATION ${CMAKE_INSTALL_PREFIX}/lib )
 # install header files
 INSTALL( DIRECTORY ${LCDD_INCLUDE_DIR}/lcdd/ DESTINATION include/lcdd/ )
 
+# install XML schemas to a single directory
+INSTALL( DIRECTORY schemas/ DESTINATION ${CMAKE_INSTALL_PREFIX}/share/schemas FILES_MATCHING PATTERN "*.xsd")
+
 # configure and output documentation using doxygen
 OPTION( INSTALL_DOC "Set to OFF to skip build/install documentation" ON ) 
 IF ( INSTALL_DOC )
