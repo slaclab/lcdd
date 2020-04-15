@@ -19,9 +19,9 @@ SET( LCDD_VERSION_PATCH 0 )
 LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
 
 # find Xerces C++
-FIND_PACKAGE( XERCES REQUIRED )
-IF( NOT XERCES_FOUND )
-	MESSAGE( FATAL_ERROR "Xerces was not found!  Define XERCES_DIR when calling cmake." )
+FIND_PACKAGE( XercesC REQUIRED )
+IF( NOT XercesC_FOUND )
+	MESSAGE( FATAL_ERROR "XercesC was not found!  Define XercesC_INCLUDE_DIR and XercesC_LIBRARY when calling cmake." )
 ENDIF()
 
 # find Geant4
@@ -51,13 +51,13 @@ FILE( GLOB_RECURSE library_sources ${PROJECT_SOURCE_DIR}/src/*.cc )
 ADD_DEFINITIONS(${Geant4_DEFINITIONS})
 
 # include directories
-INCLUDE_DIRECTORIES( ${XERCES_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIR} )
+INCLUDE_DIRECTORIES( ${XercesC_INCLUDE_DIR} ${Geant4_INCLUDE_DIRS} ${GDML_INCLUDE_DIR} )
 
 # add GDML link directory
 LINK_DIRECTORIES( ${GDML_LIBRARY_DIR} )
 
 # libraries
-LINK_LIBRARIES( ${XERCES_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} )
+LINK_LIBRARIES( ${XercesC_LIBRARY} ${Geant4_LIBRARIES} ${GDML_LIBRARY} )
 
 # output shared library
 ADD_LIBRARY( lcdd SHARED ${library_sources} )
